@@ -9,7 +9,6 @@
 <body>
   
 	<% if logged_in? %>
-<<<<<<< HEAD
 		<span>
       Logged in as: <%= @current_user.username %>
       <%= link_to 'Log Out', session_url, :method => :delete %>
@@ -19,11 +18,7 @@
       <%= link_to 'Log in', new_session_url%>
       <%= link_to 'Sign up', new_user_url%>
     </span>
-=======
-		<p>Logged in as: <%= @current_user.username %></p>
-		<%= button_to 'Log Out', '/session', :method => :delete %>
->>>>>>> 08ffde3854ab93b4a0b2d6dcb96bfa84b228405f
-	<% end %>
+  <% end %>
 
 	<% if flash[:errors] %>
     <% flash[:errors].each do |error| %>
