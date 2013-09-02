@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
     :class_name => "List",
     :foreign_key => :author_id
   )
-            
+  
   include BCrypt
   
   def password

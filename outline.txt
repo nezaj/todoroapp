@@ -15,7 +15,6 @@ Here is the core functionality I want to implement:
 1. Add User Authentication with Bcrypt
 2. Add List/Tasks, build CRUD features
 
-
 - As a user I want to be able to see all my lists
 - As a user I want to be able to create new lists
 - As a user I want to be able to delete my lists
@@ -26,5 +25,8 @@ Logging-in/Out
 - As a user I want to be able to login (DONE)
 - As a user I want to be able to logout (DONE)
 
-
+Create/Login/Logut
+- As a user I want to be able to create an account
+- As a user I want to be able to login
+- As a user I want to be able to logout
 
