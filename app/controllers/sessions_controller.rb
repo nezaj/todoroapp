@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     
     if @user and @user.password == params[:user][:password]
       login(@user)
-      render :json => "Success"
+      redirect_to dashboard_url
     else
       @user = User.new
       flash.now[:errors] = ["Invalid username/password"]
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
   
   def destroy
     logout
-    redirect_to new_session_url
+    redirect_to dashboard_url
   end
   
   def new

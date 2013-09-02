@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
     if @user.save
       login(@user)
-      render :json => "Success"
+      redirect_to dashboard_url
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new    
