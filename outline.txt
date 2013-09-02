@@ -1,0 +1,12 @@
+Here is the core functionality I want to implement:
+- Users can CRUD lists to hold tasks they can CRUD.
+- Tasks are time bound, the length is measured in pomodoros, 25 minute blocks with 5 minute breaks.
+- Tasks can be marked complete/uncomplete
+- Tasks can be flagged to be included in a separate "today's tasks" list. 
+- Tasks from "today's tasks" can be started by running the pomodoro timer.
+- Pomodoro timer counts down from 25 minutes. Immediately counts down from 5 minutes afterwards.
+- Pomodoro is automatically marked complete if both timers finish.
+- Pomodoro is automatically marked incomplete if the timers are stopped before finishing.
+- During a running Pomodoro timer, Users can log a new task to be done later. this task is automatically added to the "unplanned tasks" list
+- Users can see the number of completed/uncompleted tasks and completed/uncompleted pomodoros for each list.
+- User can see the above for the whole day
