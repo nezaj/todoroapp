@@ -8,6 +8,12 @@ class User < ActiveRecord::Base
   validates :password, :length => { minimum: 6, 
             :message => "password must be at least %{count} characters" }
             
+  has_many(
+    :lists,
+    :class_name => "List",
+    :foreign_key => :author_id
+  )
+            
   include BCrypt
   
   def password
