@@ -10,3 +10,13 @@ Here is the core functionality I want to implement:
 - During a running Pomodoro timer, Users can log a new task to be done later. this task is automatically added to the "unplanned tasks" list
 - Users can see the number of completed/uncompleted tasks and completed/uncompleted pomodoros for each list.
 - User can see the above for the whole day
+
+-- Todo
+1. Add User Authentication with Bcrypt
+2. Add List/Tasks, build CRUD features
+
+Create/Login/Logut
+- As a user I want to be able to create an account
+- As a user I want to be able to login
+- As a user I want to be able to logout
+

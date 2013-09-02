@@ -8,6 +8,6 @@ window.App = {
   }
 };
 
-$(document).ready(function(){
-  App.initialize();
-});
+// $(document).ready(function(){
+//   App.initialize();
+// });
