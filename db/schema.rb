@@ -11,7 +11,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20130902220848) do
 
   create_table "lists", :force => true do |t|
@@ -22,9 +21,6 @@ ActiveRecord::Schema.define(:version => 20130902220848) do
   end
 
   add_index "lists", ["author_id"], :name => "index_on_author_id"
-=======
-ActiveRecord::Schema.define(:version => 20130902213018) do
->>>>>>> 08ffde3854ab93b4a0b2d6dcb96bfa84b228405f
 
   create_table "users", :force => true do |t|
     t.string   "username",      :null => false

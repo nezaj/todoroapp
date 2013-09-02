@@ -3,7 +3,9 @@ window.App = {
   Collections: {},
   Views: {},
   Routers: {},
-  initialize: function() {
+  
+  initialize: function($rootEl, lists) {
+    // Called from dashboard/show
     alert('Hello from Backbone!');
   }
 };

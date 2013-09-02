@@ -1,1 +1,14 @@
 <h1>Your dashboard!</h1>
+
+<script type="application/json" id="bootstrapped_lists">
+  { "lists": <%= current_user.lists.to_json.html_safe %> }
+</script>
+
+<!-- Kickoff Backbone -->
+<script type="application/javascript">
+$(function () {
+  var lists = JSON.parse($("#bootstrapped_lists").html()).lists;
+  console.log(lists);
+  window.App.initialize($('body'), lists);
+});
+</script>
