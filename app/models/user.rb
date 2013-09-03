@@ -14,6 +14,12 @@ class User < ActiveRecord::Base
     :foreign_key => :author_id
   )
   
+  has_many(
+    :tasks,
+    :through => :lists,
+    :source => :tasks
+  )
+  
   include BCrypt
   
   def password

@@ -13,25 +13,33 @@ App.Views.ListsIndex = Backbone.View.extend({
   },
   
   render: function() {
-    var renderedContent = this.template({ lists: this.collection });
+    var self = this;
+    
+    var renderedContent = this.template();
     this.$el.html(renderedContent);
+    
+    // Create individual list views
+    this.collection.each(function (list) {
+      var listItem = new App.Views.ListsItem({ model: list });
+      self.$('table').append(listItem.render().el);
+    });
+    
     return this;
   },
   
   newList: function(event) {
     event.preventDefault();
     var formData = $(event.target).serializeJSON().list
-    console.log(formData)
     this.collection.create(formData, {
-      success: function() {
-        Backbone.history.navigate("#", {trigger: true})
-      }
+      success: function() { Backbone.history.navigate("#", {trigger: true}) },
+      error: function() { Backbone.history.navigate("#", {trigger: true}) },
+      wait: true
     });
   },
   
   removeList: function(event) {
     event.preventDefault();
-    var id = $(event.currentTarget).attr('data-id');
+    var id = $(event.target).parent().attr('data-id');
     var listToDelete = this.collection.get(id)
     listToDelete.destroy();
   }

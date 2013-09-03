@@ -11,9 +11,8 @@ App.Routers.Lists = Backbone.Router.extend({
   },
   
   index: function () {
-    var that = this
-    
-    var ListsIndex = new App.Views.ListsIndex( {
+    var that = this;
+    var ListsIndex = new App.Views.ListsIndex({
       collection: that.lists
     })
     
@@ -21,7 +20,7 @@ App.Routers.Lists = Backbone.Router.extend({
   },
   
   show: function (id) {
-    console.log("Show Booya!")
+    var that = this;
   }
   
 });

@@ -3,7 +3,9 @@ App::Application.routes.draw do
   resource :dashboard, :only => [:show]
   
   resources :users, :only => [:create, :new]
-  resources :lists
+  resources :lists do
+    resources :tasks
+  end
   
   root :to => 'dashboards#show'
 end

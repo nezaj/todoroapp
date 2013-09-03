@@ -47,7 +47,7 @@ ListItem View
 
 ListIndex View
 - As a view I display all lists as individual list views
-- As a view I display a form to add a new list
+- (DONE) As a view I display a form to add a new list
 
 Basic Task Features
 - As a user I can flag tasks as part of today's taks

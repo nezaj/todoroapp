@@ -1,13 +1,7 @@
-
-<ul>
-  <br>
-  <% lists.each(function(list) { %>
-    <li id="list <%= list.id %>">
-      <%= list.escape('title') %>
-      <a href="/#" class="remove" data-id="<%= list.id %>">Delete</a>
-    </li>
-  <% }); %>
-</ul>
+<h2>Lists</h2>
+<table>
+  <!-- child content will be rendered here -->
+</table>
 
 <form>
   <input type="text" name="list[title]">

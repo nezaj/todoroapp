@@ -9,4 +9,10 @@ class List < ActiveRecord::Base
     :foreign_key => :author_id
   )
   
+  has_many(
+    :tasks,
+    :class_name => "Task",
+    :foreign_key => :list_id
+  )
+  
 end

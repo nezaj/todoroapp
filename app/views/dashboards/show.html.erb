@@ -8,6 +8,8 @@
 <script type="application/javascript">
 $(function () {
   var lists = JSON.parse($("#bootstrapped_lists").html()).lists;
-  window.App.initialize($('.container'), lists);
+  var $rootEl = $('.container');
+  
+  window.App.initialize($rootEl, lists);
 });
 </script>
