@@ -1,5 +1,5 @@
 App.Collections.Lists = Backbone.Collection.extend({
-  url: "/lists",
+  url: "/lists.json",
   model: App.Models.List,
   
   // Sort by created_time

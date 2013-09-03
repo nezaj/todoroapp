@@ -28,6 +28,12 @@ class ListsController < ApplicationController
   end
   
   def show
+    @list = List.find_by_id(params[:id])
+    if @list
+      respond_with(@list)
+    else
+      redirect_to dashboard_url
+    end
   end
   
   def update

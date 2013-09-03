@@ -2,7 +2,8 @@ App.Views.ListsIndex = Backbone.View.extend({
 
   events: {
     "submit.new": "newList",
-    "click a.remove": "removeList"
+    "click a.remove": "removeList",
+    "click a.open" : "openList"
   },
 
   template: JST['lists/index'],
@@ -29,7 +30,7 @@ App.Views.ListsIndex = Backbone.View.extend({
   
   newList: function(event) {
     event.preventDefault();
-    var formData = $(event.target).serializeJSON().list
+    var formData = $(event.target).serializeJSON().list;
     this.collection.create(formData, {
       success: function() { Backbone.history.navigate("#", {trigger: true}) },
       error: function() { Backbone.history.navigate("#", {trigger: true}) },
@@ -37,11 +38,17 @@ App.Views.ListsIndex = Backbone.View.extend({
     });
   },
   
+  openList: function(event) {
+    var id = $(event.target).parent().attr('data-id');
+    Backbone.history.navigate("lists/" + id, {trigger: true});
+  },
+  
   removeList: function(event) {
-    event.preventDefault();
     var id = $(event.target).parent().attr('data-id');
     var listToDelete = this.collection.get(id)
     listToDelete.destroy();
   }
+  
+  
 
 });

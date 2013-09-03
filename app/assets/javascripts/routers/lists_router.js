@@ -2,7 +2,7 @@ App.Routers.Lists = Backbone.Router.extend({
   
   initialize: function ($rootEl, lists) {
     this.$rootEl = $rootEl;
-    this.lists = lists;
+    this.collection = lists;
   },
   
   routes: {
@@ -13,7 +13,7 @@ App.Routers.Lists = Backbone.Router.extend({
   index: function () {
     var that = this;
     var ListsIndex = new App.Views.ListsIndex({
-      collection: that.lists
+      collection: that.collection
     })
     
     $('.sidebar').html(ListsIndex.render().$el);
@@ -21,6 +21,9 @@ App.Routers.Lists = Backbone.Router.extend({
   
   show: function (id) {
     var that = this;
+    var currentList = that.collection.get(id)
+    
+    console.log(currentList)
   }
   
 });
