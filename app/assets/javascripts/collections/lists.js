@@ -2,7 +2,9 @@ App.Collections.Lists = Backbone.Collection.extend({
   url: "/lists",
   model: App.Models.List,
   
+  // Sort by created_time
   comparator: function(list) {
-    return list.created_at
+    var date = new Date(list.get('created_at'))
+    return date.getTime();
   }
 });
