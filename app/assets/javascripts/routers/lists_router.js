@@ -17,7 +17,7 @@ App.Routers.Lists = Backbone.Router.extend({
       collection: that.lists
     })
     
-    that.$rootEl.html(ListsIndex.render().$el);
+    $('.sidebar').html(ListsIndex.render().$el);
   },
   
   show: function (id) {

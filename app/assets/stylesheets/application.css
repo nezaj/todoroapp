@@ -11,3 +11,26 @@
  *= require_self
  *= require_tree .
  */
+
+
+html {
+  font-family: 'Avenir Next', sans-serif;
+  margin 0x;
+}
+
+body {
+  margin: 0px;
+}
+
+.sidebar {
+  float: left;
+  width: 20%;
+}
+
+.current-list, .today-list, .unplanned-list {
+  float: left;
+  width: 22%;
+  margin-right: 3%;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
