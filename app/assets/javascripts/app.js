@@ -3,13 +3,10 @@ window.App = {
   Collections: {},
   Views: {},
   Routers: {},
-  
+  // Called from dashboard/show
   initialize: function($rootEl, lists) {
-    // Called from dashboard/show
-    alert('Hello from Backbone!');
+    var listsCollection = new App.Collections.Lists(lists);
+    new App.Routers.Lists($rootEl, listsCollection);
+    Backbone.history.start();
   }
 };
-
-// $(document).ready(function(){
-//   App.initialize();
-// });
