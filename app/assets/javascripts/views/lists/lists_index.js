@@ -32,15 +32,14 @@ App.Views.ListsIndex = Backbone.View.extend({
     
     var formData = $(event.target).serializeJSON().list;
     this.collection.create(formData, {
-      success: function() { Backbone.history.navigate("#", {trigger: true}) },
-      error: function() { Backbone.history.navigate("#", {trigger: true}) },
+      success: function() { Backbone.history.navigate("#") },
+      error: function() { Backbone.history.navigate("#") },
       wait: true
     });
   },
   
   openList: function(event) {
     event.preventDefault();
-    
     var id = $(event.target).parent().attr('data-id');
     // Issue with URL not updating
     Backbone.history.navigate('lists/' + id, {trigger: true});

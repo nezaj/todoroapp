@@ -34,8 +34,8 @@ App.Views.ListShow = Backbone.View.extend({
     formData.list_id = this.collection.list_id;
 
     this.collection.create(formData, {
-      success: function() { Backbone.history.navigate("#", {trigger: true}) },
-      error: function() { Backbone.history.navigate("#", {trigger: true}) },
+      success: function() { Backbone.history.navigate("#") },
+      error: function() { Backbone.history.navigate("#") },
       wait: true
     });
   },

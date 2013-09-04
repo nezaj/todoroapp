@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  attr_accessible :list_id, :pomodoro, :title
+  attr_accessible :list_id, :pomodoro, :title, :today
   
   validates :title, :list_id, :presence => true
   

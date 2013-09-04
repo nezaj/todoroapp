@@ -1,5 +1,10 @@
 <td data-id="<%= task.id %>">
-  <%= task.escape('title')%>
+  <%= task.escape('title') %>
   <a href="#" class="task-remove">Delete</a>
+  <% if (task.escape('today')) { %>
+    <a href="#" class="add-today">Not Today</a>
+  <% } else { %>
+    <a href="#" class="remove-today">Today</a>
+  <% } %>
 </td>
   

@@ -1,8 +1,7 @@
 App.Routers.Lists = Backbone.Router.extend({
     
-  initialize: function (collection) {
+  initialize: function () {
     this.$rootEl = $('.container');
-    this.collection = collection;
   },
   
   routes: {
@@ -13,31 +12,40 @@ App.Routers.Lists = Backbone.Router.extend({
   index: function () {
     this.displaySidebar();
     this.displayTodayTasks();
-    this.displayUnplannedTasks();
+    //this.displayUnplannedTasks();
   },
   
   show: function (id) {
-    var that = this;
-    var currentList = that.collection.get(id);
-    var tasksCollection = currentList.get('tasks');
-    
-    var listShow = new App.Views.ListShow({
-      collection: tasksCollection
-    });
-    
-    $('.current-list-tasks').html(listShow.render().$el);
+    // Deep-linking pattern:
+    // See: http://coenraets.org/blog/2011/12/backbone-js-wine-cellar-tutorial-part-3-deep-linking-and-application-states/
+    if (this.lists) {
+      this.currentList = this.lists.get(id)
+      this.tasks = this.currentList.get('tasks');
+      // Add close method to properly remove view
+      // if (this.listShow) { this.listShow.close(); }
+      this.listShow = new App.Views.ListShow({ collection: this.tasks });
+      $('.current-list-tasks').html(this.listShow.render().$el);
+    } else {
+      this.requestedId = id;
+      this.index();
+    }
   },
   
   displaySidebar: function() {
+    this.lists = new App.Collections.Lists();
     var that = this;
-    var listsIndex = new App.Views.ListsIndex({
-      collection: that.collection
+    this.lists.fetch({
+      success:function() {
+        that.listsIndex = new App.Views.ListsIndex( { collection: that.lists });
+        $('.sidebar').html(that.listsIndex.render().$el);
+        if (that.requestedId) { that.show(that.requestedId); }
+      }
     });
-    $('.sidebar').html(listsIndex.render().$el);
   },
   
   displayTodayTasks: function() {
-    var todayTasks = new App.Collections.TodayTasks();
+    //var todayTasks = new App.Collections.TodayTasks();
+    console.log("Let's do this!")
   }
   
 });

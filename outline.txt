@@ -16,6 +16,7 @@ Here is the core functionality I want to implement:
 2. Add List/Tasks, build CRUD features
 
 Misc
+- Add deep linking for creating/deleting tasks
 - Get url to update correctly
 
 DailySummary View
@@ -29,28 +30,24 @@ TaskItem View
 - As a view I display a checkbox to mark whether my task is complete or not
 - As a view I strikethrough and gray-out my name when my task is complete
 - As a view I display a button to add my task to "today's tasks" 
-- As a view I display a button to delete my task and myself
+- (DONE) As a view I display a button to delete my task and myself
 - As a view I display the number of achieved pomodoros for the task
 - As a view I display the number of pomdoros expected for the task
 - As a view I can allow the expected number of pomdoros to change
 
 GenericListDetail View
-- As a view I display all the tasks for my list as individual task views
+- (DONE) As a view I display all the tasks for my list as individual task views
 - As a view I display the total number of completed tasks for my list
 - As a view I display the total number of pending tasks for my list
 - As a view I display the total number of achieved pomodoros for my list
 - As a view I display the total number of remaining pomodoros for my list
-- As a view I display an input field to add a new task to my list
+- (DONE) As a view I display an input field to add a new task to my list
 
 ListItem View
-- As a view I display the name of my list
+- (DONE) As a view I display the name of my list
 - As a view I am highlighted when I am selected
 - As a view I display the number of tasks for the list
-- As a view I display a button to delete the list
-
-ListIndex View
-- As a view I display all lists as individual list views
-- (DONE) As a view I display a form to add a new list
+- (DONE) As a view I display a button to delete the list
 
 Basic Task Features
 - As a user I can flag tasks as part of today's taks
@@ -58,10 +55,10 @@ Basic Task Features
 - As a user I can mark a task complete/incomplete
 
 CRUD Tasks
-- As a user I can see my tasks for a list
-- As a user I can create new tasks for a list
-- As a user I can delete tasks for a list
 - As a user I can rename tasks by double-click the name
+- (DONE) As a user I can see my tasks for a list
+- (DONE) As a user I can create new tasks for a list
+- (DONE) As a user I can delete tasks for a list
 
 CRUD Lists
 - As a user I can rename my lists by double-clicking the name
@@ -69,7 +66,11 @@ CRUD Lists
 - (DONE) As a user I can create new lists
 - (DONE) As a user I can delete my lists
 
-Logging-in/Out
+ListIndex View (COMPLETE)
+- (DONE) As a view I display all lists as individual list views
+- (DONE) As a view I display a form to add a new list
+
+Basic Logging-in/Out (COMPLETE)
 - (DONE) As a user I can create an account
 - (DONE) As a user I can login
 - (DONE) As a user I can logout
