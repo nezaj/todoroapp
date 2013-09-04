@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   has_many(
     :lists,
     :class_name => "List",
-    :foreign_key => :author_id
+    :foreign_key => :author_id,
+    :dependent  => :destroy
   )
   
   has_many(

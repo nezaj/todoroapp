@@ -3,10 +3,16 @@ window.App = {
   Collections: {},
   Views: {},
   Routers: {},
+  
   // Called from dashboard/show
-  initialize: function($rootEl, lists) {
-    var listsCollection = new App.Collections.Lists(lists);
-    new App.Routers.Lists($rootEl, listsCollection);
-    Backbone.history.start();
+  initialize: function($rootEl) {
+    // Fetch Lists data
+    var listsCollection = new App.Collections.Lists();  
+    listsCollection.fetch({
+      success: function(collection) {
+        new App.Routers.Lists(collection);
+        Backbone.history.start();
+      }
+    });
   }
 };

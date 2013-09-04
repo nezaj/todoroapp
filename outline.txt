@@ -15,6 +15,9 @@ Here is the core functionality I want to implement:
 1. Add User Authentication with Bcrypt
 2. Add List/Tasks, build CRUD features
 
+Misc
+- Get url to update correctly
+
 DailySummary View
 - As a view I display the current date
 - As a view I display the current weekday

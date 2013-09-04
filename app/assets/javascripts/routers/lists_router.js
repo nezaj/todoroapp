@@ -1,8 +1,8 @@
 App.Routers.Lists = Backbone.Router.extend({
-  
-  initialize: function ($rootEl, lists) {
-    this.$rootEl = $rootEl;
-    this.collection = lists;
+    
+  initialize: function (collection) {
+    this.$rootEl = $('.container');
+    this.collection = collection;
   },
   
   routes: {
@@ -12,18 +12,23 @@ App.Routers.Lists = Backbone.Router.extend({
   
   index: function () {
     var that = this;
-    var ListsIndex = new App.Views.ListsIndex({
+    var listsIndex = new App.Views.ListsIndex({
       collection: that.collection
-    })
+    });
     
-    $('.sidebar').html(ListsIndex.render().$el);
+    $('.sidebar').html(listsIndex.render().$el);
   },
   
   show: function (id) {
     var that = this;
-    var currentList = that.collection.get(id)
+    var currentList = that.collection.get(id);
+    var tasksCollection = currentList.get('tasks');
     
-    console.log(currentList)
+    var listShow = new App.Views.ListShow({
+      collection: tasksCollection
+    });
+    
+    $('.current-list-tasks').html(listShow.render().$el);
   }
   
 });

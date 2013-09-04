@@ -12,7 +12,8 @@ class List < ActiveRecord::Base
   has_many(
     :tasks,
     :class_name => "Task",
-    :foreign_key => :list_id
+    :foreign_key => :list_id,
+    :dependent => :destroy
   )
   
 end
