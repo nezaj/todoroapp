@@ -6,8 +6,8 @@ App.Views.ListShow = Backbone.View.extend({
   events: {
     "submit.add-new-task": "addTask",
     "click a.task-remove": "removeTask",
-    "click a.add-today": "addToday",
-    "click a.remove-today": "removeToday"
+    "click a.do-today": "addToday",
+    "click a.do-later": "removeToday"
   },
   
   initialize: function() {
@@ -47,7 +47,9 @@ App.Views.ListShow = Backbone.View.extend({
     event.preventDefault();
     var task_id = $(event.target).parent().attr('data-id')
     var task = this.collection.get(task_id);
-    task.save({ today: true });
+    task.set("today", true);
+    task.save();
+
   },
   
   removeTask: function() {
@@ -61,7 +63,8 @@ App.Views.ListShow = Backbone.View.extend({
     event.preventDefault();
     var task_id = $(event.target).parent().attr('data-id')
     var task = this.collection.get(task_id);
-    task.save({ today: false });
+    task.set("today", false);
+    task.save();
   }
   
 });

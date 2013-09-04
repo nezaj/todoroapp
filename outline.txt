@@ -50,7 +50,7 @@ ListItem View
 - (DONE) As a view I display a button to delete the list
 
 Basic Task Features
-- As a user I can flag tasks as part of today's taks
+- (DONE) As a user I can flag tasks as part of today's taks
 - As a user I can set the expected number of pomodoros for a task
 - As a user I can mark a task complete/incomplete
 
