@@ -5,9 +5,10 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(params[:task])
     if @task.save
-      respond_with(@task)
+      @list = List.find_by_id(@task.list_id)
+      respond_with(@list, @task)
     else
-      respond_with(@task.error.full_messages, :status => 422)
+      render :json => @task.errors.full_messages, :status => 422
     end
   end
   
@@ -20,7 +21,7 @@ class TasksController < ApplicationController
   def index
     @list = List.find_by_id(params[:list_id])
     @tasks = @list.tasks
-    respond_with(@tasks)
+    respond_with(@list, @tasks)
   end
   
   def update

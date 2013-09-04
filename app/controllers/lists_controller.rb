@@ -9,7 +9,7 @@ class ListsController < ApplicationController
     if @list.save
       respond_with(@list)
     else
-      respond_with(@list.errors.full_messages, :status => 422)
+      render :json => @list.errors.full_messages, :status => 422
     end
   end
   
