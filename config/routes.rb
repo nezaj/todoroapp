@@ -7,5 +7,7 @@ App::Application.routes.draw do
     resources :tasks
   end
   
+  resources :today_tasks, :only => [:create, :destroy, :index, :update]
+  
   root :to => 'dashboards#show'
 end

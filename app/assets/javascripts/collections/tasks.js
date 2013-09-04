@@ -14,5 +14,14 @@ App.Collections.Tasks = Backbone.Collection.extend({
   comparator: function(task) {
     var date = new Date(task.get('created_at'))
     return date.getTime();
+  },
+  
+  // See:
+  // http://stackoverflow.com/questions/11762105/filter-backbone-collection-by-attribute-value
+  byTodayStatus: function(status) {
+    filtered = this.filter(function(task) {
+      return task.get("today") === status;
+    });
+    return new App.Collections.Tasks(filtered);
   }
 });

@@ -6,16 +6,25 @@ App.Routers.Lists = Backbone.Router.extend({
   
   routes: {
     "": "index",
-    "lists/:id": "show"
+    "lists/:id": "showList",
+    "today/": "showToday"
   },
   
-  index: function () {
-    this.displaySidebar();
-    this.displayTodayTasks();
-    //this.displayUnplannedTasks();
+  index: function() {
+    this.lists = new App.Collections.Lists();
+    var that = this;
+    this.lists.fetch({
+      success:function() {
+        that.showSidebar();
+        // Load ListDetail if deep-linked
+        if (that.requestedId) { that.showList(that.requestedId); }
+        //that.showToday();
+        that.showToday();
+        }
+      });
   },
   
-  show: function (id) {
+  showList: function (id) {
     // Deep-linking pattern:
     // See: http://coenraets.org/blog/2011/12/backbone-js-wine-cellar-tutorial-part-3-deep-linking-and-application-states/
     if (this.lists) {
@@ -31,21 +40,30 @@ App.Routers.Lists = Backbone.Router.extend({
     }
   },
   
-  displaySidebar: function() {
-    this.lists = new App.Collections.Lists();
-    var that = this;
-    this.lists.fetch({
-      success:function() {
-        that.listsIndex = new App.Views.ListsIndex( { collection: that.lists });
-        $('.sidebar').html(that.listsIndex.render().$el);
-        if (that.requestedId) { that.show(that.requestedId); }
-      }
-    });
+  showSidebar: function() {
+    if (this.lists) {
+      this.listsIndex = new App.Views.ListsIndex( { collection: this.lists });
+      $('.sidebar').html(this.listsIndex.render().$el);
+    } else {
+      this.index();
+    }
   },
   
-  displayTodayTasks: function() {
-    //var todayTasks = new App.Collections.TodayTasks();
-    console.log("Let's do this!")
+  showToday: function() {
+    if (this.lists) {
+      this.tasksForToday = new App.Collections.TasksForToday();
+      var that = this;
+      this.tasksForToday.fetch({
+        success:function() {
+          that.todayView = new App.Views.TodayView({
+            collection: that.tasksForToday
+          });
+          $('.today-list-tasks').html(that.todayView.render().$el)
+        }
+      });
+    } else {
+      this.index();
+    }
   }
   
 });

@@ -47,8 +47,7 @@ App.Views.ListShow = Backbone.View.extend({
     event.preventDefault();
     var task_id = $(event.target).parent().attr('data-id')
     var task = this.collection.get(task_id);
-    task.set("today", true);
-    task.save();
+    task.save({ today: true });
 
   },
   
@@ -63,8 +62,7 @@ App.Views.ListShow = Backbone.View.extend({
     event.preventDefault();
     var task_id = $(event.target).parent().attr('data-id')
     var task = this.collection.get(task_id);
-    task.set("today", false);
-    task.save();
+    task.save({ today: false });
   }
   
 });
