@@ -21,7 +21,7 @@ App.Views.ListsIndex = Backbone.View.extend({
     // Create individual list views
     this.collection.each(function (list) {
       var listItem = new App.Views.ListsItem({ model: list });
-      self.$('table').append(listItem.render().el);
+      self.$('table').append(listItem.render().$el);
     });
     
     return this;
@@ -32,17 +32,17 @@ App.Views.ListsIndex = Backbone.View.extend({
     
     var formData = $(event.target).serializeJSON().list;
     this.collection.create(formData, {
-      success: function() { Backbone.history.navigate("#") },
-      error: function() { Backbone.history.navigate("#") },
+      success: function() { appRouter.navigate("#") },
+      error: function() { appRouter.navigate("#") },
       wait: true
     });
   },
   
   openList: function(event) {
     event.preventDefault();
+  
     var id = $(event.target).parent().attr('data-id');
-    // Issue with URL not updating
-    Backbone.history.navigate('lists/' + id, {trigger: true});
+    appRouter.navigate('lists/' + id, {trigger: true});
   },
   
   removeList: function(event) {
@@ -53,6 +53,4 @@ App.Views.ListsIndex = Backbone.View.extend({
     listToDelete.destroy();
   }
   
-  
-
 });

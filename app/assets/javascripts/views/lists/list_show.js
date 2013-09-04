@@ -5,16 +5,19 @@ App.Views.ListShow = Backbone.View.extend({
   
   events: {
     "submit.add-new-task": "addTask",
-    "click a.task-remove": "removeTask"
+    "click a.task-remove": "removeTask",
+    "click a.add-today": "addToday",
+    "click a.remove-today": "removeToday"
   },
   
   initialize: function() {
-    this.listenTo(this.collection, 'remove', this.render)
-    this.listenTo(this.collection, 'add', this.render)
+    this.listenTo(this.collection, 'remove', this.render);
+    this.listenTo(this.collection, 'add', this.render);
+    this.listenTo(this.collection, 'change', this.render);
   },
     
   render: function() {
-    var self = this;
+    var that = this;
     
     var renderedContent = this.template();
     this.$el.html(renderedContent);
@@ -22,7 +25,7 @@ App.Views.ListShow = Backbone.View.extend({
     // Create individual task views
     this.collection.each(function (task) {
       var taskView = new App.Views.TaskView({ model: task });
-      self.$('table').append(taskView.render().el);
+      that.$('table').append(taskView.render().$el);
     });
     
     return this;
@@ -34,18 +37,31 @@ App.Views.ListShow = Backbone.View.extend({
     formData.list_id = this.collection.list_id;
 
     this.collection.create(formData, {
-      success: function() { Backbone.history.navigate("#") },
-      error: function() { Backbone.history.navigate("#") },
+      success: function() { appRouter.navigate("#") },
+      error: function() { appRouter.navigate("#") },
       wait: true
     });
+  },
+
+  addToday: function() {
+    event.preventDefault();
+    var task_id = $(event.target).parent().attr('data-id')
+    var task = this.collection.get(task_id);
+    task.save({ today: true });
   },
   
   removeTask: function() {
     event.preventDefault();
-    
     var task_id = $(event.target).parent().attr('data-id');
-    var taskToDelete = this.collection.get(task_id);
-    taskToDelete.destroy();
+    var task = this.collection.get(task_id);
+    task.destroy();
+  },
+  
+  removeToday: function() {
+    event.preventDefault();
+    var task_id = $(event.target).parent().attr('data-id')
+    var task = this.collection.get(task_id);
+    task.save({ today: false });
   }
-
+  
 });
