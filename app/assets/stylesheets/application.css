@@ -33,3 +33,7 @@ body {
   margin-right: 3%;
   text-align: center;
 }
+
+.current-list tr {
+  text-align: left;
+}

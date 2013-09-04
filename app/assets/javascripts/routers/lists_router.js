@@ -11,12 +11,9 @@ App.Routers.Lists = Backbone.Router.extend({
   },
   
   index: function () {
-    var that = this;
-    var listsIndex = new App.Views.ListsIndex({
-      collection: that.collection
-    });
-    
-    $('.sidebar').html(listsIndex.render().$el);
+    this.displaySidebar();
+    this.displayTodayTasks();
+    this.displayUnplannedTasks();
   },
   
   show: function (id) {
@@ -29,6 +26,18 @@ App.Routers.Lists = Backbone.Router.extend({
     });
     
     $('.current-list-tasks').html(listShow.render().$el);
+  },
+  
+  displaySidebar: function() {
+    var that = this;
+    var listsIndex = new App.Views.ListsIndex({
+      collection: that.collection
+    });
+    $('.sidebar').html(listsIndex.render().$el);
+  },
+  
+  displayTodayTasks: function() {
+    var todayTasks = new App.Collections.TodayTasks();
   }
   
 });

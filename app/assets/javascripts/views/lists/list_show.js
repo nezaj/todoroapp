@@ -1,5 +1,6 @@
 App.Views.ListShow = Backbone.View.extend({
 
+  className: "list-tasks",
   template: JST['lists/show'],
   
   events: {
