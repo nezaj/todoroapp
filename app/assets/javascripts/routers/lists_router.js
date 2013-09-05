@@ -30,8 +30,8 @@ App.Routers.Lists = Backbone.Router.extend({
     if (this.lists) {
       this.currentList = this.lists.get(id)
       this.tasks = this.currentList.get('tasks');
-      // Add close method to properly remove view
-      // if (this.listShow) { this.listShow.close(); }
+      // Clean up previous view
+      if (this.listShow) { this.listShow.leave(); }
       this.listShow = new App.Views.ListShow({ collection: this.tasks });
       $('.current-list-tasks').html(this.listShow.render().$el);
     } else {
@@ -50,11 +50,13 @@ App.Routers.Lists = Backbone.Router.extend({
   },
   
   showToday: function() {
+    console.log("Today!")
     if (this.lists) {
       this.tasksForToday = new App.Collections.TasksForToday();
       var that = this;
       this.tasksForToday.fetch({
         success:function() {
+          if (that.todayView) { that.todayView.leave(); }
           that.todayView = new App.Views.TodayView({
             collection: that.tasksForToday
           });

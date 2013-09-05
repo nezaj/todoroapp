@@ -32,8 +32,8 @@ App.Views.ListsIndex = Backbone.View.extend({
     
     var formData = $(event.target).serializeJSON().list;
     this.collection.create(formData, {
-      success: function() { appRouter.navigate("#") },
-      error: function() { appRouter.navigate("#") },
+      // success: function() { appRouter.navigate("#") },
+      // error: function() { appRouter.navigate("#") },
       wait: true
     });
   },
