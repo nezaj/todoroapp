@@ -53,18 +53,24 @@ App.Routers.AppRouter = Backbone.Router.extend({
   
   showToday: function() {
     console.log('Executed showToday');
+    var that = this;
+    
     if (this.lists) {
       this.todayTasks = new App.Collections.TodayTasks();
-      var that = this;
-      this.todayTasks.fetch({
-        success:function() {
-          if (that.todayView) { that.todayView.leave(); }
-          that.todayView = new App.Views.TodayView({
-            collection: that.todayTasks
-          });
-          $('.today-tasks').html(that.todayView.render().$el)
-        }
+      this.todayTasks.fetch().done(function() {
+        if (that.todayView) { that.todayView.leave(); }
+        that.todayView = new App.Views.TodayView({collection: that.todayTasks});
+        $('.today-tasks').html(that.todayView.render().$el)      
       });
+      // this.todayTasks.fetch({
+//         success:function() {
+//           if (that.todayView) { that.todayView.leave(); }
+//           that.todayView = new App.Views.TodayView({
+//             collection: that.todayTasks
+//           });
+//           $('.today-tasks').html(that.todayView.render().$el)
+//         }
+//       });
     } else {
       this.index();
     }

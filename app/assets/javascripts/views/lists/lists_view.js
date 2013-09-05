@@ -29,25 +29,18 @@ App.Views.ListsView = Backbone.View.extend({
   
   newList: function(event) {
     event.preventDefault();
-    
     var formData = $(event.target).serializeJSON().list;
-    this.collection.create(formData, {
-      // success: function() { appRouter.navigate("#") },
-      // error: function() { appRouter.navigate("#") },
-      wait: true
-    });
+    this.collection.create(formData, { wait: true });
   },
   
   openList: function(event) {
     event.preventDefault();
-  
     var id = $(event.target).parent().attr('data-id');
     appRouter.navigate('lists/' + id, {trigger: true});
   },
   
   removeList: function(event) {
     event.preventDefault();
-
     var id = $(event.target).parent().attr('data-id');
     var listToDelete = this.collection.get(id);
     listToDelete.destroy();
