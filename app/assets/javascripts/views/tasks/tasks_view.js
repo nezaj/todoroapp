@@ -5,12 +5,12 @@ App.Views.TasksView = Backbone.View.extend({
   events: {
     "submit.add-new-task": "addTask",
     "click a.remove-task": "removeTask",
-    "click a.do-today": "addToday",
-    "click a.do-later": "removeToday"
+    "click a.do-today": "doToday",
+    "click a.do-later": "doLater"
   },
   
   initialize: function() {
-    vent.on('updateList', this.update, this);
+    pubSub.on('updateList', this.update, this);
     this.listenTo(this.collection, 'remove', this.render);
     this.listenTo(this.collection, 'add', this.render);
     this.listenTo(this.collection, 'change:today', this.render);
@@ -35,19 +35,16 @@ App.Views.TasksView = Backbone.View.extend({
     event.preventDefault();
     var formData = $(event.target).serializeJSON().task;
     formData.list_id = this.collection.list_id;
-
-    this.collection.create(formData, {
-      wait: true
-    });
+    this.collection.create(formData, { wait: true });
   },
 
-  addToday: function() {
+  doToday: function() {
     event.preventDefault();
     var task_id = $(event.target).parent().attr('data-id')
     var task = this.collection.get(task_id);
     task.save(
       { today: true },
-      { success: function() { vent.trigger('updateToday'); } }
+      { success: function() { pubSub.trigger('updateToday'); } }
     );
   },
   
@@ -55,19 +52,16 @@ App.Views.TasksView = Backbone.View.extend({
     event.preventDefault();
     var task_id = $(event.target).parent().attr('data-id');
     var task = this.collection.get(task_id);
-    task.destroy({
-      success: function() { vent.trigger('updateToday'); }
-    });
-
+    task.destroy({ success: function() { pubSub.trigger('updateToday'); } });
   },
   
-  removeToday: function() {
+  doLater: function() {
     event.preventDefault();
     var task_id = $(event.target).parent().attr('data-id')
     var task = this.collection.get(task_id);
     task.save(
       { today: false },
-      { success: function() { vent.trigger('updateToday'); } }
+      { success: function() { pubSub.trigger('updateToday'); } }
     );
   },
   
@@ -77,15 +71,10 @@ App.Views.TasksView = Backbone.View.extend({
     this.collection.fetch().done(function() {
       that.setElement(that.$el).render().$el;
     });
-    // this.collection.fetch({
-    //   success: function() {
-    //     that.setElement(that.$el).render().$el;
-    //   },
-    //   wait: true
-    // });
   },
   
   leave: function() {
+    this.unbind();
     this.off();
     this.remove();
   }

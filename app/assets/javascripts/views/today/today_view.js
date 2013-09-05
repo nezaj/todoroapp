@@ -7,7 +7,7 @@ App.Views.TodayView = Backbone.View.extend({
   },
   
   initialize: function() {
-    vent.on('updateToday', this.update, this);
+    pubSub.on('updateToday', this.update, this);
     this.listenTo(this.collection, "remove", this.render);
   },
    
@@ -30,7 +30,7 @@ App.Views.TodayView = Backbone.View.extend({
     var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
     task.destroy({
-      success: function() { vent.trigger('updateList'); }
+      success: function() { pubSub.trigger('updateList'); }
     });
   },
   
@@ -40,15 +40,10 @@ App.Views.TodayView = Backbone.View.extend({
     this.collection.fetch().done(function() {
       that.setElement(that.$el).render().$el;
     });
-    // this.collection.fetch({
-    //   success: function() { 
-    //     that.setElement(that.$el).render().$el;
-    //   },
-    //   wait: true
-    // });
   },
   
   leave: function() {
+    this.unbind();
     this.off();
     this.remove();
   }
