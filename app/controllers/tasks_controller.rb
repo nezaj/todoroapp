@@ -15,7 +15,7 @@ class TasksController < ApplicationController
   def destroy
     @task = Task.find_by_id(params[:id])
     @task.destroy
-    head :ok
+    respond_with(@task)
   end
   
   def index
@@ -27,7 +27,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find_by_id(params[:id])
     @task.update_attributes(params[:task])
-    head :ok
+    respond_with(@task)
   end
   
 end

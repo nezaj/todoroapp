@@ -4,7 +4,7 @@ App.Views.TasksView = Backbone.View.extend({
   
   events: {
     "submit.add-new-task": "addTask",
-    "click a.task-remove": "removeTask",
+    "click a.remove-task": "removeTask",
     "click a.do-today": "addToday",
     "click a.do-later": "removeToday"
   },
@@ -45,35 +45,44 @@ App.Views.TasksView = Backbone.View.extend({
     event.preventDefault();
     var task_id = $(event.target).parent().attr('data-id')
     var task = this.collection.get(task_id);
-    task.save({ today: true });
-    vent.trigger('updateToday', task)
+    task.save(
+      { today: true },
+      { success: function() { vent.trigger('updateToday'); } }
+    );
   },
   
   removeTask: function() {
     event.preventDefault();
     var task_id = $(event.target).parent().attr('data-id');
     var task = this.collection.get(task_id);
-    task.destroy();
-    vent.trigger('updateToday')
+    task.destroy({
+      success: function() { vent.trigger('updateToday'); }
+    });
+
   },
   
   removeToday: function() {
     event.preventDefault();
     var task_id = $(event.target).parent().attr('data-id')
     var task = this.collection.get(task_id);
-    task.save({ today: false });
-    vent.trigger('updateToday')
+    task.save(
+      { today: false },
+      { success: function() { vent.trigger('updateToday'); } }
+    );
   },
   
   update: function() {
-    console.log('updateList');
+    console.log('Execute updateList');
     var that = this;
-    this.collection.fetch({
-      success: function() {
-        $('.current-tasks').html(that.render().$el);
-      },
-      wait: true
+    this.collection.fetch().done(function() {
+      that.setElement(that.$el).render().$el;
     });
+    // this.collection.fetch({
+    //   success: function() {
+    //     that.setElement(that.$el).render().$el;
+    //   },
+    //   wait: true
+    // });
   },
   
   leave: function() {

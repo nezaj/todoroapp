@@ -25,6 +25,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
   },
   
   showList: function (id) {
+    console.log('Executed showList');
     // Deep-linking pattern:
     // See: http://coenraets.org/blog/2011/12/backbone-js-wine-cellar-tutorial-part-3-deep-linking-and-application-states/
     if (this.lists) {
@@ -41,6 +42,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
   },
   
   showSidebar: function() {
+    console.log('Executed showSidebar');
     if (this.lists) {
       this.listsView = new App.Views.ListsView( { collection: this.lists });
       $('.sidebar').html(this.listsView.render().$el);
@@ -50,7 +52,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
   },
   
   showToday: function() {
-    console.log("Today!")
+    console.log('Executed showToday');
     if (this.lists) {
       this.todayTasks = new App.Collections.TodayTasks();
       var that = this;

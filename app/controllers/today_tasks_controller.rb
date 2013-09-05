@@ -6,14 +6,14 @@ class TodayTasksController < ApplicationController
     @task = Task.find_by_id(params[:id]);
     @task.today = true;
     @task.save
-    head :ok
+    respond_with(@task)
   end
   
   def destroy
     @task = Task.find_by_id(params[:id]);
     @task.today = false;
     @task.save
-    head :ok
+    respond_with(@task)
   end
     
   def index
