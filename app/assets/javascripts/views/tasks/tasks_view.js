@@ -3,7 +3,7 @@ App.Views.TasksView = Backbone.View.extend({
   template: JST['tasks/tasks_view'],
   
   events: {
-    "submit.add-new-task": "addTask",
+    "submit #task-form": "addTask",
     "click a.remove-task": "removeTask",
     "click a.do-today": "doToday",
     "click a.do-later": "doLater"

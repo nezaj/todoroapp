@@ -16,6 +16,7 @@
 //= require backbone
 //= require app
 //= require jquery.serializeJSON
+//= require jquery-ui-custom
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections

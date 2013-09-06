@@ -1,6 +1,6 @@
 App.Views.ListsView = Backbone.View.extend({
   events: {
-    "submit.new": "newList",
+    "submit #list-form": "newList",
     "click a.remove": "removeList",
     "click a.open" : "openList"
   },
