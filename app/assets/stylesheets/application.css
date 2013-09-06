@@ -26,9 +26,10 @@ body {
 .sidebar {
   float: left;
   width: 20%;
+  text-align: center;
 }
 
-.current-list, .today-list, .unplanned-list {
+.current-tasks, .today-tasks, .unplanned-tasks {
   float: left;
   width: 22%;
   margin-right: 3%;

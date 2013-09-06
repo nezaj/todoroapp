@@ -18,7 +18,6 @@ App.Routers.AppRouter = Backbone.Router.extend({
         that.showSidebar();
         // Load ListDetail if deep-linked
         if (that.requestedId) { that.showList(that.requestedId); }
-        //that.showToday();
         that.showToday();
         }
       });
@@ -26,14 +25,16 @@ App.Routers.AppRouter = Backbone.Router.extend({
   
   showList: function (id) {
     console.log('Executed showList');
-    // Deep-linking pattern:
-    // See: http://coenraets.org/blog/2011/12/backbone-js-wine-cellar-tutorial-part-3-deep-linking-and-application-states/
     if (this.lists) {
-      this.currentList = this.lists.get(id)
+      this.currentList = this.lists.get(id);
+      this.currentListTitle = this.currentList.get('title');
       this.tasks = this.currentList.get('tasks');
       // Clean up previous view
       if (this.listShow) { this.listShow.leave(); }
-      this.TasksView = new App.Views.TasksView({ collection: this.tasks });
+      this.TasksView = new App.Views.TasksView({ 
+        collection: this.tasks,
+        listTitle: this.currentListTitle
+      });
       $('.current-tasks').html(this.TasksView.render().$el);
     } else {
       this.requestedId = id;
@@ -62,15 +63,6 @@ App.Routers.AppRouter = Backbone.Router.extend({
         that.todayView = new App.Views.TodayView({collection: that.todayTasks});
         $('.today-tasks').html(that.todayView.render().$el)      
       });
-      // this.todayTasks.fetch({
-//         success:function() {
-//           if (that.todayView) { that.todayView.leave(); }
-//           that.todayView = new App.Views.TodayView({
-//             collection: that.todayTasks
-//           });
-//           $('.today-tasks').html(that.todayView.render().$el)
-//         }
-//       });
     } else {
       this.index();
     }

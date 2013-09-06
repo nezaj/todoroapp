@@ -9,7 +9,8 @@ App.Views.TasksView = Backbone.View.extend({
     "click a.do-later": "doLater"
   },
   
-  initialize: function() {
+  initialize: function(options) {
+    this.listTitle = options.listTitle;
     pubSub.on('updateList', this.update, this);
     this.listenTo(this.collection, 'remove', this.render);
     this.listenTo(this.collection, 'add', this.render);
@@ -19,7 +20,9 @@ App.Views.TasksView = Backbone.View.extend({
   render: function() {
     var that = this;
     
-    var renderedContent = this.template();
+    var renderedContent = this.template({
+      listTitle: that.listTitle
+    });
     this.$el.html(renderedContent);
     
     // Create individual task views
