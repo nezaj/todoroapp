@@ -1,7 +1,7 @@
 <span data-id="<%= list.id %>">
-  <a href="#" class="open"><%= list.escape('title') %></a>
+  <a href="#" class="open-list"><%= list.escape('title') %></a>
   <!-- Remove List -->
-  <a href="#" class="hidden remove-list">
+  <a href="#" class="hidden remove-list" id="remove-list-item">
     <span class="ui-icon ui-icon-closethick" data-id="<%= list.id %>" id="delete-list"></span>
   </a>
 </span>
@@ -19,8 +19,19 @@
     font-size: 1.0em; 
     height: 1.0em; 
   }
-  #delete-list { float: right;}
+  .open-list { float: left; }
+  #delete-list { float: right; }
 </style>
 
 <script>
+  // Hover effect to display delete button
+  // .list-item comes from list_item.js
+  $(".list-item").hover(
+    function() {
+      $(this).removeClass("ui-state-default").addClass("ui-state-hover");
+      $(this).find(".remove-list").removeClass("hidden"); },
+    function() {
+      $(this).removeClass("ui-state-hover").addClass("ui-state-default"); 
+      $(this).find(".remove-list").addClass("hidden"); }
+  );
 </script>
