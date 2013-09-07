@@ -1,11 +1,20 @@
 <% var todayStatus = task.get("today") ? "today" : "later" %>
 
-<td data-id="<%= task.id %>">
+<td>
   <%= task.escape("title") %>
-  <a href="#" class="remove-task">Delete</a>
-  <span class="do <%= todayStatus %>" data-id="<%= task.id %>">
-    <a href="#" class="do-later">Not Today</a>
-    <a href="#" class="do-today">Today</a>
+  <a href="#" class="list-remove-task" data-id="<%= task.id %>">Delete</a>
+  <span class="<%= todayStatus %>">
+    <a href="#" class="list-do-later" data-id="<%= task.id %>">Not Today</a>
+    <a href="#" class="list-do-today" data-id="<%= task.id %>">Today</a>
   </span>
 </td>
   
+<style>
+  .today .list-do-today {
+    display: none;
+  }
+
+  .later .list-do-later {
+    display: none;
+  }
+</style>

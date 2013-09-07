@@ -2,7 +2,7 @@ App.Views.ListsView = Backbone.View.extend({
   events: {
     "submit #list-form": "newList",
     "click a.remove-list": "removeList",
-    "click a.open" : "openList"
+    "click a.open-list" : "openList"
   },
 
   template: JST['lists/lists_view'],

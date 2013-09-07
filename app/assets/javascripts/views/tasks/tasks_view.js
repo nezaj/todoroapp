@@ -4,9 +4,9 @@ App.Views.TasksView = Backbone.View.extend({
   
   events: {
     "submit #task-form": "addTask",
-    "click a.remove-task": "removeTask",
-    "click a.do-today": "doToday",
-    "click a.do-later": "doLater"
+    "click a.list-remove-task": "removeTask",
+    "click a.list-do-today": "doToday",
+    "click a.list-do-later": "doLater"
   },
   
   initialize: function(options) {
@@ -43,7 +43,7 @@ App.Views.TasksView = Backbone.View.extend({
 
   doToday: function() {
     event.preventDefault();
-    var task_id = $(event.target).parent().attr('data-id')
+    var task_id = $(event.target).attr('data-id')
     var task = this.collection.get(task_id);
     task.save(
       { today: true },
@@ -53,14 +53,14 @@ App.Views.TasksView = Backbone.View.extend({
   
   removeTask: function() {
     event.preventDefault();
-    var task_id = $(event.target).parent().attr('data-id');
+    var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
     task.destroy({ success: function() { pubSub.trigger('updateToday'); } });
   },
   
   doLater: function() {
     event.preventDefault();
-    var task_id = $(event.target).parent().attr('data-id')
+    var task_id = $(event.target).attr('data-id')
     var task = this.collection.get(task_id);
     task.save(
       { today: false },
