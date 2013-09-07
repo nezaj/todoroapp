@@ -29,7 +29,7 @@ body {
   text-align: center;
 }
 
-.current-tasks, .today-tasks, .unplanned-tasks {
+.current-list-container, .today-tasks, .unplanned-tasks {
   float: left;
   width: 22%;
   margin-right: 3%;

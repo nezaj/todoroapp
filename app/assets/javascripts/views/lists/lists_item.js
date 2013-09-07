@@ -1,6 +1,7 @@
 App.Views.ListsItemView = Backbone.View.extend({
 
-  tagName: "tr",
+  tagName: "li",
+  className: "ui-state-default",
   template: JST['lists/lists_item'],
   
   render: function() {

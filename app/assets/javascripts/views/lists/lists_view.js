@@ -1,7 +1,7 @@
 App.Views.ListsView = Backbone.View.extend({
   events: {
     "submit #list-form": "newList",
-    "click a.remove": "removeList",
+    "click a.remove-list": "removeList",
     "click a.open" : "openList"
   },
 
@@ -21,7 +21,7 @@ App.Views.ListsView = Backbone.View.extend({
     // Create individual list views
     this.collection.each(function (list) {
       var listsItemView = new App.Views.ListsItemView({ model: list });
-      self.$('table').append(listsItemView.render().$el);
+      self.$('ul').append(listsItemView.render().$el);
     });
     
     return this;
@@ -41,7 +41,7 @@ App.Views.ListsView = Backbone.View.extend({
   
   removeList: function(event) {
     event.preventDefault();
-    var id = $(event.target).parent().attr('data-id');
+    var id = $(event.target).attr('data-id');
     var listToDelete = this.collection.get(id);
     listToDelete.destroy();
   },

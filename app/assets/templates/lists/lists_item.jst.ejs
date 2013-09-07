@@ -1,4 +1,26 @@
-<td data-id="<%= list.id %>">
+<span data-id="<%= list.id %>">
   <a href="#" class="open"><%= list.escape('title') %></a>
-  <a href="#" class="remove">Delete</a>
-</td>
+  <!-- Remove List -->
+  <a href="#" class="hidden remove-list">
+    <span class="ui-icon ui-icon-closethick" data-id="<%= list.id %>" id="delete-list"></span>
+  </a>
+</span>
+
+<!-- <li class="ui-state-default ui-corner-all" title=".ui-icon-closethick"><span class="ui-icon ui-icon-closethick"></span></li> -->
+
+<style>
+  li {
+    list-style-type: none;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-left: -10px;
+    margin-bottom: -5px;
+    padding: 15px;
+    font-size: 1.0em; 
+    height: 1.0em; 
+  }
+  #delete-list { float: right;}
+</style>
+
+<script>
+</script>

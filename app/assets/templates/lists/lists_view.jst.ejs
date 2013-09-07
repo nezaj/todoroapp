@@ -1,40 +1,60 @@
 Lists
 <br>
 <!-- Show List Form Button-->
-<button id="show-list-form" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false" style="font-size: 12px; color: #cc0000">
+<button id="show-list-form" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
   <span class="ui-button-text">Add New List</span>
 </button>
 
 <div id="list-utility" class="hidden">
-  <form id="list-form" style="float: left">
+  <form id="list-form">
     <input type="text" name="list[title]">
     <!-- Add Task Button -->
-    <button class="ui-state-default ui-corner-all" title=".ui-icon-plusthick" id="submit-form" style="font-size: 8px">
+    <button class="ui-state-default ui-corner-all" title=".ui-icon-plusthick" id="submit-task-form">
       <span class="ui-icon ui-icon-plus"></span>
     </button>
   </form>
   <!-- Remove Form Button -->
-  <button class="ui-state-default ui-corner-all" title=".ui-icon-close" id="remove-form" style="font-size: 8px; float: left ">
+  <button class="ui-state-default ui-corner-all" title=".ui-icon-close" id="remove-list-form">
     <span class="ui-icon ui-icon-close"></span>
   </button>
 </div>
 
-<table>
+<div style="clear: both;"></div>
+
+<ul id="lists-sortable">
   <!-- child content will be rendered here -->
-</table>
+</ul>
+
+<style>
+  #show-list-form { font-size: 12px; color: #cc0000; }
+  #list-form { float: left; }
+  #submit-task-form { font-size: 8px; }
+  #remove-list-form { font-size: 8px; float: left }
+</style>
 
 <script>
-  $('button').button();
-  // Display Add Task Form
-  $('#show-list-form').click(function() {
-    $('#show-list-form').addClass('hidden');
-    $('#list-utility').removeClass('hidden');
+  $(function() { 
+    // Button Effects
+    $('button').button();
+  
+    // Sortable Effects
+    $( "#lists-sortable" ).sortable({
+      placeholder: "ui-state-highlight"
+    });
+    $( "#lists-sortable" ).disableSelection();
+  
+    // Display Add Task Form
+    $('#show-list-form').click(function() {
+      $('#list-utility').removeClass('hidden');
+      $('#show-list-form').addClass('hidden');
+    });
+  
+    // Remove Add Task Form
+    $('#remove-list-form').click(function() {
+      $('#list-utility').addClass('hidden');
+      $('#show-list-form').removeClass('hidden');
+    });
   });
-  // Remove Add Task Form
-  $('#remove-form').click(function() {
-    $('#list-utility').addClass('hidden');
-    $('#show-list-form').removeClass('hidden');
-  })
 </script>
 
 
