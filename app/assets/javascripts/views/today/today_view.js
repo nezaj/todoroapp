@@ -41,6 +41,15 @@ App.Views.TodayView = Backbone.View.extend({
     );
   },
   
+  removeTask: function() {
+    event.preventDefault();
+    var task_id = $(event.target).attr('data-id');
+    var task = this.collection.get(task_id);
+    task.destroy({
+      success: function() { pubSub.trigger('updateList'); }
+    });
+  },
+  
   taskComplete: function() {
     console.log("Task complete!");
     var task_id = $(event.target).attr('data-id');
@@ -63,15 +72,6 @@ App.Views.TodayView = Backbone.View.extend({
         pubSub.trigger('updateList');
         pubSub.trigger('updateToday'); } }
     );
-  },
-  
-  removeTask: function() {
-    event.preventDefault();
-    var task_id = $(event.target).attr('data-id');
-    var task = this.collection.get(task_id);
-    task.destroy({
-      success: function() { pubSub.trigger('updateList'); }
-    });
   },
   
   update: function() {

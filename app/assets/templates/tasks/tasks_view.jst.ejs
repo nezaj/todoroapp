@@ -69,23 +69,14 @@ List: <%= listTitle %>
     });
     
     // Display Edit Form
-    $('task-content').on('click', '.task-edit-link', function() {
+    $('#task-content').on('click', '.task-edit-link', function() {
+      event.preventDefault();
       $(event.target).parents('.task-item').find('.task-options')
       .toggleClass('hidden');
       $(event.target).parents('.task-item').find('.task-title')
       .toggleClass('hidden');
       $(event.target).parents('.task-item').find('.task-edit-form')
       .toggleClass('hidden').focus();
-    });
-    
-    // Remove Edit Form
-    $('task-content').on('click', '.task-edit-form', function() {
-      $(event.target).parents('.task-item').find('.task-options')
-      .toggleClass('hidden');
-      $(event.target).parents('.task-item').find('.task-title')
-      .toggleClass('hidden');
-      $(event.target).parents('.task-item').find('.task-edit-form')
-      .toggleClass('hidden');
     });
     
   });
