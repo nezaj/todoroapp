@@ -26,16 +26,21 @@ App.Routers.AppRouter = Backbone.Router.extend({
   showList: function (id) {
     console.log('Executed showList');
     if (this.lists) {
+      var that = this;
       this.currentList = this.lists.get(id);
       this.currentListTitle = this.currentList.get('title');
       this.tasks = this.currentList.get('tasks');
-      // Clean up previous view
-      if (this.listShow) { this.listShow.leave(); }
-      this.TasksView = new App.Views.TasksView({ 
-        collection: this.tasks,
-        listTitle: this.currentListTitle
+      
+      this.tasks.fetch().done(function() {
+        // Clean up previous view
+        if (this.TasksView) { this.TasksView.leave(); }
+        that.TasksView = new App.Views.TasksView({ 
+          collection: that.tasks,
+          listTitle: that.currentListTitle,
+          viewType: "tasksView"
+        });
+        $('.current-tasks').html(that.TasksView.render().$el);  
       });
-      $('.current-tasks').html(this.TasksView.render().$el);
     } else {
       this.requestedId = id;
       this.index();
@@ -59,9 +64,12 @@ App.Routers.AppRouter = Backbone.Router.extend({
     if (this.lists) {
       this.todayTasks = new App.Collections.TodayTasks();
       this.todayTasks.fetch().done(function() {
-        if (that.todayView) { that.todayView.leave(); }
-        that.todayView = new App.Views.TodayView({collection: that.todayTasks});
-        $('.today-tasks').html(that.todayView.render().$el)      
+        if (that.TodayView) { that.TodayView.leave(); }
+        that.TodayView = new App.Views.TasksView({
+          collection: that.todayTasks,
+          viewType: "todayView"
+        });
+        $('.today-tasks').html(that.TodayView.render().$el)      
       });
     } else {
       this.index();

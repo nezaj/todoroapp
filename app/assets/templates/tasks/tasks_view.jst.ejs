@@ -1,10 +1,19 @@
+
+<% if (viewType === "tasksView")  { %>
 List: <%= listTitle %>
+<% } else if (viewType === "todayView") { %>
+Today
+<% } else { %>
+Unplanned
+<% } %>
 <br>
 
+<% if (viewType === "tasksView")  { %>
 <!-- Add Task Button -->
 <button id="show-task-form" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false" style="font-size: 12px; color: #cc0000">
   <span class="ui-button-text">Add New Task</span>
 </button>
+
 
 <!-- Add Task Form -->
 <div id="task-utility" class="hidden clearfix">
@@ -24,6 +33,8 @@ List: <%= listTitle %>
     <span class="ui-icon ui-icon-close"></span>
   </button>
 </div>
+
+<% } %>
 
 <!-- Clear Floats -->
 <div style="clear: both;"></div>
@@ -66,17 +77,6 @@ List: <%= listTitle %>
     $('#remove-task-form').click(function() {
       $('#task-utility').addClass('hidden');
       $('#show-task-form').removeClass('hidden');
-    });
-    
-    // Display Edit Form
-    $('#task-content').on('click', '.task-edit-link', function() {
-      event.preventDefault();
-      $(event.target).parents('.task-item').find('.task-options')
-      .toggleClass('hidden');
-      $(event.target).parents('.task-item').find('.task-title')
-      .toggleClass('hidden');
-      $(event.target).parents('.task-item').find('.task-edit-form')
-      .toggleClass('hidden').focus();
     });
     
   });
