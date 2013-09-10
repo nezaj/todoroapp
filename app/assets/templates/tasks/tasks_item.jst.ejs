@@ -25,7 +25,9 @@
     <!-- doLater/doToday -->
     <span class="<%= todayStatus %>">
       <a href="#" class="list-do-later" data-id="<%= task.id %>">Not Today</a>
-      <a href="#" class="list-do-today" data-id="<%= task.id %>">Today</a>
+      <% if (viewType !== "todayView") { %>
+        <a href="#" class="list-do-today" data-id="<%= task.id %>">Today</a>
+      <% } %>
     </span>
   </span>
 </td>
