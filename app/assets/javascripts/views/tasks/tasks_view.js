@@ -6,7 +6,9 @@ App.Views.TasksView = Backbone.View.extend({
     "submit #task-form": "addTask",
     "click a.list-remove-task": "removeTask",
     "click a.list-do-today": "doToday",
-    "click a.list-do-later": "doLater"
+    "click a.list-do-later": "doLater",
+    "click .task-unchecked": "taskComplete",
+    "click .task-checked": "taskIncomplete"
   },
   
   initialize: function(options) {
@@ -34,6 +36,30 @@ App.Views.TasksView = Backbone.View.extend({
     return this;
   },
   
+  taskComplete: function() {
+    console.log("Task complete!");
+    var task_id = $(event.target).attr('data-id');
+    var task = this.collection.get(task_id);
+    task.save(
+      { complete: true },
+      { success: function() { 
+        pubSub.trigger('updateList');
+        pubSub.trigger('updateToday'); } }
+    );
+  },
+  
+  taskIncomplete: function() {
+    console.log("Task incomplete!");
+    var task_id = $(event.target).attr('data-id');
+    var task = this.collection.get(task_id);
+    task.save(
+      { complete: false },
+      { success: function() { 
+        pubSub.trigger('updateList');
+        pubSub.trigger('updateToday'); } }
+    );
+  },
+
   addTask: function() {
     event.preventDefault();
     var formData = $(event.target).serializeJSON().task;
@@ -43,7 +69,7 @@ App.Views.TasksView = Backbone.View.extend({
 
   doToday: function() {
     event.preventDefault();
-    var task_id = $(event.target).attr('data-id')
+    var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
     task.save(
       { today: true },

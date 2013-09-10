@@ -1,3 +1,9 @@
+1. Implement Task Title Edit
+2. Implement Checkmarking Tasks Complete/Incomplete
+3. Display total number of tasks completed and pending for all lists
+4. Display total number of pending tasks for a list in sidebar
+5. Display total number of pending and completed tasks for current list
+
 Here is the core functionality I want to implement:
 - Users can CRUD lists to hold tasks they can CRUD.
 - Tasks are time bound, the length is measured in pomodoros, 25 minute blocks with 5 minute breaks.

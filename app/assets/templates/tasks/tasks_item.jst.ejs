@@ -1,7 +1,14 @@
 <% var todayStatus = task.get("today") ? "today" : "later" %>
+<% var completeStatus = task.get("complete") ? "complete" : "incomplete" %>
 
-<td>
-  <%= task.escape("title") %>
+<td data-id="<%= task.id %>">
+  <span class="task-<%= completeStatus %>">
+    <input type="checkbox" class="task-checked"
+                           data-id="<%=task.id %>" checked>
+    <input type="checkbox" class="task-unchecked"
+                           data-id="<%=task.id %>">
+    <%= task.escape("title") %>
+  </span>
   <a href="#" class="list-remove-task" data-id="<%= task.id %>">Delete</a>
   <span class="<%= todayStatus %>">
     <a href="#" class="list-do-later" data-id="<%= task.id %>">Not Today</a>
@@ -17,4 +24,13 @@
   .later .list-do-later {
     display: none;
   }
+  
+  .task-complete {
+    text-decoration: line-through;
+    color: grey;
+  }
+  
+  .task-complete .task-unchecked { display: none; }
+  .task-incomplete .task-checked { display: none; }
+  
 </style>

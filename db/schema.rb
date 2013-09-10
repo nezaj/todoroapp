@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130904035905) do
+ActiveRecord::Schema.define(:version => 20130910000435) do
 
   create_table "lists", :force => true do |t|
     t.integer  "author_id",  :null => false
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20130904035905) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "today",      :default => false
+    t.boolean  "complete",   :default => false
   end
 
   add_index "tasks", ["list_id", "title"], :name => "index_tasks_on_list_id_and_title"

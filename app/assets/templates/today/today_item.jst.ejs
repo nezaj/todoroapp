@@ -1,4 +1,13 @@
+<% var completeStatus = task.get("complete") ? "complete" : "incomplete" %>
+
 <td>
-  <%= task.escape('title') %>
-  <a href="#" class="remove-today" data-id="<%= task.id %>">Remove</a>  
+  <span class="task-<%= completeStatus %>">
+    <input type="checkbox" class="task-checked"
+                           data-id="<%=task.id %>" checked>
+    <input type="checkbox" class="task-unchecked"
+                           data-id="<%=task.id %>">
+    <%= task.escape('title') %>
+  </span>
+  <a href="#" class="today-remove-task" data-id="<%= task.id %>">Delete</a>  
+  <a href="#" class="today-do-later" data-id="<%= task.id %>">Not Today</a>  
 </td>
