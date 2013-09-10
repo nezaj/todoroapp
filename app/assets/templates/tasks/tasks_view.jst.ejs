@@ -1,35 +1,51 @@
-<!-- Show Task Form Button-->
 List: <%= listTitle %>
 <br>
+
+<!-- Add Task Button -->
 <button id="show-task-form" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false" style="font-size: 12px; color: #cc0000">
   <span class="ui-button-text">Add New Task</span>
 </button>
 
-</span>
+<!-- Add Task Form -->
 <div id="task-utility" class="hidden clearfix">
   <form id="task-form">
     <!-- Task Name -->
     <input type="text" name="task[title]">
+    
     <!-- Add Task Button -->
     <button class="ui-state-default ui-corner-all" title=".ui-icon-plusthick" id="submit-task-form">
       <span class="ui-icon ui-icon-plus"></span>
     </button>
   </form>
-  <!-- Remove Form Button -->
-  <button class="ui-state-default ui-corner-all" title=".ui-icon-close" id="remove-task-form">
+  
+    <!-- Remove Form Button -->
+  <button class="ui-state-default ui-corner-all" title=".ui-icon-close"
+          id="remove-task-form">
     <span class="ui-icon ui-icon-close"></span>
   </button>
 </div>
 
+<!-- Clear Floats -->
 <div style="clear: both;"></div>
 
+<!-- render tasks views here -->
 <div id="task-content">
-  <table>
-    <!-- render tasks views here -->
-  </table>
 </div>
 
 <style>
+
+  /* doToday/doLater links */
+  .today .list-do-today { display: none; }
+  .later .list-do-later { display: none; }
+
+  /* Check boxes */
+  .task-complete {
+    text-decoration: line-through;
+    color: grey;
+  }
+  .task-complete .task-unchecked { display: none; }
+  .task-incomplete .task-checked { display: none; }
+
   #show-task-form { font-size: 12px; color: #cc0000; }
   #task-form { float: left; }
   #submit-task-form { font-size: 8px; }
@@ -39,15 +55,38 @@ List: <%= listTitle %>
 <script>
   $(function() {
     $('button').button();
+    
     // Display Add Task Form
     $('#show-task-form').click(function() {
       $('#show-task-form').addClass('hidden');
       $('#task-utility').removeClass('hidden');
     });
+    
     // Remove Add Task Form
     $('#remove-task-form').click(function() {
       $('#task-utility').addClass('hidden');
       $('#show-task-form').removeClass('hidden');
     });
+    
+    // Display Edit Form
+    $('task-content').on('click', '.task-edit-link', function() {
+      $(event.target).parents('.task-item').find('.task-options')
+      .toggleClass('hidden');
+      $(event.target).parents('.task-item').find('.task-title')
+      .toggleClass('hidden');
+      $(event.target).parents('.task-item').find('.task-edit-form')
+      .toggleClass('hidden').focus();
+    });
+    
+    // Remove Edit Form
+    $('task-content').on('click', '.task-edit-form', function() {
+      $(event.target).parents('.task-item').find('.task-options')
+      .toggleClass('hidden');
+      $(event.target).parents('.task-item').find('.task-title')
+      .toggleClass('hidden');
+      $(event.target).parents('.task-item').find('.task-edit-form')
+      .toggleClass('hidden');
+    });
+    
   });
 </script>

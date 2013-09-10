@@ -26,10 +26,24 @@ Lists
 </ul>
 
 <style>
+  .open-list { float: left; }
+  .delete-list { float: right; }
+
   #show-list-form { font-size: 12px; color: #cc0000; }
   #list-form { float: left; }
   #submit-task-form { font-size: 8px; }
-  #remove-list-form { font-size: 8px; float: left });
+  #remove-list-form { font-size: 8px; float: left; }
+  
+  ul#lists-sortable li {
+    list-style-type: none;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-left: -10px;
+    margin-bottom: -5px;
+    padding: 15px;
+    font-size: 1.0em; 
+    height: 1.0em; 
+  }
 </style>
 
 <script>
@@ -54,6 +68,18 @@ Lists
       $('#list-utility').addClass('hidden');
       $('#show-list-form').removeClass('hidden');
     });
+    
+    // Hover Effect on List
+    $("ul").on('mouseenter', '.list-item', 
+      function() {
+        $(this).removeClass("ui-state-default").addClass("ui-state-hover");
+        $(this).find(".remove-list").removeClass("hidden"); }
+      );
+    $("ul").on('mouseleave', '.list-item', 
+      function() {
+        $(this).removeClass("ui-state-hover").addClass("ui-state-default"); 
+        $(this).find(".remove-list").addClass("hidden"); }
+    );
   });
 </script>
 

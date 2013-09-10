@@ -8,7 +8,8 @@ App.Views.TasksView = Backbone.View.extend({
     "click a.list-do-today": "doToday",
     "click a.list-do-later": "doLater",
     "click .task-unchecked": "taskComplete",
-    "click .task-checked": "taskIncomplete"
+    "click .task-checked": "taskIncomplete",
+    "click a.task-edit-link": "taskEdit"
   },
   
   initialize: function(options) {
@@ -30,10 +31,15 @@ App.Views.TasksView = Backbone.View.extend({
     // Create individual task views
     this.collection.each(function (task) {
       var tasksItemView = new App.Views.TasksItemView({ model: task });
-      that.$('table').append(tasksItemView.render().$el);
+      that.$('#task-content').append(tasksItemView.render().$el);
     });
     
     return this;
+  },
+  
+  taskEdit: function() {
+    event.preventDefault();
+    console.log(event.target);
   },
   
   taskComplete: function() {

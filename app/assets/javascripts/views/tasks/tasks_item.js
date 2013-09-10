@@ -1,6 +1,6 @@
 App.Views.TasksItemView = Backbone.View.extend({
   
-  tagname: "tr",
+  className: "task-item",
   template: JST['tasks/tasks_item'],
   
   render: function() {

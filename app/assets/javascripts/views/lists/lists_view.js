@@ -1,8 +1,8 @@
 App.Views.ListsView = Backbone.View.extend({
   events: {
-    "submit #list-form": "newList",
+    "submit #list-form": "addList",
     "click a.remove-list": "removeList",
-    "click a.open-list" : "openList"
+    "click a.open-list" : "openList",
   },
 
   template: JST['lists/lists_view'],
@@ -27,7 +27,7 @@ App.Views.ListsView = Backbone.View.extend({
     return this;
   },
   
-  newList: function(event) {
+  addList: function(event) {
     event.preventDefault();
     var formData = $(event.target).serializeJSON().list;
     this.collection.create(formData, { wait: true });
