@@ -18,6 +18,7 @@
 //= require jquery.serializeJSON
 //= require jquery-ui-custom
 //= require jquery.countdown.min.js
+//= require jquery.the-final-countdown.js
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections

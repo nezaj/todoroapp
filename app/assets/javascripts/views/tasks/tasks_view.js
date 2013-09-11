@@ -15,7 +15,7 @@ App.Views.TasksView = Backbone.View.extend({
     "click .task-open-timer": "openTimer",
     "click .task-close-timer": "closeTimer",
     "click .task-begin-timer": "beginTimer",
-    "click .task-stop-timer": "stopTimer"
+    "click .task-reset-timer": "resetTimer"
   },
   
   initialize: function(options) {
@@ -63,21 +63,14 @@ App.Views.TasksView = Backbone.View.extend({
     task_id = $(event.target).attr('data-id');
     task = this.collection.get(task_id);
     
-    $timer = $(event.target).parents('.task-item').find('#timer-time')
-    var twentyFiveMinutes = new Date();
-    twentyFiveMinutes.setMinutes(twentyFiveMinutes.getMinutes() + 1);
-    
-    $timer.countdown({
-      until: twentyFiveMinutes, 
-      compact: true,
-      layout: '{mnn}{sep}{snn}',
-      onExpiry: function() { that.completePomodoro(task) }
-    });
-    $(window).find('title').html("TodoroApp (" + $timer.html() + ")");
+    this.tickTock('Todoro', 10);
   },
   
   closeTimer: function() {
     this.stopTimer(event);
+    // Reset Title
+    $('title').html('TodoroApp');
+    // Hide Window and Update
     $(event.target).parents('.task-item').find('.timer-window')
     .toggleClass('hidden');
     if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
@@ -175,10 +168,11 @@ App.Views.TasksView = Backbone.View.extend({
     });
   },
   
-  stopTimer: function(event) {
+  resetTimer: function(event) {
     event.preventDefault();
-    $(event.target).parents('.task-item').find('#timer-time')
-    .countdown('destroy').html("25:00");
+    $(".timer-time").pauseTimer();
+    $(".timer-time").html("25:00");
+    $('title').html('Todoro');
   },
   
   taskComplete: function() {
@@ -209,6 +203,20 @@ App.Views.TasksView = Backbone.View.extend({
     });
   },
   
+  tickTock: function(name,time_in_seconds){
+    var that = this;
+    $(".timer-time").createTimer({
+      time_in_seconds: time_in_seconds,
+      tick: function(timer, time_in_seconds, formatted_time) {
+        document.title = name + ' (' + formatted_time + ')';
+      },
+      buzzer: function(){
+        document.title = 'DING!';
+        that.completePomodoro();
+      }
+    });
+  },
+  
   update: function() {
     console.log('Execute updateTasks for ' + this.viewType);
     var that = this;
@@ -220,6 +228,6 @@ App.Views.TasksView = Backbone.View.extend({
   leave: function() {
     this.unbind();
     this.remove();
-  }
+  },
   
 });
