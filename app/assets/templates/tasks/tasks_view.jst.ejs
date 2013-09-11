@@ -1,7 +1,4 @@
-<div id="overall-info" style="float: left; text-align: left">
-  <% var monthNames = [ "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December" ]; %>
-  
+<div id="task-overall-info" style="float: left; text-align: left">  
   <!-- Completed Tasks -->
   <% var completedTasks = _.where(tasks.toJSON(), {complete: true}) %>
   
@@ -23,8 +20,7 @@
     
     <% var pomPending = _.reduce(expectedPomodorosCount, function(memo,num){ 
       return memo+num 
-      }, 0); 
-    %>
+      }, 0); %>
 
   <% if (viewType !== "todayView") { %>
     Tasks Complete: <%= completedTasks.length %>
@@ -86,6 +82,25 @@
 
 <style>
 
+  /* Timer */
+  .timer-window {
+    z-index:1000;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:grey;
+    opacity:0.8;
+    -moz-opacity:0.8;
+    filter:alpha(opacity=80);
+    }
+    
+  .timer-content {
+    position: relative;
+    top: 200px;
+  }
+
   /* doToday/doLater links */
   .today .list-do-today { display: none; }
   .later .list-do-later { display: none; }
@@ -98,6 +113,7 @@
   .task-complete .task-unchecked { display: none; }
   .task-incomplete .task-checked { display: none; }
 
+  /* Forms */
   #show-task-form { font-size: 12px; color: #cc0000; }
   #task-form { float: left; }
   #submit-task-form { font-size: 8px; }

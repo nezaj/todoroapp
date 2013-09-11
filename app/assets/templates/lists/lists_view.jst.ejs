@@ -1,51 +1,50 @@
-<% if (lists.toJSON().length > 0)  { %>
-  <div id="overall-info" style="float: left; text-align: left">
-    <div id="date-info">
-      <!-- Date Info -->
-      <% var now = new Date() %>
-      <% var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday',
-      'Friday','Saturday']; %>
-      <% var months = ['January','February','March','April','May','June','July',
-      'August','September','October','November','December']; %>
+<div id="date-info">
+  <!-- Date Info -->
+  <% var now = new Date() %>
+  <% var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday',
+  'Friday','Saturday']; %>
+  <% var months = ['January','February','March','April','May','June','July',
+  'August','September','October','November','December']; %>
 
-      <%= months[ now.getMonth() ] %> <%= now.getDate() %>
-      <br>
-      <%= days[ now.getDay() ] %>
-      <br><br>
-    </div>
-    <div id="task-info">
-      <!-- Completed Task Count -->
-      <% var taskCountComplete = _.map(lists.toJSON(), function(list) { 
-        return _.where(list.tasks, {complete: true}).length 
-        }); %>
-      <% var completedTasks = _.reduce(taskCountComplete, function(memo, num){ 
-        return memo+num 
-        }, 0); %>
-      
-      <!-- Pending Task Count -->
-      <% var taskCountPending = _.map(lists.toJSON(), function(list) { 
-        return _.where(list.tasks, {complete: false}).length 
-        }); %>
-      <% var pendingTasks = _.reduce(taskCountPending, function(memo, num){ 
-        return memo+num 
-        }, 0); %>
-      
-        <!-- Pomdoros Achieved -->
-      <% var pomodorosCount = _.flatten(_.map(lists.toJSON(), function(list) {
-        return _.map(list.tasks, function(task) { return task.pomodoro_actual }) 
-          })
-        ); %>
-      <% var pomodorosAchieved = _.reduce(pomodorosCount, function(memo, num){ 
-        return memo+num 
-        }, 0); %>
-      
-      Tasks Complete: <%= completedTasks %>
-      <br>
-      Tasks Pending: <%= pendingTasks %>
-      <br>
-      Pomodoros Achieved: <%= pomodorosAchieved %>
-      <br><br>
-    </div>
+  <%= months[ now.getMonth() ] %> <%= now.getDate() %>
+  <br>
+  <%= days[ now.getDay() ] %>
+  <br><br>
+</div>
+
+<% if (lists.toJSON().length > 0)  { %>
+  <div id="lists-overall-info" style="float: left; text-align: left">
+    <!-- Completed Task Count -->
+    <% var taskCountComplete = _.map(lists.toJSON(), function(list) { 
+      return _.where(list.tasks, {complete: true}).length 
+      }); %>
+    <% var completedTasks = _.reduce(taskCountComplete, function(memo, num){ 
+      return memo+num 
+      }, 0); %>
+    
+    <!-- Pending Task Count -->
+    <% var taskCountPending = _.map(lists.toJSON(), function(list) { 
+      return _.where(list.tasks, {complete: false}).length 
+      }); %>
+    <% var pendingTasks = _.reduce(taskCountPending, function(memo, num){ 
+      return memo+num 
+      }, 0); %>
+    
+      <!-- Pomdoros Achieved -->
+    <% var pomodorosCount = _.flatten(_.map(lists.toJSON(), function(list) {
+      return _.map(list.tasks, function(task) { return task.pomodoro_actual }) 
+        })
+      ); %>
+    <% var pomodorosAchieved = _.reduce(pomodorosCount, function(memo, num){ 
+      return memo+num 
+      }, 0); %>
+    
+    Tasks Complete: <%= completedTasks %>
+    <br>
+    Tasks Pending: <%= pendingTasks %>
+    <br>
+    Pomodoros Achieved: <%= pomodorosAchieved %>
+    <br><br>
   </div>
 <% } %>
 

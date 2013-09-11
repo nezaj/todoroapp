@@ -11,7 +11,11 @@ App.Views.TasksView = Backbone.View.extend({
     "click .task-checked": "taskIncomplete",
     "click .task-edit-link": "displayEditForm",
     "submit .task-edit": "editTaskTitle",
-    "blur .task-edit-form": "editTaskTitle"
+    "blur .task-edit-form": "editTaskTitle",
+    "click .task-open-timer": "openTimer",
+    "click .task-close-timer": "closeTimer",
+    "click .task-begin-timer": "beginTimer",
+    "click .task-stop-timer": "stopTimer"
   },
   
   initialize: function(options) {
@@ -53,6 +57,39 @@ App.Views.TasksView = Backbone.View.extend({
     });
   },
   
+  beginTimer: function() {
+    event.preventDefault();
+    var that = this;
+    task_id = $(event.target).attr('data-id');
+    task = this.collection.get(task_id);
+    
+    $timer = $(event.target).parents('.task-item').find('#timer-time')
+    var twentyFiveMinutes = new Date();
+    twentyFiveMinutes.setMinutes(twentyFiveMinutes.getMinutes() + 1);
+    
+    $timer.countdown({
+      until: twentyFiveMinutes, 
+      compact: true,
+      layout: '{mnn}{sep}{snn}',
+      onExpiry: function() { that.completePomodoro(task) }
+    });
+    $(window).find('title').html("TodoroApp (" + $timer.html() + ")");
+  },
+  
+  closeTimer: function() {
+    this.stopTimer(event);
+    $(event.target).parents('.task-item').find('.timer-window')
+    .toggleClass('hidden');
+    if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
+    appRouter.todayView.trigger('updateTasks');
+    appRouter.listsView.trigger('updateTasks');
+  },
+  
+  completePomodoro: function(task) {
+    task.save({ pomodoro_actual: task.get("pomodoro_actual") + 1 });
+    
+  },
+  
   displayEditForm: function() {
     event.preventDefault();
     $(event.target).parents('.task-item').find('.task-options')
@@ -67,6 +104,7 @@ App.Views.TasksView = Backbone.View.extend({
     event.preventDefault();
     var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
+    
     task.save(
       { today: false },
       { success: function() { 
@@ -80,6 +118,7 @@ App.Views.TasksView = Backbone.View.extend({
     event.preventDefault();
     var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
+    
     task.save(
       { today: true },
       { success: function() { 
@@ -107,6 +146,12 @@ App.Views.TasksView = Backbone.View.extend({
     });
   },
   
+  openTimer: function() {
+    event.preventDefault();
+    $(event.target).parents('.task-item').find('.timer-window')
+    .toggleClass('hidden');
+  },
+  
   removeEditForm: function(event) {
     $(event.target).parents('.task-item').find('.task-options')
     .toggleClass('hidden');
@@ -120,6 +165,7 @@ App.Views.TasksView = Backbone.View.extend({
     event.preventDefault();
     var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
+    
     task.destroy(
       { success: function() { 
         if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
@@ -129,10 +175,16 @@ App.Views.TasksView = Backbone.View.extend({
     });
   },
   
+  stopTimer: function(event) {
+    event.preventDefault();
+    $(event.target).parents('.task-item').find('#timer-time')
+    .countdown('destroy').html("25:00");
+  },
+  
   taskComplete: function() {
-    console.log("Task complete!");
     var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
+    
     task.save(
       { complete: true },
       { success: function() { 
@@ -144,9 +196,9 @@ App.Views.TasksView = Backbone.View.extend({
   },
   
   taskIncomplete: function() {
-    console.log("Task incomplete!");
     var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
+    
     task.save(
       { complete: false },
       { success: function() { 
