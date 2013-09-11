@@ -29,6 +29,8 @@
         <a href="#" class="list-do-today" data-id="<%= task.id %>">Today</a>
       <% } %>
     </span>
+    <!-- Actual/Expected Pomodoros -->
+    <%= task.get("pomodoro_actual")%>/<%= task.get("pomodoro_expected")%>
   </span>
 </td>
 <!-- Edit Form -->

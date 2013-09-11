@@ -1,12 +1,40 @@
 <div id="overall-info" style="float: left; text-align: left">
-  <!-- Completed Task Count -->
-  <% var completedTasks = _.where(tasks.toJSON(), {complete: true}).length; %>
-  <!-- Pending Task Count -->
-  <% var pendingTasks = _.where(tasks.toJSON(), {complete: false}).length; %>
+  <% var monthNames = [ "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December" ]; %>
+  
+  <!-- Completed Tasks -->
+  <% var completedTasks = _.where(tasks.toJSON(), {complete: true}) %>
+  
+  <!-- Pending Tasks -->
+  <% var pendingTasks = _.where(tasks.toJSON(), {complete: false}); %>
+  
+  <!-- Actual Pomodoros Count -->
+  <% var actualPomodorosCount = _.flatten(_.map(tasks.toJSON(), function(task) {
+    return task.pomodoro_actual })
+    ); %>
+  <% var pomAchieved = _.reduce(actualPomodorosCount, function(memo,num){
+    return memo+num 
+    }, 0); %>
 
-  Tasks Complete: <%= completedTasks %>
+  <!-- Pending Pomodoros Count -->
+  <% var expectedPomodorosCount = _.flatten(_.map(pendingTasks, function(task) {
+    return task.pomodoro_expected })
+    ); %>
+    
+    <% var pomPending = _.reduce(expectedPomodorosCount, function(memo,num){ 
+      return memo+num 
+      }, 0); 
+    %>
+
+  <% if (viewType !== "todayView") { %>
+    Tasks Complete: <%= completedTasks.length %>
+    <br>
+    Tasks Pending: <%= pendingTasks.length %>
+    <br>
+  <% } %>
+  Pomodoros Achieved: <%= pomAchieved %>
   <br>
-  Tasks Pending: <%= pendingTasks %>
+  Pomodoros Expected: <%= pomPending %>
   <br><br>
 </div>
 

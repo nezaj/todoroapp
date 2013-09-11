@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130910000435) do
+ActiveRecord::Schema.define(:version => 20130911084915) do
 
   create_table "lists", :force => true do |t|
     t.integer  "author_id",  :null => false
@@ -23,13 +23,14 @@ ActiveRecord::Schema.define(:version => 20130910000435) do
   add_index "lists", ["author_id"], :name => "index_on_author_id"
 
   create_table "tasks", :force => true do |t|
-    t.integer  "list_id",                       :null => false
-    t.string   "title",                         :null => false
-    t.integer  "pomodoro",   :default => 1,     :null => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "today",      :default => false
-    t.boolean  "complete",   :default => false
+    t.integer  "list_id",                              :null => false
+    t.string   "title",                                :null => false
+    t.integer  "pomodoro_expected", :default => 1,     :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "today",             :default => false
+    t.boolean  "complete",          :default => false
+    t.integer  "pomodoro_actual",   :default => 0
   end
 
   add_index "tasks", ["list_id", "title"], :name => "index_tasks_on_list_id_and_title"
