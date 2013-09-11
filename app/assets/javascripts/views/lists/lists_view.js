@@ -8,6 +8,7 @@ App.Views.ListsView = Backbone.View.extend({
   template: JST['lists/lists_view'],
   
   initialize: function() {
+    this.listenTo(this, 'updateTasks', this.update);
     this.listenTo(this.collection, 'remove', this.render)
     this.listenTo(this.collection, 'add', this.render)
   },
@@ -15,7 +16,7 @@ App.Views.ListsView = Backbone.View.extend({
   render: function() {
     var self = this;
     
-    var renderedContent = this.template();
+    var renderedContent = this.template({ lists: this.collection });
     this.$el.html(renderedContent);
     
     // Create individual list views
@@ -44,6 +45,14 @@ App.Views.ListsView = Backbone.View.extend({
     var id = $(event.target).attr('data-id');
     var listToDelete = this.collection.get(id);
     listToDelete.destroy();
+  },
+  
+  update: function() {
+    console.log('Execute updateTasks for sidebar');
+    var that = this;
+    this.collection.fetch().done(function() {
+      that.setElement(that.$el).render().$el;
+    });
   },
   
   leave: function() {

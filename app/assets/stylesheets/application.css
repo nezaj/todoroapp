@@ -40,6 +40,6 @@ body {
   text-align: left;
 }
 
-.hidden {
-  display: none;
-}
+/* Helpers */
+.clearfix { clear: both; }
+.hidden { display: none; }

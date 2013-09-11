@@ -1,3 +1,29 @@
+<% if (lists.toJSON().length > 0)  { %>
+  <div id="overall-info" style="float: left; text-align: left">
+    <!-- Completed Task Count -->
+    <% var taskCountComplete = _.map(lists.toJSON(), function(list) { 
+      return _.where(list.tasks, {complete: true}).length 
+      }); %>
+    <% var completedTasks = _.reduce(taskCountComplete, function(memo, num){ 
+      return memo+num 
+      }); %>
+    <!-- Pending Task Count -->
+    <% var taskCountPending = _.map(lists.toJSON(), function(list) { 
+      return _.where(list.tasks, {complete: false}).length 
+      }); %>
+    <% var pendingTasks = _.reduce(taskCountPending, function(memo, num){ 
+      return memo+num 
+      }); %>
+
+    Tasks Complete: <%= completedTasks %>
+    <br>
+    Tasks Pending: <%= pendingTasks %>
+    <br><br>
+  </div>
+<% } %>
+
+
+<div class="clearfix">
 Lists
 <br>
 <!-- Show List Form Button-->
@@ -24,9 +50,11 @@ Lists
 <ul id="lists-sortable">
   <!-- child content will be rendered here -->
 </ul>
+</div>
 
 <style>
   .open-list { float: left; }
+  .list-pending-tasks { float: right; }
   .delete-list { float: right; }
 
   #show-list-form { font-size: 12px; color: #cc0000; }

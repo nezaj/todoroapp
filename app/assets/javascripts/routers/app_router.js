@@ -33,13 +33,13 @@ App.Routers.AppRouter = Backbone.Router.extend({
       
       this.tasks.fetch().done(function() {
         // Clean up previous view
-        if (this.TasksView) { this.TasksView.leave(); }
-        that.TasksView = new App.Views.TasksView({ 
+        if (this.tasksView) { this.tasksView.leave(); }
+        that.tasksView = new App.Views.TasksView({ 
           collection: that.tasks,
           listTitle: that.currentListTitle,
           viewType: "tasksView"
         });
-        $('.current-tasks').html(that.TasksView.render().$el);  
+        $('.current-tasks').html(that.tasksView.render().$el);  
       });
     } else {
       this.requestedId = id;
@@ -64,12 +64,12 @@ App.Routers.AppRouter = Backbone.Router.extend({
     if (this.lists) {
       this.todayTasks = new App.Collections.TodayTasks();
       this.todayTasks.fetch().done(function() {
-        if (that.TodayView) { that.TodayView.leave(); }
-        that.TodayView = new App.Views.TasksView({
+        if (that.todayView) { that.todayView.leave(); }
+        that.todayView = new App.Views.TasksView({
           collection: that.todayTasks,
           viewType: "todayView"
         });
-        $('.today-tasks').html(that.TodayView.render().$el)      
+        $('.today-tasks').html(that.todayView.render().$el)      
       });
     } else {
       this.index();

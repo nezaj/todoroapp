@@ -1,5 +1,9 @@
 <span data-id="<%= list.id %>">
   <a href="#" class="open-list"><%= list.escape('title') %></a>
+  <!-- Number of pending tasks -->
+  <span class="lists-pending-tasks">
+    <%= _.where(list.toJSON().tasks, {complete: false}).length %>
+  </span>
   <!-- Remove List -->
   <a href="#" class="hidden remove-list" id="remove-list-item">
     <span class="ui-icon ui-icon-closethick delete-list" data-id="<%= list.id %>" id="delete-list"></span>

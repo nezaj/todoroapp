@@ -25,8 +25,9 @@ App.Views.TasksView = Backbone.View.extend({
     var that = this;
     
     var renderedContent = this.template({
-      listTitle: that.listTitle,
-      viewType: that.viewType
+      tasks: this.collection,
+      listTitle: this.listTitle,
+      viewType: this.viewType
     });
     this.$el.html(renderedContent);
     
@@ -46,7 +47,10 @@ App.Views.TasksView = Backbone.View.extend({
     event.preventDefault();
     var formData = $(event.target).serializeJSON().task;
     formData.list_id = this.collection.list_id;
-    this.collection.create(formData, { wait: true });
+    this.collection.create(formData, { 
+      success: function() { appRouter.listsView.trigger('updateTasks'); },
+      wait: true 
+    });
   },
   
   displayEditForm: function() {
@@ -66,8 +70,8 @@ App.Views.TasksView = Backbone.View.extend({
     task.save(
       { today: false },
       { success: function() { 
-        if (appRouter.TasksView) {appRouter.TasksView.trigger('updateTasks'); }
-        appRouter.TodayView.trigger('updateTasks');
+        if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
+        appRouter.todayView.trigger('updateTasks');
       }
     });
   },
@@ -79,8 +83,8 @@ App.Views.TasksView = Backbone.View.extend({
     task.save(
       { today: true },
       { success: function() { 
-        if (appRouter.TasksView) {appRouter.TasksView.trigger('updateTasks'); }
-        appRouter.TodayView.trigger('updateTasks');
+        if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
+        appRouter.todayView.trigger('updateTasks');
       }
     });
   },
@@ -97,8 +101,8 @@ App.Views.TasksView = Backbone.View.extend({
       { title: newTaskTitle },
       { success: function() { 
         that.removeEditForm(event);
-        if (appRouter.TasksView) {appRouter.TasksView.trigger('updateTasks'); }
-        appRouter.TodayView.trigger('updateTasks');
+        if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
+        appRouter.todayView.trigger('updateTasks');
       }
     });
   },
@@ -118,8 +122,9 @@ App.Views.TasksView = Backbone.View.extend({
     var task = this.collection.get(task_id);
     task.destroy(
       { success: function() { 
-        if (appRouter.TasksView) {appRouter.TasksView.trigger('updateTasks'); }
-        appRouter.TodayView.trigger('updateTasks');
+        if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
+        appRouter.todayView.trigger('updateTasks');
+        appRouter.listsView.trigger('updateTasks');
       }
     });
   },
@@ -131,8 +136,9 @@ App.Views.TasksView = Backbone.View.extend({
     task.save(
       { complete: true },
       { success: function() { 
-        if (appRouter.TasksView) {appRouter.TasksView.trigger('updateTasks'); }
-        appRouter.TodayView.trigger('updateTasks');
+        if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
+        appRouter.todayView.trigger('updateTasks');
+        appRouter.listsView.trigger('updateTasks');
       }
     });
   },
@@ -144,8 +150,9 @@ App.Views.TasksView = Backbone.View.extend({
     task.save(
       { complete: false },
       { success: function() { 
-        if (appRouter.TasksView) {appRouter.TasksView.trigger('updateTasks'); }
-        appRouter.TodayView.trigger('updateTasks');
+        if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
+        appRouter.todayView.trigger('updateTasks');
+        appRouter.listsView.trigger('updateTasks');
       }
     });
   },
