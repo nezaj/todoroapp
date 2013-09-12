@@ -13,7 +13,7 @@
 </div>
 
 <% if (lists.toJSON().length > 0)  { %>
-  <div id="lists-overall-info" style="float: left; text-align: left">
+  <div id="lists-overall-info">
     <!-- Completed Task Count -->
     <% var taskCountComplete = _.map(lists.toJSON(), function(list) { 
       return _.where(list.tasks, {complete: true}).length 
@@ -39,66 +39,49 @@
       return memo+num 
       }, 0); %>
     
-    Tasks Complete: <%= completedTasks %>
-    <br>
-    Tasks Pending: <%= pendingTasks %>
-    <br>
-    Pomodoros Achieved: <%= pomodorosAchieved %>
+    <span class="glyphicon glyphicon-check"></span> : <%= completedTasks %>
+    <span class="glyphicon glyphicon-unchecked"></span> : <%= pendingTasks %>
+    <span class="glyphicon glyphicon-star"></span> : <%= pomodorosAchieved %>
     <br><br>
   </div>
 <% } %>
 
+<div class="clearfix"></div>
 
-<div class="clearfix">
-Lists
-<br>
-<!-- Show List Form Button-->
-<button id="show-list-form" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
-  <span class="ui-button-text">Add New List</span>
+<!-- Add New List Button-->
+<button id="show-list-form" 
+        class="ui-button ui-widget ui-state-default ui-corner-all
+               ui-button-text-only" 
+        role="button" 
+        aria-disabled="false">
+        <span class="ui-button-text">Add New List</span>
 </button>
 
+<!-- Add List Form -->
 <div id="list-utility" class="hidden">
+  <!-- Submit Button -->
   <form id="list-form">
     <input type="text" name="list[title]">
-    <!-- Add Task Button -->
-    <button class="ui-state-default ui-corner-all" title=".ui-icon-plusthick" id="submit-task-form">
-      <span class="ui-icon ui-icon-plus"></span>
+    <button class="ui-state-default ui-corner-all" 
+            title=".ui-icon-plusthick" 
+            id="submit-task-form">
+            <span class="ui-icon ui-icon-plus"></span>
     </button>
   </form>
   <!-- Remove Form Button -->
-  <button class="ui-state-default ui-corner-all" title=".ui-icon-close" id="remove-list-form">
-    <span class="ui-icon ui-icon-close"></span>
+  <button class="ui-state-default ui-corner-all" 
+          title=".ui-icon-close" 
+          id="remove-list-form">
+          <span class="ui-icon ui-icon-close"></span>
   </button>
 </div>
 
 <div style="clear: both;"></div>
 
-<ul id="lists-sortable">
+<ul id="lists-sortable" class="list-group">
   <!-- child content will be rendered here -->
 </ul>
 </div>
-
-<style>
-  .open-list { float: left; }
-  .list-pending-tasks { float: right; }
-  .delete-list { float: right; }
-
-  #show-list-form { font-size: 12px; color: #cc0000; }
-  #list-form { float: left; }
-  #submit-task-form { font-size: 8px; }
-  #remove-list-form { font-size: 8px; float: left; }
-  
-  ul#lists-sortable li {
-    list-style-type: none;
-    margin-top: 10px;
-    margin-right: 20px;
-    margin-left: -10px;
-    margin-bottom: -5px;
-    padding: 15px;
-    font-size: 1.0em; 
-    height: 1.0em; 
-  }
-</style>
 
 <script>
   $(function() { 
@@ -126,12 +109,10 @@ Lists
     // Hover Effect on List
     $("ul").on('mouseenter', '.list-item', 
       function() {
-        $(this).removeClass("ui-state-default").addClass("ui-state-hover");
         $(this).find(".remove-list").removeClass("hidden"); }
       );
     $("ul").on('mouseleave', '.list-item', 
       function() {
-        $(this).removeClass("ui-state-hover").addClass("ui-state-default"); 
         $(this).find(".remove-list").addClass("hidden"); }
     );
   });

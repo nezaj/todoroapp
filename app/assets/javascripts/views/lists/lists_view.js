@@ -25,6 +25,10 @@ App.Views.ListsView = Backbone.View.extend({
       self.$('ul').append(listsItemView.render().$el);
     });
     
+    // activateButtons();
+    // makeSortable();
+    //    $(#some-elemnt) => this.$el.find(#some-element)
+    
     return this;
   },
   

@@ -7,39 +7,76 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  
-	<% if logged_in? %>
-		<span>
-      Logged in as: <%= @current_user.username %>
-      <%= link_to 'Log Out', session_url, :method => :delete %>
-    </span>
-  <% else %>
-    <span>
-      <%= link_to 'Log in', new_session_url%>
-      <%= link_to 'Sign up', new_user_url%>
-    </span>
-  <% end %>
-
-	<% if flash[:errors] %>
-    <% flash[:errors].each do |error| %>
-  		<p><%= error %></p>
-      <% end %>
-	<% end %>
-
-<%= yield %>
-
-<div class="container">
-  <div class="navbar"></div>
-  <% if logged_in? %>
-    <div class="sidebar"></div>
-    <div class="current-list-container">
-      <div class="current-tasks"></div>
+  <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" 
+              class="navbar-toggle" 
+              data-toggle="collapse" 
+              data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Todoro</a>
     </div>
-    <div class="today-tasks"></div>
-    <div class="unplanned-tasks">Unplanned</div>
-    <div class="footer"></div>
+    
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse ">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Dashboard</a></li>
+      </ul>
+      <div class="navbar-text pull-right">
+      <% if logged_in? %>
+          Signed in as <%= @current_user.username%>
+          <%= link_to 'Log Out', session_url, :method => :delete %>
+      <% else %>
+        <%= link_to 'Log in', new_session_url%>
+        <%= link_to 'Sign up', new_user_url%>
+      </div>
+      <% end %>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+  
+  
+  
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+    	<% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+      		<p><%= error %></p>
+          <% end %>
+    	<% end %>
+      <%= yield %>
+    </div>
+  </div>
+
+  <% if logged_in? %>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="sidebar"></div>
+      </div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="current-list-container">
+              <div class="current-tasks"></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="today-tasks"></div>          
+          </div>
+          <div class="col-md-4">
+            <div class="unplanned-tasks">Unplanned</div>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>
+
 
 </body>
 </html>

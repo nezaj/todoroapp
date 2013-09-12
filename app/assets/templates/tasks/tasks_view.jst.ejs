@@ -1,4 +1,15 @@
-<div id="task-overall-info" style="float: left; text-align: left">  
+<div id="tasksView-title">
+  <% if (viewType === "tasksView")  { %>
+  <%= listTitle %>
+  <% } else if (viewType === "todayView") { %>
+  Today
+  <% } else { %>
+  Unplanned
+  <% } %>
+  <br><br><br>
+</div>
+
+<div id="task-overall-info">  
   <!-- Completed Tasks -->
   <% var completedTasks = _.where(tasks.toJSON(), {complete: true}) %>
   
@@ -23,61 +34,58 @@
       }, 0); %>
 
   <% if (viewType !== "todayView") { %>
-    Tasks Complete: <%= completedTasks.length %>
-    <br>
-    Tasks Pending: <%= pendingTasks.length %>
+    <span class="glyphicon glyphicon-check"></span> : <%= completedTasks.length %>
+    <span class="glyphicon glyphicon-unchecked"></span> : <%= pendingTasks.length %>
+  <% } %>
+  <span class="glyphicon glyphicon-star"></span> : <%= pomAchieved %>
+  <span class="glyphicon glyphicon-star-empty"></span> : <%= pomPending %>
+  <br><br>
+  
+  <% if (viewType !== "tasksView") { %>
     <br>
   <% } %>
-  Pomodoros Achieved: <%= pomAchieved %>
-  <br>
-  Pomodoros Expected: <%= pomPending %>
-  <br><br>
 </div>
 
-<div class="clearfix">
+<div id="task-view-content" class="clearfix">
   <% if (viewType === "tasksView")  { %>
-  List: <%= listTitle %>
-  <% } else if (viewType === "todayView") { %>
-  Today
-  <% } else { %>
-  Unplanned
-  <% } %>
-  <br>
-
-  <% if (viewType === "tasksView")  { %>
-  <!-- Add Task Button -->
-  <button id="show-task-form" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false" style="font-size: 12px; color: #cc0000">
-    <span class="ui-button-text">Add New Task</span>
-  </button>
-
-
-  <!-- Add Task Form -->
-  <div id="task-utility" class="hidden clearfix">
-    <form id="task-form">
-      <!-- Task Name -->
-      <input type="text" name="task[title]">
-    
-      <!-- Add Task Button -->
-      <button class="ui-state-default ui-corner-all" title=".ui-icon-plusthick" id="submit-task-form">
-        <span class="ui-icon ui-icon-plus"></span>
-      </button>
-    </form>
-  
-      <!-- Remove Form Button -->
-    <button class="ui-state-default ui-corner-all" title=".ui-icon-close"
-            id="remove-task-form">
-      <span class="ui-icon ui-icon-close"></span>
+    <!-- Add Task Button -->
+    <button id="show-task-form" 
+            class="ui-button ui-widget ui-state-default ui-corner-all
+                   ui-button-text-only" 
+                   role="button" 
+                   aria-disabled="false" 
+                   style="font-size: 12px; color: #cc0000">
+                   <span class="ui-button-text">Add New Task</span>
     </button>
-  </div>
 
+    <!-- Add Task Form -->
+    <div id="task-utility" class="hidden clearfix">
+      <form id="task-form">
+        <!-- Task Name -->
+        <input type="text" name="task[title]">
+    
+        <!-- Add Task Button -->
+        <button class="ui-state-default ui-corner-all" 
+                title=".ui-icon-plusthick" 
+                id="submit-task-form">
+                <span class="ui-icon ui-icon-plus"></span>
+        </button>
+      </form>
+  
+        <!-- Remove Form Button -->
+        <button class="ui-state-default ui-corner-all" 
+                title=".ui-icon-close"
+                id="remove-task-form">
+                <span class="ui-icon ui-icon-close"></span>
+        </button>
+    </div>
   <% } %>
 
   <!-- Clear Floats -->
   <div class="clearfix"></div>
 
   <!-- render tasks views here -->
-  <div id="task-content">
-  </div>
+  <ul id="task-content"></ul>
 </div>
   
   <!-- Timer Box -->
@@ -93,46 +101,6 @@
     </div>
   </div>
 <% } %>
-
-<style>
-
-  /* Timer */
-  #timer-window {
-    z-index:1000;
-    position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    width:100%;
-    background:grey;
-    opacity:0.8;
-    -moz-opacity:0.8;
-    filter:alpha(opacity=80);
-    }
-    
-  .timer-content {
-    position: relative;
-    top: 200px;
-  }
-
-  /* doToday/doLater links */
-  .today .list-do-today { display: none; }
-  .later .list-do-later { display: none; }
-
-  /* Check boxes */
-  .task-complete {
-    text-decoration: line-through;
-    color: grey;
-  }
-  .task-complete .task-unchecked { display: none; }
-  .task-incomplete .task-checked { display: none; }
-
-  /* Forms */
-  #show-task-form { font-size: 12px; color: #cc0000; }
-  #task-form { float: left; }
-  #submit-task-form { font-size: 8px; }
-  #remove-task-form { font-size: 8px; float: left; }
-</style>
 
 <script>
   $(function() {

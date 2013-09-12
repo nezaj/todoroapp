@@ -1,6 +1,7 @@
 App.Views.TasksItemView = Backbone.View.extend({
   
-  className: "task-item",
+  tagName: "li",
+  className: "list-group-item task-item",
   template: JST['tasks/tasks_item'],
   
   initialize: function(options) {

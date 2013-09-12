@@ -9,6 +9,8 @@ gem 'pg'
 gem 'bcrypt-ruby'
 gem 'rabl'
 gem 'quiet_assets', :group => :development
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                              :github => 'anjlab/bootstrap-rails'
 
 
 # Gems used only for assets and not required
