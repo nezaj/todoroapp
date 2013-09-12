@@ -79,11 +79,25 @@
   <div id="task-content">
   </div>
 </div>
+  
+  <!-- Timer Box -->
+<% if (viewType === "todayView") { %>
+  <div id="timer-window" class="hidden">
+    <div class="timer-content">
+      I'm a timer box!
+      <div class="timer-time">25:00</div>
+      <br>
+      <a href="#" class="task-begin-timer">Start</a>
+      <a href="#" class="task-reset-timer">Reset</a>
+      <a href="#" class="task-close-timer">Close</a>
+    </div>
+  </div>
+<% } %>
 
 <style>
 
   /* Timer */
-  .timer-window {
+  #timer-window {
     z-index:1000;
     position:absolute;
     top:0;

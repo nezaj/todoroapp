@@ -56,7 +56,7 @@
             settings.tick(timer, current_time, formatted_time);
 
             //If the timer completed, fire the buzzer callback
-            current_time == 0 && settings.buzzer(timer);
+            current_time == 0 && settings.buzzer(timer)
           } else {
             clearInterval(interval);
           }

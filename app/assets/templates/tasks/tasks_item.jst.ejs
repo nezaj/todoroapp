@@ -17,6 +17,7 @@
 
   <span class="task-options">
     <% if (viewType === "todayView") { %>
+      <!-- Open Timer Window -->
       <a href="#" class="task-open-timer" data-id="<%= task.id %>">Start</a>
     <% } %>
     <!-- Edit -->
@@ -46,18 +47,3 @@
            value="<%= task.escape('title') %>">
   </form>
 </td>
-
-<!-- Timer Box -->
-<td>
-  <div class="timer-window hidden">
-    <div class="timer-content">
-      I'm a timer box!
-      <div class="timer-time">25:00</div>
-      <br>
-      <a href="#" class="task-begin-timer" data-id="<%= task.id %>">Start</a>
-      <a href="#" class="task-reset-timer" data-id="<%= task.id %>">Reset</a>
-      <a href="#" class="task-close-timer" data-id="<%= task.id %>">Close</a>
-    </div class="timer-content">
-  </div>
-</td>
-

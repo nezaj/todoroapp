@@ -59,26 +59,21 @@ App.Views.TasksView = Backbone.View.extend({
   
   beginTimer: function() {
     event.preventDefault();
-    var that = this;
-    task_id = $(event.target).attr('data-id');
-    task = this.collection.get(task_id);
-    
     this.tickTock('Todoro', 10);
   },
   
   closeTimer: function() {
-    this.stopTimer(event);
-    // Reset Title
+    this.resetTimer(event);
     $('title').html('TodoroApp');
     // Hide Window and Update
-    $(event.target).parents('.task-item').find('.timer-window')
-    .toggleClass('hidden');
+    $('#timer-window').toggleClass('hidden');
     if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
     appRouter.todayView.trigger('updateTasks');
     appRouter.listsView.trigger('updateTasks');
   },
   
-  completePomodoro: function(task) {
+  completePomodoro: function() {
+    task = appRouter.todayView.timerTask
     task.save({ pomodoro_actual: task.get("pomodoro_actual") + 1 });
     
   },
@@ -141,8 +136,9 @@ App.Views.TasksView = Backbone.View.extend({
   
   openTimer: function() {
     event.preventDefault();
-    $(event.target).parents('.task-item').find('.timer-window')
-    .toggleClass('hidden');
+    var task_id = $(event.target).attr('data-id');
+    this.timerTask = this.collection.get(task_id);
+    $('#timer-window').toggleClass('hidden');
   },
   
   removeEditForm: function(event) {
