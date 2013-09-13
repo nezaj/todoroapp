@@ -3,7 +3,7 @@ App.Views.ListsView = Backbone.View.extend({
     "submit #list-form": "addList",
     "click a#submit-list-form": "addList",
     "click a.remove-list": "removeList",
-    "click a.open-list": "openList"
+    "click a.list-title": "openList"
   },
 
   template: JST['lists/lists_view'],

@@ -62,10 +62,6 @@ padding-left: 0px;
 }
 
 /* Forms */
-#list-form, #task-form {
-  font-size: 8px;
-}
-
 .form-control {
   background-color:beige;
 }
@@ -191,7 +187,7 @@ ul#task-content li, ul#list-items li {
   .list-group {
   margin-bottom: 20px;
   padding-left: 0;
-  font-size: 1.5em;
+  font-size: 1.25em;
   }
 }
 
@@ -209,9 +205,15 @@ ul#task-content li, ul#list-items li {
 @media (max-width: 992px) {
   .glyphicon { 
     color: brown;
-    font-size: 30px;
-    width: 1.25em;
+    font-size: 23px;
+    width: 1.5em;
+  }
+  
+  form .glyphicon { 
+    color: brown;
+    font-size: 1.0em;
+    width: 1.5em;
   }
 
-  .glyphicon:empty { width: 1.25em; } 
+  .glyphicon:empty { width: 1.5em; } 
 }

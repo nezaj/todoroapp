@@ -5,17 +5,17 @@
 #date-info { text-align: center; }
 
 @media (min-width: 993px) {
-  .open-list {
+  .list-title {
     position: absolute;
     top: 25%;
-    left: 30%;
+    left: 25%;
   }
 }
 
 @media (max-width: 992px) {
-  .open-list {
+  .list-title {
     position: absolute;
     top: 30%;
-    left: 25%;
+    left: 30%;
   }
 }
