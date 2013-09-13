@@ -43,9 +43,12 @@ My Lists
       return memo+num 
       }, 0); %>
     
-    <span class="glyphicon glyphicon-check"></span> : <%= completedTasks %>
-    <span class="glyphicon glyphicon-unchecked"></span> : <%= pendingTasks %>
-    <span class="glyphicon glyphicon-star"></span> : <%= pomodorosAchieved %>
+    <span class="glyphicon glyphicon-check"></span> : <%= completedTasks %> Tasks Done
+    <br>
+    <span class="glyphicon glyphicon-unchecked"></span> : <%= pendingTasks %> Tasks Pending
+    <br>
+    <span class="glyphicon glyphicon-star"></span> : <%= pomodorosAchieved %> Pomodoros
+    <br>
   </div>
 <% } %>
 
@@ -58,7 +61,7 @@ My Lists
 <!-- Add List Form -->
 <form id="list-form" 
      class="hidden clearfix input-group">
-  <input type="text" name="list[title]" class="form-control">
+  <input type="text" name="list[title]" id="list-input-field" class="form-control">
   <a class="input-group-addon glyphicon glyphicon-plus"
         id="submit-list-form"></a>
   <a class="input-group-addon glyphicon glyphicon-remove"
@@ -75,6 +78,7 @@ My Lists
     // Display Add Task Form
     $('#show-list-form').click(function() {
       $('#list-form').removeClass('hidden');
+      $('#list-input-field').focus();
       $('#show-list-form').addClass('hidden');
     });
   

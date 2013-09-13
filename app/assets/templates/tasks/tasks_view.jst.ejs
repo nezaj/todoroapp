@@ -49,7 +49,7 @@
     <!-- Add Task Form -->
       <form id="task-form" 
            class="hidden clearfix input-group">
-        <input type="text" name="task[title]" class="form-control">
+        <input type="text" name="task[title]" id="task-input-field" class="form-control">
         <a class="input-group-addon glyphicon glyphicon-plus"
               id="submit-task-form"></a>
         <a class="input-group-addon glyphicon glyphicon-remove"
@@ -93,6 +93,7 @@
     $('#show-task-form').click(function() {
       $('#show-task-form').addClass('hidden');
       $('#task-form').removeClass('hidden');
+      $('#task-input-field').focus();
     });
     
     // Remove Add Task Form

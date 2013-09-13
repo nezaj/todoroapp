@@ -1,6 +1,6 @@
 <% var pendingTasks = _.where(list.toJSON().tasks, {complete: false}).length %>
 
-<a href="#" class="open-list"><%= list.escape('title') %></a>
+<a href="#" class="open-list" data-id="<%= list.id %>"><%= list.escape('title') %></a>
 <!-- Number of pending tasks -->
 <div class="lists-pending-tasks pull-right">
   <% if (pendingTasks > 0)  { %>

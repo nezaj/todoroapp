@@ -72,9 +72,16 @@ padding-left: 0px;
 }
 
 /* Common */
-#lists-overall-info, #task-overall-info {
+#task-overall-info {
   font-size: 18px;
   text-align: center;
+  margin-bottom: 0.75em;
+}
+
+#lists-overall-info {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: left;
   margin-bottom: 0.75em;
 }
 

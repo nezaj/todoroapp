@@ -49,7 +49,7 @@ App.Views.ListsView = Backbone.View.extend({
   
   openList: function(event) {
     event.preventDefault();
-    var id = $(event.target).parent().attr('data-id');
+    var id = $(event.target).attr('data-id');
     appRouter.navigate('lists/' + id, {trigger: true});
   },
   
