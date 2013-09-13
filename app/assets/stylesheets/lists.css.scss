@@ -3,4 +3,19 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #date-info { text-align: center; }
-.list-pending-tasks { float: right; }
+
+@media (min-width: 993px) {
+  .open-list {
+    position: absolute;
+    top: 25%;
+    left: 30%;
+  }
+}
+
+@media (max-width: 992px) {
+  .open-list {
+    position: absolute;
+    top: 25%;
+    left: 20%;
+  }
+}

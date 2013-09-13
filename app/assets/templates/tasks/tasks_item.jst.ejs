@@ -4,7 +4,7 @@
 <td>
   <!-- todayView/unplannedView doLater -->
   <% if (viewType === "todayView") { %>
-    <span class="<%= todayStatus %>">
+    <span class="<%= todayStatus %> do-control hidden">
       <a href="#" class="do-later glyphicon glyphicon-arrow-left tov-left" data-id="<%= task.id %>"></a>
     </span>
   <% } %>
@@ -19,7 +19,7 @@
 
   <!-- Open Timer Window -->
   <% if (viewType === "todayView") { %>
-    <a href="#" class="task-open-timer glyphicon glyphicon-dashboard" data-id="<%= task.id %>" style="top: 2px; left: -1px"></a>
+    <a href="#" class="hidden task-open-timer glyphicon glyphicon-dashboard" data-id="<%= task.id %>" style="top: 2px; left: -1px"></a>
   <% } %>
   
   <!-- Task Title -->
@@ -32,11 +32,11 @@
   <a href="#" class="edit-pomodoro "></a>
 
   <!-- Remove Task -->
-  <a href="#" class="remove-task glyphicon glyphicon-remove rmt-<%= viewType %>" data-id="<%= task.id %>"></a>
+  <a href="#" class="hidden remove-task glyphicon glyphicon-remove rmt-<%= viewType %>" data-id="<%= task.id %>"></a>
 
   <!-- tasksView doLater/doToday -->
   <% if (viewType === "tasksView") { %>
-    <span class="<%= todayStatus %>">
+    <span class="<%= todayStatus %> do-control hidden">
         <a href="#" class="do-later glyphicon glyphicon-arrow-right tav-right" data-id="<%= task.id %>"></a>
         <a href="#" class="do-today glyphicon glyphicon-arrow-right tav-right" data-id="<%= task.id %>" style="color: grey"></a>
     </span>

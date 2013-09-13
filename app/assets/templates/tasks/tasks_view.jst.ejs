@@ -102,5 +102,18 @@
       $('#show-task-form').removeClass('hidden');
     });
     
+    // Hover Effect on List
+    $("ul").on('mouseenter', '.task-item', 
+      function() {
+        $(this).find(".remove-task").removeClass("hidden");
+        $(this).find(".task-open-timer").removeClass("hidden");
+        $(this).find(".do-control").removeClass("hidden"); }
+      );
+    $("ul").on('mouseleave', '.task-item', 
+      function() {
+        $(this).find(".remove-task").addClass("hidden");
+        $(this).find(".task-open-timer").addClass("hidden");
+        $(this).find(".do-control").addClass("hidden"); }
+    );  
   });
 </script>
