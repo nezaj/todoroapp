@@ -16,7 +16,6 @@
 //= require backbone
 //= require app
 //= require jquery.serializeJSON
-//= require jquery-ui-custom
 //= require jquery.countdown.min.js
 //= require jquery.the-final-countdown.js
 //= require_tree ../templates

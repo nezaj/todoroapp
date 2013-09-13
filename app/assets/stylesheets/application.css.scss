@@ -8,7 +8,6 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require jquery-ui-custom
  *= require jquery.countdown
  *= require_self
  *= require_tree .
@@ -64,22 +63,32 @@ padding-left: 0px;
 }
 
 /* Forms */
+#list-form, #task-form {
+  font-size: 8px;
+}
+
 .form-control {
   background-color:beige;
 }
 
-/* Titles */
-#date-info, #tasksView-title  {
-  font-size: 20px;
-  text-align: center;
-  margin-bottom: 0.25em;
-}
-
-/* Summary Head */
+/* Common */
 #lists-overall-info, #task-overall-info {
   font-size: 18px;
   text-align: center;
   margin-bottom: 0.75em;
+}
+
+#date-info, #tasksView-title  {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 0.25em;
+}
+
+ul#task-content li, ul#list-items li {
+  list-style-type: none;
+  margin-top: 10px;
+  font-size: 1.0em; 
 }
 
 /* Timer */

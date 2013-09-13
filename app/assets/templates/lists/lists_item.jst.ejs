@@ -1,16 +1,13 @@
 <% var pendingTasks = _.where(list.toJSON().tasks, {complete: false}).length %>
-<span data-id="<%= list.id %>">
-  <a href="#" class="open-list" style="color: black;"><%= list.escape('title') %></a>
-  <!-- Number of pending tasks -->
-  <div class="lists-pending-tasks pull-right">
-    <% if (pendingTasks > 0)  { %>
-      <span class="glyphicon glyphicon-unchecked"></span>:<%= pendingTasks %>
-    <% } else { %>
-      <span class="glyphicon glyphicon-check"></span>
-    <% } %>
-  </div>
-  <!-- Remove List -->
-  <a href="#" class="hidden remove-list pull-right" id="remove-list-item">
-    <span class="ui-icon ui-icon-closethick delete-list" data-id="<%= list.id %>" id="delete-list"></span>
-  </a>
-</span>
+
+<a href="#" class="open-list"><%= list.escape('title') %></a>
+<!-- Number of pending tasks -->
+<div class="lists-pending-tasks pull-right">
+  <% if (pendingTasks > 0)  { %>
+    <span class="glyphicon glyphicon-unchecked"></span>:<%= pendingTasks %>
+  <% } else { %>
+    <span class="glyphicon glyphicon-check"></span>
+  <% } %>
+</div>
+<!-- Remove List -->
+<a href="#" class="hidden remove-list pull-right glyphicon glyphicon-remove" data-id="<%= list.id %>"></a>

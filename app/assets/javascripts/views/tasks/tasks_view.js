@@ -4,6 +4,7 @@ App.Views.TasksView = Backbone.View.extend({
   
   events: {
     "submit #task-form": "addTask",
+    "click a#submit-task-form": "addTask",
     "click a.list-remove-task": "removeTask",
     "click a.list-do-today": "doToday",
     "click a.list-do-later": "doLater",
@@ -50,7 +51,15 @@ App.Views.TasksView = Backbone.View.extend({
   
   addTask: function() {
     event.preventDefault();
-    var formData = $(event.target).serializeJSON().task;
+    var $target = $(event.target);
+    var formData;
+    // Check whether submit or click link
+    if ($target.get(0).tagName !== 'A') {
+      formData = $target.serializeJSON().task;
+    } else {
+      formData = $target.parent().serializeJSON().task;
+    }
+    
     formData.list_id = this.collection.list_id;
     this.collection.create(formData, { 
       success: function() { appRouter.listsView.trigger('updateTasks'); },

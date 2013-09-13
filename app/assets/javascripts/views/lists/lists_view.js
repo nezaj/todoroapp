@@ -1,6 +1,7 @@
 App.Views.ListsView = Backbone.View.extend({
   events: {
     "submit #list-form": "addList",
+    "click a#submit-list-form": "addList",
     "click a.remove-list": "removeList",
     "click a.open-list": "openList"
   },
@@ -9,8 +10,8 @@ App.Views.ListsView = Backbone.View.extend({
   
   initialize: function() {
     this.listenTo(this, 'updateTasks', this.update);
-    this.listenTo(this.collection, 'remove', this.render)
-    this.listenTo(this.collection, 'add', this.render)
+    this.listenTo(this.collection, 'remove', this.render);
+    this.listenTo(this.collection, 'add', this.render);
   },
   
   render: function() {
@@ -34,7 +35,15 @@ App.Views.ListsView = Backbone.View.extend({
   
   addList: function(event) {
     event.preventDefault();
-    var formData = $(event.target).serializeJSON().list;
+    var $target = $(event.target);
+    var formData;
+    // Check whether submit or click link
+    if ($target.get(0).tagName !== 'A') {
+      formData = $target.serializeJSON().list;
+    } else {
+      formData = $target.parent().serializeJSON().list;
+    }
+    
     this.collection.create(formData, { wait: true });
   },
   

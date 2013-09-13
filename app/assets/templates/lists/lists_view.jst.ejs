@@ -11,7 +11,7 @@
   <br><br>
 </div> -->
 
-<!-- Fix this -->
+<!-- Fix Date above -->
 <div id="date-info">
 My Lists
 </div>
@@ -49,59 +49,38 @@ My Lists
   </div>
 <% } %>
 
-<div class="clearfix"></div>
-
 <!-- Add New List Button-->
 <center>
-<button type="button" 
-        id="show-list-form"
-        class="btn btn-danger">Add New List</button>
+  <button type="button" 
+          id="show-list-form"
+          class="btn btn-danger">Add New List</button>
 </center>
 <!-- Add List Form -->
-<div id="list-utility" class="hidden">
-  <!-- Submit Button -->
-  <form id="list-form">
-    <input type="text" name="list[title]">
-    <button class="ui-state-default ui-corner-all" 
-            title=".ui-icon-plusthick" 
-            id="submit-task-form">
-            <span class="ui-icon ui-icon-plus"></span>
-    </button>
-  </form>
-  <!-- Remove Form Button -->
-  <button class="ui-state-default ui-corner-all" 
-          title=".ui-icon-close" 
-          id="remove-list-form">
-          <span class="ui-icon ui-icon-close"></span>
-  </button>
-  
-  
-</div>
+<form id="list-form" 
+     class="hidden clearfix input-group">
+  <input type="text" name="list[title]" class="form-control">
+  <a class="input-group-addon glyphicon glyphicon-plus"
+        id="submit-list-form"></a>
+  <a class="input-group-addon glyphicon glyphicon-remove"
+        id="remove-list-form"></a>
+</form>
 
-<div class="clearfix"></div>
-
-<ul id="lists-sortable" class="list-group">
+<ul id="list-items" class="list-group">
   <!-- child content will be rendered here -->
 </ul>
 </div>
 
 <script>
   $(function() {   
-    // Sortable Effects
-    $( "#lists-sortable" ).sortable({
-      placeholder: "ui-state-highlight"
-    });
-    $( "#lists-sortable" ).disableSelection();
-  
     // Display Add Task Form
     $('#show-list-form').click(function() {
-      $('#list-utility').removeClass('hidden');
+      $('#list-form').removeClass('hidden');
       $('#show-list-form').addClass('hidden');
     });
   
     // Remove Add Task Form
     $('#remove-list-form').click(function() {
-      $('#list-utility').addClass('hidden');
+      $('#list-form').addClass('hidden');
       $('#show-list-form').removeClass('hidden');
     });
     

@@ -2,16 +2,5 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.list-pending-tasks { float: right; }
-.delete-list { float: right; }
-
 #date-info { text-align: center; }
-
-#list-form { float: left; }
-#remove-list-form { font-size: 8px; float: left; }
-
-ul#lists-sortable li {
-  list-style-type: none;
-  margin-top: 10px;
-  font-size: 1.0em; 
-}
+.list-pending-tasks { float: right; }
