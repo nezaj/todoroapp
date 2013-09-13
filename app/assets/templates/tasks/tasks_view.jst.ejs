@@ -6,7 +6,6 @@
   <% } else { %>
   Unplanned
   <% } %>
-  <br><br><br>
 </div>
 
 <div id="task-overall-info">  
@@ -33,88 +32,73 @@
       return memo+num 
       }, 0); %>
 
-  <% if (viewType !== "todayView") { %>
     <span class="glyphicon glyphicon-check"></span> : <%= completedTasks.length %>
     <span class="glyphicon glyphicon-unchecked"></span> : <%= pendingTasks.length %>
-  <% } %>
   <span class="glyphicon glyphicon-star"></span> : <%= pomAchieved %>
   <span class="glyphicon glyphicon-star-empty"></span> : <%= pomPending %>
-  <br><br>
-  
-  <% if (viewType !== "tasksView") { %>
-    <br>
-  <% } %>
 </div>
 
 <div id="task-view-content" class="clearfix">
+    <center>
   <% if (viewType === "tasksView")  { %>
     <!-- Add Task Button -->
-    <button id="show-task-form" 
-            class="ui-button ui-widget ui-state-default ui-corner-all
-                   ui-button-text-only" 
-                   role="button" 
-                   aria-disabled="false" 
-                   style="font-size: 12px; color: #cc0000">
-                   <span class="ui-button-text">Add New Task</span>
-    </button>
+      <button type="button" 
+              id="show-task-form"
+              class="btn btn-danger">Add New Task</button>
 
     <!-- Add Task Form -->
-    <div id="task-utility" class="hidden clearfix">
-      <form id="task-form">
-        <!-- Task Name -->
-        <input type="text" name="task[title]">
-    
-        <!-- Add Task Button -->
-        <button class="ui-state-default ui-corner-all" 
-                title=".ui-icon-plusthick" 
-                id="submit-task-form">
-                <span class="ui-icon ui-icon-plus"></span>
-        </button>
+      <form id="task-form" 
+           class="hidden clearfix input-group" 
+           style="font-size: 8px">
+        <input type="text" name="task[title]" class="form-control">
+        <a class="input-group-addon glyphicon glyphicon-plus"
+              id="submit-task-form"></a>
+        <a class="input-group-addon glyphicon glyphicon-remove"
+              id="remove-task-form"></a>
       </form>
-  
-        <!-- Remove Form Button -->
-        <button class="ui-state-default ui-corner-all" 
-                title=".ui-icon-close"
-                id="remove-task-form">
-                <span class="ui-icon ui-icon-close"></span>
-        </button>
-    </div>
+  <% } else { %>
+    <!-- Start Timer Button -->
+      <button type="button" 
+              id=""
+              class="btn btn-danger ">Start First Task</button>
   <% } %>
+  </center>
 
   <!-- Clear Floats -->
   <div class="clearfix"></div>
 
   <!-- render tasks views here -->
-  <ul id="task-content"></ul>
+  <ul id="task-content" class="list-group"></ul>
+  <br>
 </div>
   
   <!-- Timer Box -->
 <% if (viewType === "todayView") { %>
   <div id="timer-window" class="hidden">
-    <div class="timer-content">
-      I'm a timer box!
+    <center>
       <div class="timer-time">25:00</div>
       <br>
-      <a href="#" class="task-begin-timer">Start</a>
-      <a href="#" class="task-reset-timer">Reset</a>
-      <a href="#" class="task-close-timer">Close</a>
-    </div>
+      <div class="timer-actions">
+        <a href="#" class="task-begin-pomodoro">Pomodoro</a>
+        <a href="#" class="task-begin-sbreak">Short Break</a>
+        <a href="#" class="task-begin-lbreak">Long Break</a>
+        <a href="#" class="task-close-timer">Close</a>
+      </div>
+  </center>
   </div>
 <% } %>
 
 <script>
-  $(function() {
-    $('button').button();
-    
+  $(function() {    
     // Display Add Task Form
     $('#show-task-form').click(function() {
       $('#show-task-form').addClass('hidden');
-      $('#task-utility').removeClass('hidden');
+      $('#task-form').removeClass('hidden');
     });
     
     // Remove Add Task Form
     $('#remove-task-form').click(function() {
-      $('#task-utility').addClass('hidden');
+      $('#task-form').addClass('hidden');
       $('#show-task-form').removeClass('hidden');
     });
     

@@ -1,5 +1,4 @@
-<div id="date-info">
-  <!-- Date Info -->
+<!-- <div id="date-info">
   <% var now = new Date() %>
   <% var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday',
   'Friday','Saturday']; %>
@@ -10,6 +9,11 @@
   <br>
   <%= days[ now.getDay() ] %>
   <br><br>
+</div> -->
+
+<!-- Fix this -->
+<div id="date-info">
+My Lists
 </div>
 
 <% if (lists.toJSON().length > 0)  { %>
@@ -42,21 +46,17 @@
     <span class="glyphicon glyphicon-check"></span> : <%= completedTasks %>
     <span class="glyphicon glyphicon-unchecked"></span> : <%= pendingTasks %>
     <span class="glyphicon glyphicon-star"></span> : <%= pomodorosAchieved %>
-    <br><br>
   </div>
 <% } %>
 
 <div class="clearfix"></div>
 
 <!-- Add New List Button-->
-<button id="show-list-form" 
-        class="ui-button ui-widget ui-state-default ui-corner-all
-               ui-button-text-only" 
-        role="button" 
-        aria-disabled="false">
-        <span class="ui-button-text">Add New List</span>
-</button>
-
+<center>
+<button type="button" 
+        id="show-list-form"
+        class="btn btn-danger">Add New List</button>
+</center>
 <!-- Add List Form -->
 <div id="list-utility" class="hidden">
   <!-- Submit Button -->
@@ -74,9 +74,11 @@
           id="remove-list-form">
           <span class="ui-icon ui-icon-close"></span>
   </button>
+  
+  
 </div>
 
-<div style="clear: both;"></div>
+<div class="clearfix"></div>
 
 <ul id="lists-sortable" class="list-group">
   <!-- child content will be rendered here -->
@@ -84,10 +86,7 @@
 </div>
 
 <script>
-  $(function() { 
-    // Button Effects
-    $('button').button();
-  
+  $(function() {   
     // Sortable Effects
     $( "#lists-sortable" ).sortable({
       placeholder: "ui-state-highlight"

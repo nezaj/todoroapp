@@ -9,13 +9,14 @@ App.Views.TasksView = Backbone.View.extend({
     "click a.list-do-later": "doLater",
     "click .task-unchecked": "taskComplete",
     "click .task-checked": "taskIncomplete",
-    "click .task-edit-link": "displayEditForm",
-    "submit .task-edit": "editTaskTitle",
+    "click .task-title": "displayEditForm",
+    "submit #task-edit": "editTaskTitle",
     "blur .task-edit-form": "editTaskTitle",
     "click .task-open-timer": "openTimer",
     "click .task-close-timer": "closeTimer",
-    "click .task-begin-timer": "beginTimer",
-    "click .task-reset-timer": "resetTimer"
+    "click .task-begin-pomodoro": "beginPomodoro",
+    "click .task-begin-sbreak": "beginShortBreak",
+    "click .task-begin-lbreak": "beginLongBreak",
   },
   
   initialize: function(options) {
@@ -57,13 +58,24 @@ App.Views.TasksView = Backbone.View.extend({
     });
   },
   
-  beginTimer: function() {
+  beginLongBreak: function() {
     event.preventDefault();
-    this.tickTock('Todoro', 10);
+    this.tickTock('Todoro', 15 * 60, false);
+  },
+
+  // Will increment pomodoro count
+  beginPomodoro: function() {
+    event.preventDefault();
+    this.tickTock('Todoro', 5, true);
+  },
+  
+  beginShortBreak: function() {
+    event.preventDefault();
+    this.tickTock('Todoro', 5 * 60, false);
   },
   
   closeTimer: function() {
-    this.resetTimer(event);
+    event.preventDefault();
     $('title').html('TodoroApp');
     // Hide Window and Update
     $('#timer-window').toggleClass('hidden');
@@ -164,14 +176,8 @@ App.Views.TasksView = Backbone.View.extend({
     });
   },
   
-  resetTimer: function(event) {
-    event.preventDefault();
-    $(".timer-time").pauseTimer();
-    $(".timer-time").html("25:00");
-    $('title').html('Todoro');
-  },
-  
   taskComplete: function() {
+    event.preventDefault();
     var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
     
@@ -186,6 +192,7 @@ App.Views.TasksView = Backbone.View.extend({
   },
   
   taskIncomplete: function() {
+    event.preventDefault();
     var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
     
@@ -199,7 +206,7 @@ App.Views.TasksView = Backbone.View.extend({
     });
   },
   
-  tickTock: function(name,time_in_seconds){
+  tickTock: function(name, time_in_seconds, isPomodoro){
     var that = this;
     $(".timer-time").createTimer({
       time_in_seconds: time_in_seconds,
@@ -208,7 +215,7 @@ App.Views.TasksView = Backbone.View.extend({
       },
       buzzer: function(){
         document.title = 'DING!';
-        that.completePomodoro();
+        if (isPomodoro) { that.completePomodoro(); }
       }
     });
   },
