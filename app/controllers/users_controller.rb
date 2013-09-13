@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
     if @user.save
       login(@user)
+      List.create(:author_id => @user.id, :title => "My First List")
       redirect_to dashboard_url
     else
       flash.now[:errors] = @user.errors.full_messages

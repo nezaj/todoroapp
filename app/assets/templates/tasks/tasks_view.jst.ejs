@@ -59,12 +59,9 @@
     <!-- Start Timer Button -->
       <button type="button" 
               id=""
-              class="btn btn-danger ">Start First Task</button>
+              class="btn btn-danger task-first-timer">Start First Task</button>
   <% } %>
   </center>
-
-  <!-- Clear Floats -->
-  <div class="clearfix"></div>
 
   <!-- render tasks views here -->
   <ul id="task-content" class="list-group"></ul>
@@ -75,13 +72,14 @@
 <% if (viewType === "todayView") { %>
   <div id="timer-window" class="hidden">
     <center>
+      <div class="timer-title"></div>
       <div class="timer-time">25:00</div>
       <br>
       <div class="timer-actions">
-        <a href="#" class="task-begin-pomodoro">Pomodoro</a>
-        <a href="#" class="task-begin-sbreak">Short Break</a>
-        <a href="#" class="task-begin-lbreak">Long Break</a>
-        <a href="#" class="task-close-timer">Close</a>
+        <a href="#" class="task-begin-pomodoro btn btn-danger">Pomodoro</a>
+        <a href="#" class="task-begin-sbreak btn btn-danger">Short Break</a>
+        <a href="#" class="task-begin-lbreak btn btn-danger">Long Break</a>
+        <a href="#" class="task-close-timer btn btn-danger">Close</a>
       </div>
   </center>
   </div>

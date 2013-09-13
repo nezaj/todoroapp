@@ -1,14 +1,8 @@
 - Implement editing expected number of pomodoros for a task
 - Implement unplanned tasks
 - Implement adding unplaned tasks from timer
-- Style Timer buttons
 - Make Lists Editable
 - Selected list is highlighted
-- Prevent last list from being deleted
-- Automatically create a list for a new user
-- Open first list by default
-- Open next list when list is deleted
-- Make list easy to click on
 - Fix hover for mobile screens
 
 

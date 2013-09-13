@@ -17,7 +17,10 @@ App.Routers.AppRouter = Backbone.Router.extend({
       success:function() {
         that.showSidebar();
         // Load ListDetail if deep-linked
-        if (that.requestedId) { that.showList(that.requestedId); }
+        if (!that.requestedId) { 
+          that.requestedId = that.lists.first().id
+        }
+        that.showList(that.requestedId);
         that.showToday();
         }
       });

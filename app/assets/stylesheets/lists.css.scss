@@ -4,18 +4,29 @@
 
 #date-info { text-align: center; }
 
-@media (min-width: 993px) {
+@media (min-width: 980px) and (max-width: 1199px) {
   .list-title {
     position: absolute;
     top: 25%;
-    left: 25%;
+    left: 30%;
+    padding-right: 20%;
   }
 }
 
-@media (max-width: 992px) {
+@media (min-width: 768px) and (max-width: 979px) {
+  .list-title {
+    position: absolute;
+    top: 25%;
+    left: 15%;
+    padding-right: 20%;
+  }
+}
+
+@media (max-width: 767px) {
   .list-title {
     position: absolute;
     top: 30%;
     left: 30%;
+    padding-right: 20%;
   }
 }

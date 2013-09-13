@@ -57,7 +57,16 @@ App.Views.ListsView = Backbone.View.extend({
     event.preventDefault();
     var id = $(event.target).attr('data-id');
     var listToDelete = this.collection.get(id);
-    listToDelete.destroy();
+    // Only delete if at least one list remaining
+    if (_.size(this.collection) !== 1) { 
+      listToDelete.destroy();
+        // display first list if deleted displaying list
+        if (appRouter.currentList.id == parseInt(id)) {
+        var listId = appRouter.lists.first().id
+        appRouter.navigate("lists/" + listId, {trigger: true})      }
+    } else {
+      $('#list-alert').fadeIn('2000').delay('5000').fadeOut('5000');
+    }
   },
   
   update: function() {

@@ -14,6 +14,7 @@ App.Views.TasksView = Backbone.View.extend({
     "submit #task-edit": "editTaskTitle",
     "blur .task-edit-form": "editTaskTitle",
     "click .task-open-timer": "openTimer",
+    "click .task-first-timer": "openTimerFirst",
     "click .task-close-timer": "closeTimer",
     "click .task-begin-pomodoro": "beginPomodoro",
     "click .task-begin-sbreak": "beginShortBreak",
@@ -155,11 +156,20 @@ App.Views.TasksView = Backbone.View.extend({
     });
   },
   
-  openTimer: function() {
+  openTimer: function(event, task_id) {
     event.preventDefault();
-    var task_id = $(event.target).attr('data-id');
+    if (!task_id) {
+      var task_id = $(event.target).attr('data-id');
+    }
+    
     this.timerTask = this.collection.get(task_id);
     $('#timer-window').toggleClass('hidden');
+    $('.timer-title').html("Task: " + this.timerTask.get("title"));
+  },
+  
+  openTimerFirst: function() {
+    task_id = this.collection.first().id;
+    this.openTimer(event, task_id)
   },
   
   removeEditForm: function(event) {
