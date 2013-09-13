@@ -2,13 +2,6 @@
 <% var completeStatus = task.get("complete") ? "complete" : "incomplete" %>
 
 <td>
-  <!-- todayView/unplannedView doLater -->
-  <% if (viewType === "todayView") { %>
-    <span class="<%= todayStatus %> do-control hidden">
-      <a href="#" class="do-later glyphicon glyphicon-arrow-left tov-left" data-id="<%= task.id %>"></a>
-    </span>
-  <% } %>
-    
 <!-- Checkboxes -->
   <span class="task-<%= completeStatus %>">
     <a href="#" class="task-checked glyphicon glyphicon-check"
@@ -17,6 +10,13 @@
                 data-id="<%=task.id %>"></a>
   </span>
 
+  <!-- todayView/unplannedView doLater -->
+  <% if (viewType === "todayView") { %>
+    <span class="<%= todayStatus %> do-control hidden">
+      <a href="#" class="do-later glyphicon glyphicon-arrow-left tov-left" data-id="<%= task.id %>"></a>
+    </span>
+  <% } %>
+
   <!-- Open Timer Window -->
   <% if (viewType === "todayView") { %>
     <a href="#" class="hidden task-open-timer glyphicon glyphicon-dashboard" data-id="<%= task.id %>" style="top: 2px; left: -1px"></a>
@@ -24,12 +24,9 @@
   
   <!-- Task Title -->
   <span class="task-<%=completeStatus %> task-title">
-    <%= task.escape("title") %>
+    <%= task.escape("title") %>   <%= task.get("pomodoro_actual")%>/<%= task.get("pomodoro_expected")%>
+    <a href="#" class="edit-pomodoro "></a>
   </span>
-  
-  <!-- Actual/Expected Pomodoros -->
-  <%= task.get("pomodoro_actual")%>/<%= task.get("pomodoro_expected")%>
-  <a href="#" class="edit-pomodoro "></a>
 
   <!-- Remove Task -->
   <a href="#" class="hidden remove-task glyphicon glyphicon-remove rmt-<%= viewType %>" data-id="<%= task.id %>"></a>
