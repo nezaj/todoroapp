@@ -3,8 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 /* doToday/doLater links */
-.today .list-do-today { display: none; }
-.later .list-do-later { display: none; }
+.today .do-today { display: none; }
+.later .do-later { display: none; }
 
 /* Check boxes */
 .task-complete {
@@ -13,3 +13,27 @@
 }
 .task-complete .task-unchecked { display: none; }
 .task-incomplete .task-checked { display: none; }
+
+.tav-right {
+  position: absolute;
+  right: 0%;
+  margin-right: 5%;
+  top: 30%;
+}
+
+.rmt-tasksView {
+  position: absolute;
+  right: 0%;
+  margin-right: 15%;
+  top: 30%;
+}
+
+.rmt-todayView {
+  position: absolute;
+  right: 0%;
+  margin-right: 5%;
+  top: 30%;
+}
+
+
+

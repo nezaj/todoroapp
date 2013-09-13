@@ -1,8 +1,17 @@
-1. Implement Task Title Edit
-2. Implement Checkmarking Tasks Complete/Incomplete
-3. Display total number of tasks completed and pending for all lists
-4. Display total number of pending tasks for a list in sidebar
-5. Display total number of pending and completed tasks for current list
+- Implement editing expected number of pomodoros for a task
+- Implement unplanned tasks
+- Implement adding unplaned tasks from timer
+- Style Timer buttons
+- Make Lists Editable
+- Selected list is highlighted
+- Prevent last list from being deleted
+- Automatically create a list for a new user
+- Open first list by default
+- Open next list when list is deleted
+- Make list easy to click on
+- Fix hover for mobile screens
+
+
 
 Here is the core functionality I want to implement:
 - Users can CRUD lists to hold tasks they can CRUD.
@@ -25,58 +34,58 @@ Misc
 - Add deep linking for creating/deleting tasks
 - Get url to update correctly
 
-DailySummary View
-- As a view I display the current date
-- As a view I display the current weekday
-- As a view I display the total number of tasks completed today
-- As a view I display the total number of tasks pending today
-- As a view I display the total number of pomodoros achieved today
+DailySummary View (DONE)
+- (DONE) As a view I display the current date
+- (DONE) As a view I display the current weekday
+- (DONE) As a view I display the total number of tasks completed today
+- (DONE) As a view I display the total number of tasks pending today
+- (DONE) As a view I display the total number of pomodoros achieved today
 
-TaskItem View
-- As a view I display a checkbox to mark whether my task is complete or not
-- As a view I strikethrough and gray-out my name when my task is complete
-- As a view I display a button to add my task to "today's tasks" 
+TaskItem View (DONE)
+- (DONE) As a view I display a checkbox to mark whether my task is complete or not
+- (DONE) As a view I strikethrough and gray-out my name when my task is complete
+- (DONE) As a view I display a button to add my task to "today's tasks" 
 - (DONE) As a view I display a button to delete my task and myself
-- As a view I display the number of achieved pomodoros for the task
-- As a view I display the number of pomdoros expected for the task
-- As a view I can allow the expected number of pomdoros to change
+- (DONE) As a view I display the number of achieved pomodoros for the task
+- (DONE) As a view I display the number of pomdoros expected for the task
+- (DONE) As a view I can allow the expected number of pomdoros to change
 
-GenericListDetail View
+GenericListDetail View (DONE)
 - (DONE) As a view I display all the tasks for my list as individual task views
-- As a view I display the total number of completed tasks for my list
-- As a view I display the total number of pending tasks for my list
-- As a view I display the total number of achieved pomodoros for my list
-- As a view I display the total number of remaining pomodoros for my list
+- (DONE) As a view I display the total number of completed tasks for my list
+- (DONE) As a view I display the total number of pending tasks for my list
+- (DONE) As a view I display the total number of achieved pomodoros for my list
+- (DONE) As a view I display the total number of remaining pomodoros for my list
 - (DONE) As a view I display an input field to add a new task to my list
 
-ListItem View
+ListItem View (DONE)
 - (DONE) As a view I display the name of my list
-- As a view I am highlighted when I am selected
-- As a view I display the number of tasks for the list
+- (DONE) As a view I am highlighted when I am selected
+- (DONE) As a view I display the number of tasks for the list
 - (DONE) As a view I display a button to delete the list
 
-Basic Task Features
+Basic Task Features (DONE)
 - (DONE) As a user I can flag tasks as part of today's taks
-- As a user I can set the expected number of pomodoros for a task
-- As a user I can mark a task complete/incomplete
+- (DONE) As a user I can set the expected number of pomodoros for a task
+- (DONE) As a user I can mark a task complete/incomplete
 
-CRUD Tasks
-- As a user I can rename tasks by double-click the name
+CRUD Tasks (DONE)
+- (DONE) As a user I can rename tasks by double-click the name
 - (DONE) As a user I can see my tasks for a list
 - (DONE) As a user I can create new tasks for a list
 - (DONE) As a user I can delete tasks for a list
 
-CRUD Lists
-- As a user I can rename my lists by double-clicking the name
+CRUD Lists (DONE)
+- (DONE) As a user I can rename my lists by double-clicking the name
 - (DONE) As a user I can see all my lists 
 - (DONE) As a user I can create new lists
 - (DONE) As a user I can delete my lists
 
-ListIndex View (COMPLETE)
+ListIndex View (DONE)
 - (DONE) As a view I display all lists as individual list views
 - (DONE) As a view I display a form to add a new list
 
-Basic Logging-in/Out (COMPLETE)
+Basic Logging-in/Out (DONE)
 - (DONE) As a user I can create an account
 - (DONE) As a user I can login
 - (DONE) As a user I can logout

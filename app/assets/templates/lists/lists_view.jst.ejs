@@ -43,11 +43,14 @@ My Lists
       return memo+num 
       }, 0); %>
     
-    <span class="glyphicon glyphicon-check"></span> : <%= completedTasks %> Tasks Done
+      <% var completedTasksText = (completedTasks === 1) ? "Task" : "Tasks" %>
+      <% var pendingTasksText = (pendingTasks === 1) ? "Task" : "Tasks" %>
+      <% var pomodorosText = (pomodorosAchieved === 1) ? "Pomodoro" : "Pomodoros" %>
+    <span class="glyphicon glyphicon-check"></span>: <%= completedTasks %> <%= completedTasksText %> Done
     <br>
-    <span class="glyphicon glyphicon-unchecked"></span> : <%= pendingTasks %> Tasks Pending
+    <span class="glyphicon glyphicon-unchecked"></span>: <%= pendingTasks %> <%= pendingTasksText %> Pending
     <br>
-    <span class="glyphicon glyphicon-star"></span> : <%= pomodorosAchieved %> Pomodoros
+    <span class="glyphicon glyphicon-star"></span>: <%= pomodorosAchieved %> <%= pomodorosText %>
     <br>
   </div>
 <% } %>

@@ -5,9 +5,9 @@ App.Views.TasksView = Backbone.View.extend({
   events: {
     "submit #task-form": "addTask",
     "click a#submit-task-form": "addTask",
-    "click a.list-remove-task": "removeTask",
-    "click a.list-do-today": "doToday",
-    "click a.list-do-later": "doLater",
+    "click a.remove-task": "removeTask",
+    "click a.do-today": "doToday",
+    "click a.do-later": "doLater",
     "click .task-unchecked": "taskComplete",
     "click .task-checked": "taskIncomplete",
     "click .task-title": "displayEditForm",
