@@ -28,7 +28,7 @@ App.Views.ListsView = Backbone.View.extend({
       self.$('ul').append(listsItemView.render().$el);
     });
     
-    this.activateHover();
+    this.addCustomEffects();
     
     return this;
   },
@@ -43,6 +43,11 @@ App.Views.ListsView = Backbone.View.extend({
         $(this).find(".remove-list").addClass("hidden"); 
       }
     );
+  },
+
+  addCustomEffects: function() {
+    this.activateHover();
+    this.highlightActiveList();
   },
   
   addList: function(event) {
@@ -62,9 +67,16 @@ App.Views.ListsView = Backbone.View.extend({
       $('#add-list-alert').fadeIn('2000').delay('5000').fadeOut('5000');
     }
   },
+
+  highlightActiveList: function() {
+    $('.active-list').removeClass('active-list');
+    $('#list-items').find('a[data-id='+appRouter.currentList.id+']').parent().addClass('active-list');
+  },
   
   openList: function(event) {
     event.preventDefault();
+    // $('.active-list').removeClass('active-list');
+    // $(event.target).parent().addClass('active-list');
     var id = $(event.target).attr('data-id');
     appRouter.navigate('lists/' + id, {trigger: true});
   },

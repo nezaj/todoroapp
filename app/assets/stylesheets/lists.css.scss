@@ -4,12 +4,25 @@
 
 #date-info { text-align: center; }
 
+.active-list {
+  background-color: beige;
+  border-color: brown;
+}
+
+@media (min-width: 1200px) {
+  .list-title {
+    position: absolute;
+    padding-right: 30%;
+    left: 25%;
+  }
+}
+
 @media (min-width: 980px) and (max-width: 1199px) {
   .list-title {
     position: absolute;
     top: 25%;
-    left: 30%;
-    padding-right: 20%;
+    left: 25%;
+    padding-right: 30%;
   }
 }
 
@@ -26,7 +39,7 @@
   .list-title {
     position: absolute;
     top: 30%;
-    left: 30%;
+    left: 25%;
     padding-right: 20%;
   }
 }

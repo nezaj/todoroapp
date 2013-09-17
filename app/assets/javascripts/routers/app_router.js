@@ -14,9 +14,10 @@ App.Routers.AppRouter = Backbone.Router.extend({
     var that = this;
     this.lists.fetch({
       success:function() {
+        that.currentList = that.lists.first();
         that.showSidebar();
         if (!that.requestedListId) { 
-          that.requestedListId = that.lists.first().id
+          that.requestedListId = that.currentList.id;
         }
         that.showList(that.requestedListId);
         that.showToday();
@@ -39,8 +40,10 @@ App.Routers.AppRouter = Backbone.Router.extend({
           listTitle: that.currentListTitle,
           viewType: "tasksView"
         });
+
         $('.current-tasks').html(that.tasksView.render().$el);
-        that.tasksView.activateHover(); 
+        that.tasksView.addCustomEffects();
+        that.listsView.highlightActiveList();
       });
     } else {
       this.requestedListId = id;
@@ -51,7 +54,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
   showSidebar: function() {
     this.listsView = new App.Views.ListsView( { collection: this.lists });
     $('.sidebar').html(this.listsView.render().$el);
-    this.listsView.activateHover();
+    this.listsView.addCustomEffects();
   },
   
   showToday: function() {
@@ -66,7 +69,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
         viewType: "todayView"
       });
       $('.today-tasks').html(that.todayView.render().$el)
-      that.todayView.activateHover();   
+      that.todayView.addCustomEffects();   
     });
   }
   

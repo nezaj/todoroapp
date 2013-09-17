@@ -49,7 +49,7 @@ App.Views.TasksView = Backbone.View.extend({
       that.$('#task-content').append(tasksItemView.render().$el);
     });
 
-    this.activateHover();
+    this.addCustomEffects();
     
     return this;
   },
@@ -67,6 +67,10 @@ App.Views.TasksView = Backbone.View.extend({
         $(this).find(".task-open-timer").addClass("hidden");
         $(this).find(".do-control").addClass("hidden"); }
     );
+  },
+
+  addCustomEffects: function() {
+    this.activateHover();
   },
   
   addTask: function() {
