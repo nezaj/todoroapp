@@ -10,15 +10,17 @@ App.Views.TasksView = Backbone.View.extend({
     "click a.do-later": "doLater",
     "click .task-unchecked": "taskComplete",
     "click .task-checked": "taskIncomplete",
-    "click .task-title": "displayEditForm",
-    "submit #task-edit": "editTaskTitle",
-    "blur .task-edit-form": "editTaskTitle",
     "click .task-open-timer": "openTimer",
     "click .task-first-timer": "openTimerFirst",
     "click .task-close-timer": "closeTimer",
     "click .task-begin-pomodoro": "beginPomodoro",
     "click .task-begin-sbreak": "beginShortBreak",
     "click .task-begin-lbreak": "beginLongBreak",
+    "click .task-title": "displayEditForm",
+    "submit #task-edit": "editTaskTitle",
+    "blur .task-edit-form": "editTaskTitle",
+    "click #show-task-form": "showTaskForm",
+    "click #remove-task-form": "removeTaskForm"
   },
   
   initialize: function(options) {
@@ -46,26 +48,48 @@ App.Views.TasksView = Backbone.View.extend({
       });
       that.$('#task-content').append(tasksItemView.render().$el);
     });
+
+    this.activateHover();
     
     return this;
+  },
+
+  activateHover: function() {
+    $("ul").on('mouseenter', '.task-item', 
+      function() {
+        $(this).find(".remove-task").removeClass("hidden");
+        $(this).find(".task-open-timer").removeClass("hidden");
+        $(this).find(".do-control").removeClass("hidden"); }
+      );
+    $("ul").on('mouseleave', '.task-item', 
+      function() {
+        $(this).find(".remove-task").addClass("hidden");
+        $(this).find(".task-open-timer").addClass("hidden");
+        $(this).find(".do-control").addClass("hidden"); }
+    );
   },
   
   addTask: function() {
     event.preventDefault();
     var $target = $(event.target);
     var formData;
-    // Check whether submit or click link
+
+    // Handle user hitting enter or hitting the +
     if ($target.get(0).tagName !== 'A') {
       formData = $target.serializeJSON().task;
     } else {
       formData = $target.parent().serializeJSON().task;
     }
-    
-    formData.list_id = this.collection.list_id;
-    this.collection.create(formData, { 
-      success: function() { appRouter.listsView.trigger('updateTasks'); },
-      wait: true 
-    });
+
+    if (formData.title.length > 0) {  
+      formData.list_id = this.collection.list_id;
+      this.collection.create(formData, { 
+        success: function() { appRouter.listsView.trigger('updateTasks'); },
+        wait: true 
+      });
+    } else {
+      $('#add-task-alert').fadeIn('2000').delay('5000').fadeOut('5000');
+    }
   },
   
   beginLongBreak: function() {
@@ -76,7 +100,7 @@ App.Views.TasksView = Backbone.View.extend({
   // Will increment pomodoro count
   beginPomodoro: function() {
     event.preventDefault();
-    this.tickTock('Todoro', 5, true);
+    this.tickTock('Todoro', 25 * 60, true);
   },
   
   beginShortBreak: function() {
@@ -87,9 +111,10 @@ App.Views.TasksView = Backbone.View.extend({
   closeTimer: function() {
     event.preventDefault();
     $('title').html('TodoroApp');
-    // Hide Window and Update
     $('#timer-window').toggleClass('hidden');
-    if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
+    if (appRouter.tasksView) {
+      appRouter.tasksView.trigger('updateTasks'); 
+    }
     appRouter.todayView.trigger('updateTasks');
     appRouter.listsView.trigger('updateTasks');
   },
@@ -97,7 +122,6 @@ App.Views.TasksView = Backbone.View.extend({
   completePomodoro: function() {
     task = appRouter.todayView.timerTask
     task.save({ pomodoro_actual: task.get("pomodoro_actual") + 1 });
-    
   },
   
   displayEditForm: function() {
@@ -111,31 +135,11 @@ App.Views.TasksView = Backbone.View.extend({
   },
   
   doLater: function() {
-    event.preventDefault();
-    var task_id = $(event.target).attr('data-id');
-    var task = this.collection.get(task_id);
-    
-    task.save(
-      { today: false },
-      { success: function() { 
-        if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
-        appRouter.todayView.trigger('updateTasks');
-      }
-    });
+    this.setTaskTodayStatus(event, false);
   },
 
   doToday: function() {
-    event.preventDefault();
-    var task_id = $(event.target).attr('data-id');
-    var task = this.collection.get(task_id);
-    
-    task.save(
-      { today: true },
-      { success: function() { 
-        if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
-        appRouter.todayView.trigger('updateTasks');
-      }
-    });
+    this.setTaskTodayStatus(event, true);
   },
 
   editTaskTitle: function() {
@@ -172,7 +176,7 @@ App.Views.TasksView = Backbone.View.extend({
     if (task) {
       this.openTimer(event, task.id);
     } else {
-      $('#task-alert').fadeIn('2000').delay('5000').fadeOut('5000');
+      $('#timer-alert').fadeIn('2000').delay('5000').fadeOut('5000');
     }
   },
   
@@ -198,14 +202,19 @@ App.Views.TasksView = Backbone.View.extend({
       }
     });
   },
-  
-  taskComplete: function() {
+
+  removeTaskForm: function() {
+    $('#task-form').addClass('hidden');
+    $('#show-task-form').removeClass('hidden');
+  },
+
+  setTaskCompleteStatus: function(event, status) {
     event.preventDefault();
     var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
     
     task.save(
-      { complete: true },
+      { complete: status },
       { success: function() { 
         if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
         appRouter.todayView.trigger('updateTasks');
@@ -213,20 +222,33 @@ App.Views.TasksView = Backbone.View.extend({
       }
     });
   },
-  
-  taskIncomplete: function() {
+
+  setTaskTodayStatus: function(event, status) {
     event.preventDefault();
     var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
     
     task.save(
-      { complete: false },
+      { today: status },
       { success: function() { 
         if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
         appRouter.todayView.trigger('updateTasks');
-        appRouter.listsView.trigger('updateTasks');
       }
     });
+  },
+
+  showTaskForm: function() {
+    $('#show-task-form').addClass('hidden');
+    $('#task-form').removeClass('hidden');
+    $('#task-input-field').focus();
+  },
+  
+  taskComplete: function() {
+    this.setTaskCompleteStatus(event, true);
+  },
+  
+  taskIncomplete: function() {
+    this.setTaskCompleteStatus(event, false);
   },
   
   tickTock: function(name, time_in_seconds, isPomodoro){

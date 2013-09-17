@@ -3,7 +3,9 @@ App.Views.ListsView = Backbone.View.extend({
     "submit #list-form": "addList",
     "click a#submit-list-form": "addList",
     "click a.remove-list": "removeList",
-    "click a.list-title": "openList"
+    "click a.list-title": "openList",
+    "click #show-list-form": "showListForm",
+    "click #remove-list-form": "removeListForm"
   },
 
   template: JST['lists/lists_view'],
@@ -26,11 +28,21 @@ App.Views.ListsView = Backbone.View.extend({
       self.$('ul').append(listsItemView.render().$el);
     });
     
-    // activateButtons();
-    // makeSortable();
-    //    $(#some-elemnt) => this.$el.find(#some-element)
+    this.activateHover();
     
     return this;
+  },
+
+  activateHover: function() {
+    $("ul").on('mouseenter', '.list-item', 
+      function() {
+        $(this).find(".remove-list").removeClass("hidden"); }
+      );
+    $("ul").on('mouseleave', '.list-item', 
+      function() {
+        $(this).find(".remove-list").addClass("hidden"); 
+      }
+    );
   },
   
   addList: function(event) {
@@ -43,8 +55,12 @@ App.Views.ListsView = Backbone.View.extend({
     } else {
       formData = $target.parent().serializeJSON().list;
     }
-    
-    this.collection.create(formData, { wait: true });
+
+    if (formData.title.length > 0) {
+      this.collection.create(formData, { wait: true });
+    } else {
+      $('#add-list-alert').fadeIn('2000').delay('5000').fadeOut('5000');
+    }
   },
   
   openList: function(event) {
@@ -60,13 +76,26 @@ App.Views.ListsView = Backbone.View.extend({
     // Only delete if at least one list remaining
     if (_.size(this.collection) !== 1) { 
       listToDelete.destroy();
-        // display first list if deleted displaying list
-        if (appRouter.currentList.id == parseInt(id)) {
+      appRouter.todayView.trigger('updateTasks');
+      // display first list if deleted displaying list
+      if (appRouter.currentList.id == parseInt(id)) {
         var listId = appRouter.lists.first().id
-        appRouter.navigate("lists/" + listId, {trigger: true})      }
+        appRouter.navigate("lists/" + listId, {trigger: true});
+      }
     } else {
-      $('#list-alert').fadeIn('2000').delay('5000').fadeOut('5000');
+      $('#remove-list-alert').fadeIn('2000').delay('5000').fadeOut('5000');
     }
+  },
+
+  removeListForm: function() {
+    $('#list-form').addClass('hidden');
+    $('#show-list-form').removeClass('hidden');
+  },
+
+  showListForm: function() {
+    $('#list-form').removeClass('hidden');
+    $('#list-input-field').focus();
+    $('#show-list-form').addClass('hidden');
   },
   
   update: function() {
@@ -78,7 +107,7 @@ App.Views.ListsView = Backbone.View.extend({
   },
   
   leave: function() {
-    this.off();
+    this.unbind();
     this.remove();
   }
   
