@@ -168,8 +168,12 @@ App.Views.TasksView = Backbone.View.extend({
   },
   
   openTimerFirst: function() {
-    task_id = this.collection.first().id;
-    this.openTimer(event, task_id)
+    var task = this.collection.first();
+    if (task) {
+      this.openTimer(event, task.id);
+    } else {
+      $('#task-alert').fadeIn('2000').delay('5000').fadeOut('5000');
+    }
   },
   
   removeEditForm: function(event) {

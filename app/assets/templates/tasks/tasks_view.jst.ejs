@@ -67,7 +67,13 @@
   <ul id="task-content" class="list-group"></ul>
   <br>
 </div>
-  
+
+<% if (viewType === "todayView") { %>
+  <div id="task-alert" class="alert alert-danger" style="display: none;">
+    No task to start! Add one to your today list first.
+  </div>
+<% } %>
+
   <!-- Timer Box -->
 <% if (viewType === "todayView") { %>
   <div id="timer-window" class="hidden">
