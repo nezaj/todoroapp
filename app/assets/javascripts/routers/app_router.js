@@ -7,7 +7,6 @@ App.Routers.AppRouter = Backbone.Router.extend({
   routes: {
     "": "index",
     "lists/:id": "showList",
-    "today/": "showToday"
   },
   
   index: function() {
@@ -16,11 +15,10 @@ App.Routers.AppRouter = Backbone.Router.extend({
     this.lists.fetch({
       success:function() {
         that.showSidebar();
-        // Load ListDetail if deep-linked
-        if (!that.requestedId) { 
-          that.requestedId = that.lists.first().id
+        if (!that.requestedListId) { 
+          that.requestedListId = that.lists.first().id
         }
-        that.showList(that.requestedId);
+        that.showList(that.requestedListId);
         that.showToday();
         }
       });
@@ -35,48 +33,41 @@ App.Routers.AppRouter = Backbone.Router.extend({
       this.tasks = this.currentList.get('tasks');
       
       this.tasks.fetch().done(function() {
-        // Clean up previous view
         if (this.tasksView) { this.tasksView.leave(); }
         that.tasksView = new App.Views.TasksView({ 
           collection: that.tasks,
           listTitle: that.currentListTitle,
           viewType: "tasksView"
         });
-        $('.current-tasks').html(that.tasksView.render().$el);  
+        $('.current-tasks').html(that.tasksView.render().$el);
+        that.tasksView.activateHover(); 
       });
     } else {
-      this.requestedId = id;
+      this.requestedListId = id;
       this.index();
     }
   },
   
   showSidebar: function() {
-    console.log('Executed showSidebar');
-    if (this.lists) {
-      this.listsView = new App.Views.ListsView( { collection: this.lists });
-      $('.sidebar').html(this.listsView.render().$el);
-    } else {
-      this.index();
-    }
+    this.listsView = new App.Views.ListsView( { collection: this.lists });
+    $('.sidebar').html(this.listsView.render().$el);
+    this.listsView.activateHover();
   },
   
   showToday: function() {
     console.log('Executed showToday');
     var that = this;
-    
-    if (this.lists) {
-      this.todayTasks = new App.Collections.TodayTasks();
-      this.todayTasks.fetch().done(function() {
-        if (that.todayView) { that.todayView.leave(); }
-        that.todayView = new App.Views.TasksView({
-          collection: that.todayTasks,
-          viewType: "todayView"
-        });
-        $('.today-tasks').html(that.todayView.render().$el)      
+    this.todayTasks = new App.Collections.TodayTasks();
+
+    this.todayTasks.fetch().done(function() {
+      if (that.todayView) { that.todayView.leave(); }
+      that.todayView = new App.Views.TasksView({
+        collection: that.todayTasks,
+        viewType: "todayView"
       });
-    } else {
-      this.index();
-    }
+      $('.today-tasks').html(that.todayView.render().$el)
+      that.todayView.activateHover();   
+    });
   }
   
 });

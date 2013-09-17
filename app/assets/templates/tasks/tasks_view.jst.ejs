@@ -1,3 +1,4 @@
+<!-- List Title based on viewType -->
 <div id="tasksView-title">
   <% if (viewType === "tasksView")  { %>
   <%= listTitle %>
@@ -40,13 +41,12 @@
 
 <div id="task-view-content" class="clearfix">
     <center>
+  <!-- Add Task Button/Form if tasksView -->
   <% if (viewType === "tasksView")  { %>
-    <!-- Add Task Button -->
       <button type="button" 
               id="show-task-form"
               class="btn btn-danger">Add New Task</button>
 
-    <!-- Add Task Form -->
       <form id="task-form" 
            class="hidden clearfix input-group">
         <input type="text" name="task[title]" id="task-input-field" class="form-control">
@@ -55,20 +55,33 @@
         <a class="input-group-addon glyphicon glyphicon-remove"
               id="remove-task-form"></a>
       </form>
+  <!-- Start Timer Button if todayView -->
   <% } else { %>
-    <!-- Start Timer Button -->
       <button type="button" 
               id=""
               class="btn btn-danger task-first-timer">Start First Task</button>
   <% } %>
   </center>
 
-  <!-- render tasks views here -->
+  <!-- render individual tasks -->
   <ul id="task-content" class="list-group"></ul>
   <br>
 </div>
+
+<!-- Alerts -->
+<% if (viewType === "tasksView") { %>
+  <div id="add-task-alert" class="alert alert-danger" style="display: none;">
+    Tasks must have a title!
+  </div>
+<% } %>
+
+<% if (viewType === "todayView") { %>
+  <div id="timer-alert" class="alert alert-danger" style="display: none;">
+    No task to start! Move a task to your today list to start the timer.
+  </div>
+<% } %>
   
-  <!-- Timer Box -->
+<!-- Timer Box for todayView -->
 <% if (viewType === "todayView") { %>
   <div id="timer-window" class="hidden">
     <center>
@@ -84,34 +97,3 @@
   </center>
   </div>
 <% } %>
-
-<script>
-  $(function() {    
-    // Display Add Task Form
-    $('#show-task-form').click(function() {
-      $('#show-task-form').addClass('hidden');
-      $('#task-form').removeClass('hidden');
-      $('#task-input-field').focus();
-    });
-    
-    // Remove Add Task Form
-    $('#remove-task-form').click(function() {
-      $('#task-form').addClass('hidden');
-      $('#show-task-form').removeClass('hidden');
-    });
-    
-    // Hover Effect on List
-    $("ul").on('mouseenter', '.task-item', 
-      function() {
-        $(this).find(".remove-task").removeClass("hidden");
-        $(this).find(".task-open-timer").removeClass("hidden");
-        $(this).find(".do-control").removeClass("hidden"); }
-      );
-    $("ul").on('mouseleave', '.task-item', 
-      function() {
-        $(this).find(".remove-task").addClass("hidden");
-        $(this).find(".task-open-timer").addClass("hidden");
-        $(this).find(".do-control").addClass("hidden"); }
-    );  
-  });
-</script>

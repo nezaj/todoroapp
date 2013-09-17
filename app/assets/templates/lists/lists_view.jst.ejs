@@ -71,42 +71,16 @@ My Lists
   </form>
 </center>
 
+<!-- render individual lists -->
 <ul id="list-items" class="list-group">
-  <!-- child content will be rendered here -->
 </ul>
 
-<div id="list-alert" class="alert alert-danger" style="display: none;">
+<!-- Alerts -->
+<div id="add-list-alert" class="alert alert-danger" style="display: none;">
+  Lists must have a title!
+</div>
+
+<div id="remove-list-alert" class="alert alert-danger" style="display: none;">
   Woah there. You should have at least one list!
 </div>
-
-</div>
-
-<script>
-  $(function() {   
-    // Display Add Task Form
-    $('#show-list-form').click(function() {
-      $('#list-form').removeClass('hidden');
-      $('#list-input-field').focus();
-      $('#show-list-form').addClass('hidden');
-    });
-  
-    // Remove Add Task Form
-    $('#remove-list-form').click(function() {
-      $('#list-form').addClass('hidden');
-      $('#show-list-form').removeClass('hidden');
-    });
-    
-    // Hover Effect on List
-    $("ul").on('mouseenter', '.list-item', 
-      function() {
-        $(this).find(".remove-list").removeClass("hidden"); }
-      );
-    $("ul").on('mouseleave', '.list-item', 
-      function() {
-        $(this).find(".remove-list").addClass("hidden"); 
-      }
-    );
-  });
-</script>
-
 
