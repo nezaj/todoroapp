@@ -3,7 +3,7 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   attr_accessible :username, :password
   
-  validates :username, :presence => true, :uniqueness => true
+  validates :username, :presence => true, :uniqueness => { :message => "already taken"}
   validates :password_hash, :presence => { :message => "Password can't be blank"}
   validates :password, :length => { minimum: 6, 
             :message => "password must be at least %{count} characters" }

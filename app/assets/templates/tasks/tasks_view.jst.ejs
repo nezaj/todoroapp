@@ -1,7 +1,7 @@
 <!-- List Title based on viewType -->
 <div id="tasksView-title">
   <% if (viewType === "tasksView")  { %>
-  <%= listTitle %>
+  <%= currentList.escape('title') %>
   <% } else if (viewType === "todayView") { %>
   Today
   <% } else { %>

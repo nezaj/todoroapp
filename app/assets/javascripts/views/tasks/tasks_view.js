@@ -18,13 +18,12 @@ App.Views.TasksView = Backbone.View.extend({
     "click .task-begin-lbreak": "beginLongBreak",
     "click .task-title": "displayEditForm",
     "submit #task-edit": "editTaskTitle",
-    "blur .task-edit-form": "editTaskTitle",
     "click #show-task-form": "showTaskForm",
     "click #remove-task-form": "removeTaskForm"
   },
   
   initialize: function(options) {
-    this.listTitle = options.listTitle;
+    this.currentList = options.currentList;
     this.viewType = options.viewType;
     this.listenTo(this, 'updateTasks', this.update);
     this.listenTo(this.collection, 'add', this.render);
@@ -35,7 +34,7 @@ App.Views.TasksView = Backbone.View.extend({
     
     var renderedContent = this.template({
       tasks: this.collection,
-      listTitle: this.listTitle,
+      currentList: this.currentList,
       viewType: this.viewType
     });
     this.$el.html(renderedContent);

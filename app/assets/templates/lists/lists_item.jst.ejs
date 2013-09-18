@@ -10,5 +10,18 @@
 <!-- List Title -->
 <a href="#" class="list-title" data-id="<%= list.id %>"><%= list.escape('title') %></a>
 
-<!-- Remove List -->
-<a href="#" class="hidden remove-list pull-right glyphicon glyphicon-remove" data-id="<%= list.id %>"></a>
+<span class="list-options pull-right hidden">
+	<!-- Edit List -->
+	<a href="#" class="edit-list glyphicon glyphicon-pencil" data-id="<%= list.id %>"></a>
+	<!-- Remove List -->
+	<a href="#" class="remove-list glyphicon glyphicon-remove" data-id="<%= list.id %>"></a>
+</span>
+
+<td>
+<form id="list-edit" data-id="<%= list.id %>">
+	<input type="text" 
+				 name="list[title]"
+				 class="list-edit-form hidden"
+				 value="<%= list.escape('title') %>" data-id="<%= list.id %>">
+</form>
+</td>

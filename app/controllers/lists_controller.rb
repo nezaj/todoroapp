@@ -37,6 +37,9 @@ class ListsController < ApplicationController
   end
   
   def update
+    @list = List.find_by_id(params[:id])
+    @list.update_attributes(params[:list])
+    respond_with(@list)
   end
   
 end

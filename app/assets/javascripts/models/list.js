@@ -1,6 +1,8 @@
 App.Models.List = Backbone.Model.extend({
   parse: function(list) {
-    list.tasks = new App.Collections.Tasks(list.tasks, {list_id: list.id});
+    if (list) { 
+      list.tasks = new App.Collections.Tasks(list.tasks, {list_id: list.id});
+    }
     return list;
   },
   

@@ -37,7 +37,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
         if (this.tasksView) { this.tasksView.leave(); }
         that.tasksView = new App.Views.TasksView({ 
           collection: that.tasks,
-          listTitle: that.currentListTitle,
+          currentList: that.currentList,
           viewType: "tasksView"
         });
 

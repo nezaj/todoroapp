@@ -9,6 +9,12 @@
   border-color: brown;
 }
 
+.list-edit-form {
+  position: absolute;
+  top: 20%;
+  left: 25%;
+}
+
 @media (min-width: 1200px) {
   .list-title {
     position: absolute;

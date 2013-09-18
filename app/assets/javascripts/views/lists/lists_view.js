@@ -5,7 +5,9 @@ App.Views.ListsView = Backbone.View.extend({
     "click a.remove-list": "removeList",
     "click a.list-title": "openList",
     "click #show-list-form": "showListForm",
-    "click #remove-list-form": "removeListForm"
+    "click #remove-list-form": "removeListForm",
+    "click a.edit-list": "displayEditList",
+    "submit #list-edit": "editListTitle",
   },
 
   template: JST['lists/lists_view'],
@@ -14,6 +16,7 @@ App.Views.ListsView = Backbone.View.extend({
     this.listenTo(this, 'updateTasks', this.update);
     this.listenTo(this.collection, 'remove', this.render);
     this.listenTo(this.collection, 'add', this.render);
+    this.listenTo(this.collection, 'change:title', this.render);
   },
   
   render: function() {
@@ -36,11 +39,11 @@ App.Views.ListsView = Backbone.View.extend({
   activateHover: function() {
     $("ul").on('mouseenter', '.list-item', 
       function() {
-        $(this).find(".remove-list").removeClass("hidden"); }
+        $(this).find(".list-options").removeClass("hidden"); }
       );
     $("ul").on('mouseleave', '.list-item', 
       function() {
-        $(this).find(".remove-list").addClass("hidden"); 
+        $(this).find(".list-options").addClass("hidden"); 
       }
     );
   },
@@ -66,6 +69,30 @@ App.Views.ListsView = Backbone.View.extend({
     } else {
       $('#add-list-alert').fadeIn('2000').delay('5000').fadeOut('5000');
     }
+  },
+
+  displayEditList: function(event) {
+    event.preventDefault();
+    $(event.target).parents('.list-item').find('.list-options').toggleClass('hidden');
+    $(event.target).parents('.list-item').find('.list-title').toggleClass('hidden');
+    $(event.target).parents('.list-item').find('.list-edit-form').toggleClass('hidden').focus();
+  },
+
+  editListTitle: function(event) {
+    event.preventDefault();
+    var that = this;
+    var list_id = $(event.target).attr('data-id');
+    var list = this.collection.get(list_id);
+    var newListTitle = $(event.target).serializeJSON().list.title;
+    
+    list.save(
+      { title: newListTitle },
+      { success: function() { 
+        if (appRouter.tasksView) {
+          appRouter.tasksView.trigger('updateTasks'); 
+        }
+      }
+    });
   },
 
   highlightActiveList: function() {
@@ -97,6 +124,13 @@ App.Views.ListsView = Backbone.View.extend({
     } else {
       $('#remove-list-alert').fadeIn('2000').delay('5000').fadeOut('5000');
     }
+  },
+
+  removeEditForm: function(event) {
+    $(event.target).parents('.list-item').find('.list-title')
+    .toggleClass('hidden');
+    $(event.target).parents('.list-item').find('.list-edit-form')
+    .toggleClass('hidden');
   },
 
   removeListForm: function() {

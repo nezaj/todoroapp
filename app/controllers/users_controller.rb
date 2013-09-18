@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+    @user.username = @user.username.downcase
 
     if @user.save
       login(@user)
