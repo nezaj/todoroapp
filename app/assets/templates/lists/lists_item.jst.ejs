@@ -1,8 +1,8 @@
-<% var pendingTasks = _.where(list.toJSON().tasks, {complete: false}).length %>
+<% var numPendingTasks = list.numPendingTasks() %>
 
 <!-- Number of pending tasks -->
-<% if (pendingTasks > 0)  { %>
-  <span class="glyphicon glyphicon-unchecked"></span>: <%= pendingTasks %>
+<% if (numPendingTasks > 0)  { %>
+  <span class="glyphicon glyphicon-unchecked"></span>: <%= numPendingTasks %>
 <% } else { %>
   <span class="glyphicon glyphicon-check"></span>
 <% } %>

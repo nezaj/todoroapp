@@ -15,5 +15,5 @@ App.Collections.Tasks = Backbone.Collection.extend({
       return task.get("today") === status;
     });
     return new App.Collections.Tasks(filtered);
-  }
+  },
 });

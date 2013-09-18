@@ -1,3 +1,11 @@
+<% var completedTasks = lists.numCompletedTasks() %>
+<% var pendingTasks = lists.numPendingTasks() %>
+<% var pomodorosAchieved = lists.numPomodorosAchieved() %> 
+
+<% var completedTasksText = (completedTasks === 1) ? "Task" : "Tasks" %>
+<% var pendingTasksText = (pendingTasks === 1) ? "Task" : "Tasks" %>
+<% var pomodorosText = (pomodorosAchieved === 1) ? "Pomodoro" : "Pomodoros" %>
+
 <!-- <div id="date-info">
   <% var now = new Date() %>
   <% var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday',
@@ -16,44 +24,14 @@
 My Lists
 </div>
 
-<% if (lists.toJSON().length > 0)  { %>
-  <div id="lists-overall-info">
-    <!-- Completed Task Count -->
-    <% var taskCountComplete = _.map(lists.toJSON(), function(list) { 
-      return _.where(list.tasks, {complete: true}).length 
-      }); %>
-    <% var completedTasks = _.reduce(taskCountComplete, function(memo, num){ 
-      return memo+num 
-      }, 0); %>
-    
-    <!-- Pending Task Count -->
-    <% var taskCountPending = _.map(lists.toJSON(), function(list) { 
-      return _.where(list.tasks, {complete: false}).length 
-      }); %>
-    <% var pendingTasks = _.reduce(taskCountPending, function(memo, num){ 
-      return memo+num 
-      }, 0); %>
-    
-      <!-- Pomdoros Achieved -->
-    <% var pomodorosCount = _.flatten(_.map(lists.toJSON(), function(list) {
-      return _.map(list.tasks, function(task) { return task.pomodoro_actual }) 
-        })
-      ); %>
-    <% var pomodorosAchieved = _.reduce(pomodorosCount, function(memo, num){ 
-      return memo+num 
-      }, 0); %>
-    
-      <% var completedTasksText = (completedTasks === 1) ? "Task" : "Tasks" %>
-      <% var pendingTasksText = (pendingTasks === 1) ? "Task" : "Tasks" %>
-      <% var pomodorosText = (pomodorosAchieved === 1) ? "Pomodoro" : "Pomodoros" %>
-    <span class="glyphicon glyphicon-check"></span>: <%= completedTasks %> <%= completedTasksText %> Done
-    <br>
-    <span class="glyphicon glyphicon-unchecked"></span>: <%= pendingTasks %> <%= pendingTasksText %> Pending
-    <br>
-    <span class="glyphicon glyphicon-star"></span>: <%= pomodorosAchieved %> <%= pomodorosText %>
-    <br>
-  </div>
-<% } %>
+<div id="lists-overall-info">
+  <span class="glyphicon glyphicon-check"></span>: <%= completedTasks %> <%= completedTasksText %> Done
+  <br>
+  <span class="glyphicon glyphicon-unchecked"></span>: <%= pendingTasks %> <%= pendingTasksText %> Pending
+  <br>
+  <span class="glyphicon glyphicon-star"></span>: <%= pomodorosAchieved %> <%= pomodorosText %>
+  <br>
+</div>
 
 <!-- Add New List Button-->
 <center>

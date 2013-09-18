@@ -3,5 +3,4 @@ TODO
 - Implement editing expected number of pomodoros for a task
 - Implement unplanned tasks
 - Implement adding unplaned tasks from timer
-- Move any model logic outside of templates
 - Move Date to top section

@@ -1,42 +1,26 @@
+<% if (viewType === "tasksView") { %>
+  <% var summaryCollection = currentList %>
+  <% var listTitle = currentList.escape('title') %>
+<% } else if (viewType === "todayView") { %>
+  <% var summaryCollection = tasks %>
+  <% var listTitle = "Today" %>
+<% } else { %>
+  <% var listTitle = "Unplanned" %>  
+<% } %>
+
+<% var completedTasks = summaryCollection.numCompletedTasks() %>
+<% var pendingTasks = summaryCollection.numPendingTasks() %>
+<% var pomodorosAchieved = summaryCollection.numPomodorosAchieved() %>
+<% var pomodorosExpected = summaryCollection.numPomodorosExpected() %> 
+
 <!-- List Title based on viewType -->
-<div id="tasksView-title">
-  <% if (viewType === "tasksView")  { %>
-  <%= currentList.escape('title') %>
-  <% } else if (viewType === "todayView") { %>
-  Today
-  <% } else { %>
-  Unplanned
-  <% } %>
-</div>
+<div id="tasksView-title"><%= listTitle %></div>
 
 <div id="task-overall-info">  
-  <!-- Completed Tasks -->
-  <% var completedTasks = _.where(tasks.toJSON(), {complete: true}) %>
-  
-  <!-- Pending Tasks -->
-  <% var pendingTasks = _.where(tasks.toJSON(), {complete: false}); %>
-  
-  <!-- Actual Pomodoros Count -->
-  <% var actualPomodorosCount = _.flatten(_.map(tasks.toJSON(), function(task) {
-    return task.pomodoro_actual })
-    ); %>
-  <% var pomAchieved = _.reduce(actualPomodorosCount, function(memo,num){
-    return memo+num 
-    }, 0); %>
-
-  <!-- Pending Pomodoros Count -->
-  <% var expectedPomodorosCount = _.flatten(_.map(pendingTasks, function(task) {
-    return task.pomodoro_expected })
-    ); %>
-    
-    <% var pomPending = _.reduce(expectedPomodorosCount, function(memo,num){ 
-      return memo+num 
-      }, 0); %>
-
-    <span class="glyphicon glyphicon-check"></span>: <%= completedTasks.length %>
-    <span class="glyphicon glyphicon-unchecked"></span>: <%= pendingTasks.length %>
-  <span class="glyphicon glyphicon-star"></span>: <%= pomAchieved %>
-  <span class="glyphicon glyphicon-star-empty"></span>: <%= pomPending %>
+  <span class="glyphicon glyphicon-check"></span>: <%= completedTasks %>
+  <span class="glyphicon glyphicon-unchecked"></span>: <%= pendingTasks %>
+  <span class="glyphicon glyphicon-star"></span>: <%= pomodorosAchieved %>
+  <span class="glyphicon glyphicon-star-empty"></span>: <%= pomodorosExpected %>
 </div>
 
 <div id="task-view-content" class="clearfix">
