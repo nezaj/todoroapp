@@ -17,6 +17,7 @@ App.Views.TasksView = Backbone.View.extend({
     "click .task-begin-sbreak": "beginShortBreak",
     "click .task-begin-lbreak": "beginLongBreak",
     "click .task-title": "displayEditForm",
+    "blur .task-edit-form": "removeEditForm",
     "submit #task-edit": "editTaskTitle",
     "click #show-task-form": "showTaskForm",
     "click #remove-task-form": "removeTaskForm"
@@ -155,8 +156,7 @@ App.Views.TasksView = Backbone.View.extend({
     
     task.save(
       { title: newTaskTitle },
-      { success: function() { 
-        that.removeEditForm(event);
+      { success: function() {
         if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
         appRouter.todayView.trigger('updateTasks');
       }

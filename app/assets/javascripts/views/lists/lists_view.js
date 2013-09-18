@@ -7,7 +7,8 @@ App.Views.ListsView = Backbone.View.extend({
     "click #show-list-form": "showListForm",
     "click #remove-list-form": "removeListForm",
     "click a.edit-list": "displayEditList",
-    "submit #list-edit": "editListTitle",
+    "blur .list-edit-form": "removeEditForm",
+    "submit #list-edit": "editListTitle"
   },
 
   template: JST['lists/lists_view'],
