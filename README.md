@@ -1,4 +1,4 @@
-# [Todoro](todoroapp.heroku.com)
+# [Todoro](http://www.todoroapp.heroku.com)
 
 Todoro is a clone of **PomodoroApp/TeamViz** built using **Backbone** and a restful **Rails** API.
 
