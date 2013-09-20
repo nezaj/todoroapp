@@ -1,2 +1,8 @@
-<h1>Sign up!</h1>
-<%= render "sessions/form", :user => @user, :action => :user %>
+<div class="row">
+	<div class="col-md-4">
+		<%= render "shared/form", :user => @user, :action => :user %>
+	</div>
+	<div class="col-md-8">
+		<%= render "shared/description" %>
+	</div>
+</div>

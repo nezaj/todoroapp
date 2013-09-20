@@ -1,6 +1,7 @@
 <% action_url = (action == :session) ? session_url : users_url %>
 <% action_value = (action == :session) ? "Log In!" : "Sign Up!" %>
 
+<h1><%= action_value %></h1>
 <form action="<%= action_url %>" method="post">
 	<input type="hidden" name="authenticity_token"
 				 value="<%= form_authenticity_token %>">
