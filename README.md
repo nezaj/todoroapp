@@ -1,7 +1,8 @@
 # [Todoro](todoroapp.heroku.com)
 
-Todoro is a clone of the desktop PomodoroApp/TeamViz. Todoro is a Single Page App built using a **Backbone** frontend serviced with a restful **Rails** API. (Work in Progress) Key features:
+Todoro is a clone of **PomodoroApp/TeamViz** built using **Backbone** and a restful **Rails** API.
 
+Key features:
 * Custom user authentication with BCrypt
 * Precise Pomodoro Timer
 * Responsive Design
