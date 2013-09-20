@@ -2,7 +2,12 @@ App::Application.routes.draw do
   resource :session, :only => [:create, :destroy, :new]
   resource :dashboard, :only => [:show]
   
-  resources :users, :only => [:create, :new]
+  resources :users, :only => [:create, :new] do
+  	collection do
+  		get 'demo'
+  	end
+  end
+  
   resources :lists do
     resources :tasks
   end

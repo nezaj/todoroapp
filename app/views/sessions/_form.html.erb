@@ -1,5 +1,5 @@
 <% action_url = (action == :session) ? session_url : users_url %>
-<% action_value = (action == :session) ? "Log In" : "Sign Up" %>
+<% action_value = (action == :session) ? "Log In!" : "Sign Up!" %>
 
 <form action="<%= action_url %>" method="post">
 	<input type="hidden" name="authenticity_token"
@@ -14,6 +14,10 @@
   	<input type="password" name="user[password]"
   				 id="Password">
   <br>
-
 	<input type="submit" value="<%= action_value %>">
  </form>
+
+ <br>
+ <button>
+	 <%= link_to "Use Demo Account", :action => "demo", :controller => "users", %>
+</button>
