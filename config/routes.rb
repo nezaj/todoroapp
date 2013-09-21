@@ -7,12 +7,13 @@ App::Application.routes.draw do
   		get 'demo'
   	end
   end
-  
+
   resources :lists do
     resources :tasks
   end
   
   resources :today_tasks, :only => [:destroy, :index, :update]
+  resources :unplanned_tasks, :only => [:destroy, :index, :update]
   
   root :to => 'dashboards#show'
 end

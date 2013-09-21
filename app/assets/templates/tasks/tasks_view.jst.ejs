@@ -30,7 +30,7 @@
               id="remove-task-form"></a>
       </form>
   <!-- Start Timer Button if todayView -->
-  <% } else { %>
+  <% } else if (viewType === "todayView") { %>
       <button type="button" 
               id=""
               class="btn btn-danger task-first-timer">Start First Task</button>

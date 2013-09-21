@@ -21,6 +21,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
         }
         that.showList(that.requestedListId);
         that.showToday();
+        that.showUnplanned();
         }
       });
   },
@@ -72,6 +73,23 @@ App.Routers.AppRouter = Backbone.Router.extend({
       });
       $('.today-tasks').html(that.todayView.render().$el)
       that.todayView.addCustomEffects();   
+    });
+  },
+
+  showUnplanned: function() {
+    console.log('Executed showUnplanned');
+    var that = this;
+    this.unplannedTasks = new App.Collections.UnplannedTasks();
+
+    this.unplannedTasks.fetch().done(function() {
+      if (that.unplannedView) { that.unplannedView.leave(); }
+      that.unplannedView = new App.Views.TasksView({
+        collection: that.unplannedTasks,
+        listTitle: "Unplanned",
+        viewType: "unplannedView"
+      });
+      $('.unplanned-tasks').html(that.unplannedView.render().$el)
+      that.unplannedView.addCustomEffects();   
     });
   }
   
