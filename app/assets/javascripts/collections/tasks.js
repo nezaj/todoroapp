@@ -1,4 +1,4 @@
-App.Collections.Tasks = Backbone.Collection.extend({
+App.Collections.Tasks = App.Collections.BaseTasks.extend({
   model: App.Models.Task,
   
   initialize: function(data, options) {
@@ -10,10 +10,4 @@ App.Collections.Tasks = Backbone.Collection.extend({
     return '/lists/' + list_id + '/tasks';
   },
   
-  byTodayStatus: function(status) {
-    filtered = this.filter(function(task) {
-      return task.get("today") === status;
-    });
-    return new App.Collections.Tasks(filtered);
-  },
 });

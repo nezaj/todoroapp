@@ -38,6 +38,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
         that.tasksView = new App.Views.TasksView({ 
           collection: that.tasks,
           currentList: that.currentList,
+          listTitle: that.currentListTitle,
           viewType: "tasksView"
         });
 
@@ -66,6 +67,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
       if (that.todayView) { that.todayView.leave(); }
       that.todayView = new App.Views.TasksView({
         collection: that.todayTasks,
+        listTitle: "Today",
         viewType: "todayView"
       });
       $('.today-tasks').html(that.todayView.render().$el)

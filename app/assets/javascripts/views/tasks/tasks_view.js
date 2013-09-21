@@ -25,6 +25,7 @@ App.Views.TasksView = Backbone.View.extend({
   
   initialize: function(options) {
     this.currentList = options.currentList;
+    this.listTitle = options.listTitle
     this.viewType = options.viewType;
     this.listenTo(this, 'updateTasks', this.update);
     this.listenTo(this.collection, 'add', this.render);
@@ -35,6 +36,7 @@ App.Views.TasksView = Backbone.View.extend({
     
     var renderedContent = this.template({
       tasks: this.collection,
+      listTitle: this.listTitle,
       currentList: this.currentList,
       viewType: this.viewType
     });

@@ -1,17 +1,7 @@
-<% if (viewType === "tasksView") { %>
-  <% var summaryCollection = currentList %>
-  <% var listTitle = currentList.escape('title') %>
-<% } else if (viewType === "todayView") { %>
-  <% var summaryCollection = tasks %>
-  <% var listTitle = "Today" %>
-<% } else { %>
-  <% var listTitle = "Unplanned" %>  
-<% } %>
-
-<% var completedTasks = summaryCollection.numCompletedTasks() %>
-<% var pendingTasks = summaryCollection.numPendingTasks() %>
-<% var pomodorosAchieved = summaryCollection.numPomodorosAchieved() %>
-<% var pomodorosExpected = summaryCollection.numPomodorosExpected() %> 
+<% var completedTasks = tasks.numCompletedTasks() %>
+<% var pendingTasks = tasks.numPendingTasks() %>
+<% var pomodorosAchieved = tasks.numPomodorosAchieved() %>
+<% var pomodorosExpected = tasks.numPomodorosExpected() %> 
 
 <!-- List Title based on viewType -->
 <div id="tasksView-title"><%= listTitle %></div>
