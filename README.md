@@ -12,6 +12,6 @@ Key features:
 
 How To Use:
 * Create Tasks under Lists 
-* Hover over a Task and click the red arrow to move it to Today 
+* Hover over a Task and click the list icon to move it to Today 
 * Hover over a Task in Today and click the timer to start
 * Mark tasks complete as you get things done!

@@ -148,7 +148,6 @@ App.Views.ListsView = Backbone.View.extend({
   },
   
   update: function() {
-    console.log('Execute updateTasks for sidebar');
     var that = this;
     this.collection.fetch().done(function() {
       that.setElement(that.$el).render().$el;

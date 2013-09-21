@@ -267,7 +267,6 @@ App.Views.TasksView = Backbone.View.extend({
   },
   
   update: function() {
-    console.log('Execute updateTasks for ' + this.viewType);
     var that = this;
     this.collection.fetch().done(function() {
       that.setElement(that.$el).render().$el;

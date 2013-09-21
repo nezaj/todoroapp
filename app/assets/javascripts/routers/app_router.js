@@ -27,7 +27,6 @@ App.Routers.AppRouter = Backbone.Router.extend({
   },
   
   showList: function (id) {
-    console.log('Executed showList');
     if (this.lists) {
       var that = this;
       this.currentList = this.lists.get(id);
@@ -60,7 +59,6 @@ App.Routers.AppRouter = Backbone.Router.extend({
   },
   
   showToday: function() {
-    console.log('Executed showToday');
     var that = this;
     this.todayTasks = new App.Collections.TodayTasks();
 
@@ -77,7 +75,6 @@ App.Routers.AppRouter = Backbone.Router.extend({
   },
 
   showUnplanned: function() {
-    console.log('Executed showUnplanned');
     var that = this;
     this.unplannedTasks = new App.Collections.UnplannedTasks();
 
