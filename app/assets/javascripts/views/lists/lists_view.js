@@ -65,7 +65,9 @@ App.Views.ListsView = Backbone.View.extend({
       formData = $target.parent().serializeJSON().list;
     }
 
-    if (formData.title.length > 0) {
+    if (formData.title = "Unplanned") {
+      $('#unplanned-list-alert').fadeIn('2000').delay('5000').fadeOut('5000');
+    } else if (formData.title.length > 0) {
       this.collection.create(formData, { wait: true });
     } else {
       $('#add-list-alert').fadeIn('2000').delay('5000').fadeOut('5000');

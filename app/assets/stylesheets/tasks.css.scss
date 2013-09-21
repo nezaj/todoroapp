@@ -15,17 +15,10 @@
 .task-incomplete .task-checked { display: none; }
 
 @media (min-width: 980px) {
-  .rmt-tasksView {
+  .rmt-tasksView, .rmt-todayView, .rmt-unplannedView {
     position: absolute;
     right: 0%;
     margin-right: 15%;
-    top: 30%;
-  }
-
-  .rmt-todayView, .rmt-unplannedView {
-    position: absolute;
-    right: 0%;
-    margin-right: 5%;
     top: 30%;
   }
   
@@ -38,17 +31,10 @@
 }
 
 @media (max-width: 979px) {
-  .rmt-tasksView {
+  .rmt-tasksView, .rmt-todayView, .rmt-unplannedView {
     position: absolute;
     right: 0%;
     margin-right: 15%;
-    top: 25%;
-  }
-
-  .rmt-todayView, .rmt-unplannedView {
-    position: absolute;
-    right: 0%;
-    margin-right: 5%;
     top: 25%;
   }
   

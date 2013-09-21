@@ -32,8 +32,11 @@
   <!-- Start Timer Button if todayView -->
   <% } else if (viewType === "todayView") { %>
       <button type="button" 
-              id=""
               class="btn btn-danger task-first-timer">Start First Task</button>
+  <% } else { %>
+      <button type="button" 
+              id=""
+              class="btn btn-danger remove-all-unplanned">Remove All</button>
   <% } %>
   </center>
 

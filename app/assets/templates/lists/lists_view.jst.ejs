@@ -19,7 +19,7 @@
   <br><br>
 </div> -->
 
-<div id="list-header">My Lists</div>
+<div id="lists-header">My Lists</div>
 
 <div id="lists-overall-info">
   <span class="glyphicon glyphicon-check"></span>: <%= completedTasks %> <%= completedTasksText %> Done
@@ -53,6 +53,9 @@
 <!-- Alerts -->
 <div id="add-list-alert" class="alert alert-danger" style="display: none;">
   Lists must have a title!
+</div>
+<div id="unplanned-list-alert" class="alert alert-danger" style="display: none;">
+  You already have an unplanned list!
 </div>
 
 <div id="remove-list-alert" class="alert alert-danger" style="display: none;">
