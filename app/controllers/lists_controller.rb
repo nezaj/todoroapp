@@ -20,7 +20,7 @@ class ListsController < ApplicationController
   end
   
   def index
-    @lists = current_user.lists
+    @lists = current_user.lists - current_user.lists.where(:title => "Unplanned")
     respond_with(@lists)
   end
   

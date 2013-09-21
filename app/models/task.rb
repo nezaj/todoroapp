@@ -1,6 +1,5 @@
 class Task < ActiveRecord::Base
-  attr_accessible :id, :created_at, :list_id, :title, :today, 
-                  :complete, :pomodoro_actual, :pomodoro_expected
+  attr_accessible *column_names
   
   validates :title, :list_id, :presence => true
   

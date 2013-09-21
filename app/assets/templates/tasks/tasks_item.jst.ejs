@@ -11,7 +11,7 @@
   </span>
 
   <!-- todayView/unplannedView doLater -->
-  <% if (viewType === "todayView") { %>
+  <% if (viewType !== "tasksView") { %>
     <span class="<%= todayStatus %> do-control hidden task-options">
       <a href="#" class="do-later glyphicon glyphicon-arrow-left tov-left" data-id="<%= task.id %>"></a>
     </span>

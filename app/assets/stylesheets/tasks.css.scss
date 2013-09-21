@@ -14,13 +14,6 @@
 .task-complete .task-unchecked { display: none; }
 .task-incomplete .task-checked { display: none; }
 
-.tav-right {
-  position: absolute;
-  right: 0%;
-  margin-right: 5%;
-  top: 30%;
-}
-
 @media (min-width: 980px) {
   .rmt-tasksView {
     position: absolute;
@@ -29,7 +22,7 @@
     top: 30%;
   }
 
-  .rmt-todayView {
+  .rmt-todayView, .rmt-unplannedView {
     position: absolute;
     right: 0%;
     margin-right: 5%;
@@ -52,7 +45,7 @@
     top: 25%;
   }
 
-  .rmt-todayView {
+  .rmt-todayView, .rmt-unplannedView {
     position: absolute;
     right: 0%;
     margin-right: 5%;

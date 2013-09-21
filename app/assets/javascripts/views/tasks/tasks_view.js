@@ -4,6 +4,7 @@ App.Views.TasksView = Backbone.View.extend({
   
   events: {
     "submit #task-form": "addTask",
+    "submit #unplanned-task-form": "addUnplannedTask",
     "click a#submit-task-form": "addTask",
     "click a.remove-task": "removeTask",
     "click a.do-today": "doToday",
@@ -28,7 +29,7 @@ App.Views.TasksView = Backbone.View.extend({
     this.listTitle = options.listTitle
     this.viewType = options.viewType;
     this.listenTo(this, 'updateTasks', this.update);
-    this.listenTo(this.collection, 'add', this.render);
+    this.listenTo(this.collection, 'add', this.update);
   },
     
   render: function() {
@@ -77,15 +78,7 @@ App.Views.TasksView = Backbone.View.extend({
   
   addTask: function() {
     event.preventDefault();
-    var $target = $(event.target);
-    var formData;
-
-    // Handle user hitting enter or hitting the +
-    if ($target.get(0).tagName !== 'A') {
-      formData = $target.serializeJSON().task;
-    } else {
-      formData = $target.parent().serializeJSON().task;
-    }
+    var formData = $('#task-form').serializeJSON().task;
 
     if (formData.title.length > 0) {  
       formData.list_id = this.collection.list_id;
@@ -95,6 +88,15 @@ App.Views.TasksView = Backbone.View.extend({
       });
     } else {
       $('#add-task-alert').fadeIn('2000').delay('5000').fadeOut('5000');
+    }
+  },
+
+  addUnplannedTask: function() {
+    event.preventDefault();
+    var formData = $('#unplanned-task-form').serializeJSON().unplanned_task
+    if (formData.title.length > 0) {
+      $('#unplanned-task-form')[0].reset();
+      appRouter.unplannedTasks.create(formData);
     }
   },
   
@@ -118,11 +120,7 @@ App.Views.TasksView = Backbone.View.extend({
     event.preventDefault();
     $('title').html('TodoroApp');
     $('#timer-window').toggleClass('hidden');
-    if (appRouter.tasksView) {
-      appRouter.tasksView.trigger('updateTasks'); 
-    }
-    appRouter.todayView.trigger('updateTasks');
-    appRouter.listsView.trigger('updateTasks');
+    this.triggerRenders();
   },
   
   completePomodoro: function() {
@@ -158,10 +156,7 @@ App.Views.TasksView = Backbone.View.extend({
     
     task.save(
       { title: newTaskTitle },
-      { success: function() {
-        if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
-        appRouter.todayView.trigger('updateTasks');
-      }
+      { success: function() { that.triggerRenders(); }
     });
   },
   
@@ -196,15 +191,12 @@ App.Views.TasksView = Backbone.View.extend({
   
   removeTask: function() {
     event.preventDefault();
+    var that = this;
     var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
     
     task.destroy(
-      { success: function() { 
-        if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
-        appRouter.todayView.trigger('updateTasks');
-        appRouter.listsView.trigger('updateTasks');
-      }
+      { success: function() { that.triggerRenders(); }
     });
   },
 
@@ -215,30 +207,25 @@ App.Views.TasksView = Backbone.View.extend({
 
   setTaskCompleteStatus: function(event, status) {
     event.preventDefault();
+    var that = this;
     var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
     
     task.save(
       { complete: status },
-      { success: function() { 
-        if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
-        appRouter.todayView.trigger('updateTasks');
-        appRouter.listsView.trigger('updateTasks');
-      }
+      { success: function() { that.triggerRenders(); }
     });
   },
 
   setTaskTodayStatus: function(event, status) {
     event.preventDefault();
+    var that = this;
     var task_id = $(event.target).attr('data-id');
     var task = this.collection.get(task_id);
     
     task.save(
       { today: status },
-      { success: function() { 
-        if (appRouter.tasksView) {appRouter.tasksView.trigger('updateTasks'); }
-        appRouter.todayView.trigger('updateTasks');
-      }
+      { success: function() { that.triggerRenders(); }
     });
   },
 
@@ -268,6 +255,15 @@ App.Views.TasksView = Backbone.View.extend({
         if (isPomodoro) { that.completePomodoro(); }
       }
     });
+  },
+
+  triggerRenders: function() {
+    if (appRouter.tasksView) {
+      appRouter.tasksView.trigger('updateTasks'); 
+    }
+    appRouter.todayView.trigger('updateTasks');
+    appRouter.unplannedView.trigger('updateTasks');
+    appRouter.listsView.trigger('updateTasks');
   },
   
   update: function() {

@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
   )
   
   include BCrypt
+
+  def unplanned_list
+    List.find_by_author_id_and_title(self.id, "Unplanned")
+  end
   
   def password
     @password ||= BCrypt::Password.new(password_hash)
