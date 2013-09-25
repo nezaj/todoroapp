@@ -1,6 +1,6 @@
 # [Todoro](http://todoroapp.heroku.com)
 
-Todoro is a clone of **PomodoroApp/TeamViz** built using **Backbone** and a restful **Rails** API.
+Todoro is a single-page-app for practicing the [Pomodoro Technique](http://pomodorotechnique.com). Built using **Backbone** and a restful **Rails** API.
 
 Key features:
 * Custom user authentication with BCrypt
