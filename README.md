@@ -1,4 +1,4 @@
-# [Todoro](http://todoroapp.heroku.com)
+# [Todoro](http://todoroapp.heroku.com) (Refactoring)
 
 Todoro is a single-page-app for practicing the [Pomodoro Technique](http://pomodorotechnique.com). Built using **Backbone** and a restful **Rails** API.
 
